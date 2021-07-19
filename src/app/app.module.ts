@@ -17,6 +17,7 @@ import { LoginComponent } from './view/login/login.component';
 import { RegisterComponent } from './view/register/register.component';
 import { ReservationComponent } from './view/reservation/reservation.component';
 import { authInterceptorProviders } from './helper/auth.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,13 @@ import { authInterceptorProviders } from './helper/auth.interceptor';
     RegisterComponent,
     ReservationComponent,
   ],
-  imports: [BrowserModule, RouterModule, FormsModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    RouterModule,
+    FormsModule,
+    AppRoutingModule,
+    HttpClientModule,
+  ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
 })
