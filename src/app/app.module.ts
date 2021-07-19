@@ -16,8 +16,8 @@ import { ItemComponent } from './view/item/item.component';
 import { LoginComponent } from './view/login/login.component';
 import { RegisterComponent } from './view/register/register.component';
 import { ReservationComponent } from './view/reservation/reservation.component';
-
 import { authInterceptorProviders } from './helper/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,5 +47,5 @@ export class AppModule {}
       { path: '/about-us', component: AboutUsComponent }
 
 
-
+authInterceptorProviders
 */

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Item } from '../items';
-import { environment } from '../../environments/environment';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({})
+const itemsURL = '';
 export class ItemsService {
   items: Item[] = [];
 
@@ -20,7 +18,7 @@ export class ItemsService {
         price: number;
         description: string;
       }[]
-    >('');
+    >(itemsURL);
     //return this.items;
   }
 
@@ -37,3 +35,38 @@ export class ItemsService {
     return item;
   }
 }
+/*
+
+{
+       id: 1,
+        name: "tequila Mojito",
+        type: drink,
+        price: 300,
+        description: "tequila, mint, lime juice, club soda, water, sugar, fresh min leaves"
+
+},
+{
+       id: 2,
+        name: "tequila Sunrise",
+        type: drink,
+        price: 300,
+        description: "tequila,orange juice, ice cubes, fluid ounce grenadine syrup, orange, maraschino          cherry "
+
+},
+{
+       id: 3,
+        name: Classic Magarita",
+        type: drink,
+        price: 300,
+        description: "tequila, cointreau, fresh lime juice, magarita salt"
+},
+
+
+
+
+
+
+
+
+
+*/
