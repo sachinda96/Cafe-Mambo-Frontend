@@ -1,0 +1,80 @@
+<div id="contact">
+  <section class="forms">
+    <form
+      *ngIf="!isSuccessful"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="container">
+        <div class="form">
+          <div class="form_text">
+            <span class="up_i"></span>
+            <h2>Register</h2>
+            <p>
+              Sign up with us to get lot of offers with promos introduced time
+              to time.Can easily track your current and past orders easily.<br />
+              The reservation of tables also very convinient and efficient
+              without waiting.
+            </p>
+          </div>
+          <div class="form_info">
+            <div class="form_reserv">
+              <input
+                placeholder="Name"
+                type="text"
+                name="username"
+                required
+                minlength="3"
+                max="20"
+                [(ngModel)]="form.username"
+                #username="ngModel"
+              />
+              <div class="alert-danger" *ngIf="username.errors && f.submitted">
+                <div *ngIf="username.errors.required">Username is required</div>
+                <div *ngIf="username.errors.minlength">
+                  Username must be at least 3 characters
+                </div>
+                <div *ngIf="username.errors.maxlength">
+                  Username must be at most 20 characters
+                </div>
+              </div>
+            </div>
+            <input
+              placeholder="Email"
+              type="email"
+              name="email"
+              [(ngModel)]="form.email"
+              #email="ngModel"
+              required
+            />
+            <div class="alert-danger" *ngIf="email.errors && f.submitted">
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.email">
+                Email must be a valid email address
+              </div>
+            </div>
+
+            <input
+              placeholder="Password"
+              type="password"
+              name="password"
+              [(ngModel)]="form.password"
+              #password="ngModel"
+              required
+            />
+            <div class="alert-danger" *ngIf="password.errors && f.submitted">
+              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.minlength">
+                Password must be at least 6 characters
+              </div>
+            </div>
+          </div>
+          <br />
+          <a class="button_line" (onclick)="onSubmit()">Sign Up</a>
+        </div>
+      </div>
+    </form>
+  </section>
+</div>

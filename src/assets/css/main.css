@@ -179,7 +179,13 @@ p {
 
 /*  Header - home 1 */
 header {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.65)), to(rgba(0, 0, 0, 0.65)));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0, 0, 0, 0.65)),
+    to(rgba(0, 0, 0, 0.65))
+  );
   background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65));
   width: 100%;
   position: relative;
@@ -545,7 +551,7 @@ body.modal_open {
 
 header.home h1 {
   font-size: 120px;
-  line-height: .9;
+  line-height: 0.9;
 }
 
 .title {
@@ -602,7 +608,8 @@ header.home h1 {
 }
 
 .contact .icon_adress {
-  background: url("../img/icons/placeholder-filled-point.svg") no-repeat center top/cover;
+  background: url("../img/icons/placeholder-filled-point.svg") no-repeat center
+    top/cover;
 }
 
 .button_sl {
@@ -806,7 +813,7 @@ header.home h1 {
 }
 
 .awards_block::after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   top: 0;
@@ -850,7 +857,7 @@ header.home h1 {
 
 .img_inf_n .bg_inf_p.bg_products {
   left: 0;
-  background: url("../img/shef-povara1_l.jpg") no-repeat center top/cover;
+  background: url("../img/cheers_drinks.jpg") no-repeat center top/cover;
 }
 
 /* Block 4 - home 1 - Menu */
@@ -956,7 +963,7 @@ header.home h1 {
 }
 
 .bg_team_block::after {
-  content: '';
+  content: "";
   display: block;
   width: 100%;
   height: 100%;
@@ -1108,7 +1115,7 @@ footer {
   -o-object-fit: cover;
   object-fit: cover;
   /* support for plugin https://github.com/bfred-it/object-fit-images */
-  font-family: 'object-fit: cover;';
+  font-family: "object-fit: cover;";
   top: 0;
   left: 0;
   width: 100%;
@@ -1160,8 +1167,8 @@ header {
   padding-top: 7px;
   border-radius: 8px;
   background: #eee;
-  -webkit-transition: .3s;
-  transition: .3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
   cursor: pointer;
   margin-right: 4px;
 }
@@ -1181,8 +1188,16 @@ header {
 }
 
 #blog header {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url("../img/blog_fon_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/blog_fon_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.7)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
+    url("../img/blog_fon_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/blog_fon_l.png") no-repeat center top/cover;
 }
 
 aside {
@@ -1251,7 +1266,7 @@ aside {
   transition: 0.3s;
 }
 
-#blog .col-lg-12:nth-last-child(-n+2) .blog_post {
+#blog .col-lg-12:nth-last-child(-n + 2) .blog_post {
   border-bottom: 0px;
 }
 
@@ -1402,7 +1417,7 @@ aside {
 }
 
 .name_p span {
-  font-family: 'Unna';
+  font-family: "Unna";
   font-size: 22px;
   font-weight: bold;
 }
@@ -1462,8 +1477,16 @@ aside a:hover {
 }
 
 #single_post header {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("../img/blog_gon_two_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/blog_gon_two_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.5)),
+      to(rgba(0, 0, 0, 0.5))
+    ),
+    url("../img/blog_gon_two_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/blog_gon_two_l.png") no-repeat center top/cover;
 }
 
 #single_post .blog_text_i h2 {
@@ -1546,7 +1569,7 @@ aside a:hover {
 }
 
 #single_post .quotes_text p {
-  font-family: 'Unna';
+  font-family: "Unna";
   font-size: 26px;
   font-weight: 500;
   color: #fff;
@@ -1655,8 +1678,16 @@ aside a:hover {
 }
 
 #shop header {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("../img/shop_fon_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/shop_fon_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.5)),
+      to(rgba(0, 0, 0, 0.5))
+    ),
+    url("../img/shop_fon_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/shop_fon_l.png") no-repeat center top/cover;
 }
 
 .products_shop {
@@ -1689,7 +1720,8 @@ aside a:hover {
   color: #eb9412;
 }
 
-.products_sh img, .products_sh p {
+.products_sh img,
+.products_sh p {
   width: 100%;
   -webkit-transition: 0.3s;
   transition: 0.3s;
@@ -1737,7 +1769,7 @@ aside a:hover {
 }
 
 .products_sh .cont_product span {
-  font-family: 'Unna';
+  font-family: "Unna";
   font-size: 24px;
   color: #eb9412;
   font-weight: bold;
@@ -1797,7 +1829,7 @@ aside a:hover {
 }
 
 .image_product_add_to_cart:before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   background: rgba(0, 0, 0, 0.5);
@@ -1875,8 +1907,16 @@ form {
 }
 
 #shop_t header {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("../img/shop_block_two_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/shop_block_two_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.5)),
+      to(rgba(0, 0, 0, 0.5))
+    ),
+    url("../img/shop_block_two_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/shop_block_two_l.png") no-repeat center top/cover;
 }
 
 .shop_info_two {
@@ -1913,7 +1953,7 @@ form {
 }
 
 .title_shop span {
-  font-family: 'Unna';
+  font-family: "Unna";
   font-size: 26px;
   color: #eb9412;
   font-weight: bold;
@@ -1976,8 +2016,16 @@ form {
 }
 
 #contact header {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url("../img/contact_fon_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/contact_fon_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.7)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
+    url("../img/contact_fon_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/contact_fon_l.png") no-repeat center top/cover;
 }
 
 #contact .info_pha {
@@ -2016,7 +2064,7 @@ form {
 
 #contact .adress_phone:after,
 #contact .adress_map:after {
-  content: '';
+  content: "";
   position: absolute;
   top: -25px;
   display: block;
@@ -2063,8 +2111,16 @@ form {
 #contact .forms {
   padding-top: 80px;
   padding-bottom: 80px;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url("../img/fon_reservation_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/fon_reservation_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.7)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
+    url("../img/fon_reservation_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/fon_reservation_l.png") no-repeat center top/cover;
 }
 
 #contact .forms a {
@@ -2138,8 +2194,16 @@ form {
 }
 
 #about header {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url("../img/fon_gallery_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/fon_gallery_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.7)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
+    url("../img/fon_gallery_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/fon_gallery_l.png") no-repeat center top/cover;
 }
 
 #about .gallery {
@@ -2267,8 +2331,16 @@ form {
   text-align: center;
   padding-top: 100px;
   padding-bottom: 100px;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url("../img/fon_about_two_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/fon_about_two_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.7)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
+    url("../img/fon_about_two_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/fon_about_two_l.png") no-repeat center top/cover;
 }
 
 #about .information_ab span {
@@ -2306,28 +2378,36 @@ form {
 
 #home_two .button_line {
   color: #000;
-  border: 2px solid #A5C63F;
+  border: 2px solid #a5c63f;
 }
 
 #home_two .button_line:hover {
   color: #fff;
-  background: #A5C63F;
+  background: #a5c63f;
 }
 
 #home_two .button_fill {
-  background: #A5C63F;
-  border: 2px solid #A5C63F;
+  background: #a5c63f;
+  border: 2px solid #a5c63f;
 }
 
 #home_two .button_fill:hover {
   background: none;
-  border: 2px solid #A5C63F;
+  border: 2px solid #a5c63f;
   color: #000;
 }
 
 #home_two header {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.01)), to(rgba(0, 0, 0, 0.01))), url("../img/fon_two_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.01)), url("../img/fon_two_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.01)),
+      to(rgba(0, 0, 0, 0.01))
+    ),
+    url("../img/fon_two_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.01)),
+    url("../img/fon_two_l.png") no-repeat center top/cover;
   background: none;
 }
 
@@ -2354,7 +2434,7 @@ form {
 }
 
 #home_two .menu a:hover {
-  color: #A5C63F;
+  color: #a5c63f;
 }
 
 #home_two .menu i {
@@ -2362,15 +2442,15 @@ form {
 }
 
 #home_two .menu i:hover {
-  color: #A5C63F;
+  color: #a5c63f;
 }
 
 #home_two .menu li.active {
-  border-bottom: 2px solid #A5C63F;
+  border-bottom: 2px solid #a5c63f;
 }
 
 #home_two .menu_mega .sub_menu .sub_s_m h5 {
-  color: #A5C63F;
+  color: #a5c63f;
 }
 
 #home_two .flex_center {
@@ -2394,8 +2474,8 @@ form {
 }
 
 #home_two .title a {
-  background: #A5C63F;
-  border: 2px solid #A5C63F;
+  background: #a5c63f;
+  border: 2px solid #a5c63f;
   color: #fff;
 }
 
@@ -2425,15 +2505,17 @@ form {
 }
 
 #home_two .slider .slider_namber .swiper-pagination-bullet-active {
-  color: #A5C63F;
+  color: #a5c63f;
 }
 
 #home_two .button_sl .icon_right {
-  background: url("../img/icons/icon_slider_three.svg") no-repeat center top/cover;
+  background: url("../img/icons/icon_slider_three.svg") no-repeat center
+    top/cover;
 }
 
 #home_two .button_sl .icon_left {
-  background: url("../img/icons/icon_slider_left_three.svg") no-repeat center top/cover;
+  background: url("../img/icons/icon_slider_left_three.svg") no-repeat center
+    top/cover;
 }
 
 #home_two .button_sl .active {
@@ -2445,7 +2527,8 @@ form {
   text-align: center;
 }
 
-#home_two .title_t span, #home_two .title_t h2 {
+#home_two .title_t span,
+#home_two .title_t h2 {
   width: auto;
 }
 
@@ -2463,7 +2546,7 @@ form {
   display: inline-block;
   width: 85px;
   height: 85px;
-  fill: #A5C63F;
+  fill: #a5c63f;
 }
 
 #home_two .info_block_img {
@@ -2520,17 +2603,25 @@ form {
 }
 
 #home_two .team:before {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.5))), url("../img/ourteam_two_version_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../img/ourteam_two_version_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.5)),
+      to(rgba(0, 0, 0, 0.5))
+    ),
+    url("../img/ourteam_two_version_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/ourteam_two_version_l.png") no-repeat center top/cover;
 }
 
 #home_two .icon_social i {
-  color: #A5C63F;
-  border: 2px solid #A5C63F;
+  color: #a5c63f;
+  border: 2px solid #a5c63f;
 }
 
 #home_two .icon_social i:hover {
-  background: #A5C63F;
+  background: #a5c63f;
   color: #fff;
 }
 
@@ -2559,7 +2650,7 @@ form {
   padding-bottom: 0px;
 }
 
-#home_two .menu_information .img_text_menu:not(:nth-last-child(-n+2)) {
+#home_two .menu_information .img_text_menu:not(:nth-last-child(-n + 2)) {
   padding-bottom: 50px;
 }
 
@@ -2579,8 +2670,8 @@ form {
 }
 
 #home_two .img_text_menu span {
-  color: #A5C63F;
-  font-family: 'Unna';
+  color: #a5c63f;
+  font-family: "Unna";
   font-size: 26px;
   font-weight: 700;
 }
@@ -2614,12 +2705,12 @@ form {
 
 #home_three .button_line {
   color: #000;
-  border: 2px solid #E34040;
+  border: 2px solid #e34040;
 }
 
 #home_three .button_line:hover {
   color: #fff;
-  background: #E34040;
+  background: #e34040;
 }
 
 #home_three .logo_mobile {
@@ -2642,7 +2733,7 @@ form {
 }
 
 #home_three .menu li.active {
-  border-bottom: 2px solid #E34040;
+  border-bottom: 2px solid #e34040;
 }
 
 #home_three .menu li .sub_menu li a {
@@ -2650,7 +2741,7 @@ form {
 }
 
 #home_three .menu li .sub_menu li a:hover {
-  color: #E34040;
+  color: #e34040;
 }
 
 #home_three .menu_lr {
@@ -2666,7 +2757,7 @@ form {
 }
 
 #home_three .menu_mega .sub_menu .sub_s_m h5 {
-  color: #E34040;
+  color: #e34040;
 }
 
 #home_three .l_m_global {
@@ -2687,7 +2778,7 @@ form {
 }
 
 #home_three .menu i:hover {
-  color: #E34040;
+  color: #e34040;
 }
 
 #home_three header {
@@ -2718,7 +2809,7 @@ form {
 }
 
 #home_three .slider .slider_namber .swiper-pagination-bullet-active {
-  color: #E34040;
+  color: #e34040;
 }
 
 #home_three .button_sl .icon_right {
@@ -2846,7 +2937,7 @@ form {
 }
 
 #home_three .visit_text .button_line {
-  border: 2px solid #E34040;
+  border: 2px solid #e34040;
 }
 
 #home_three .services {
@@ -2857,11 +2948,11 @@ form {
   display: inline-block;
   width: 85px;
   height: 85px;
-  fill: #E34040;
+  fill: #e34040;
 }
 
 #home_three .title_t .text_color {
-  color: #E34040;
+  color: #e34040;
 }
 
 #home_three .title_t .text_color:before {
@@ -2888,27 +2979,35 @@ form {
 }
 
 #home_three .team:before {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url("../img/pizza_fon_ourteam_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/pizza_fon_ourteam_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.7)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
+    url("../img/pizza_fon_ourteam_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/pizza_fon_ourteam_l.png") no-repeat center top/cover;
 }
 
 #home_three .icon_social i {
-  color: #E34040;
-  border: 2px solid #E34040;
+  color: #e34040;
+  border: 2px solid #e34040;
 }
 
 #home_three .icon_social i:hover {
-  background: #E34040;
+  background: #e34040;
   color: #fff;
 }
 
 #home_three .menu li:hover a {
-  color: #E34040;
+  color: #e34040;
 }
 
 #home_three .button_line:hover {
   color: #fff;
-  background: #E34040;
+  background: #e34040;
 }
 
 #home_three .our_t span {
@@ -2942,13 +3041,13 @@ form {
 }
 
 #home_three .button_fill {
-  background: #E34040;
-  border: 2px solid #E34040;
+  background: #e34040;
+  border: 2px solid #e34040;
 }
 
 #home_three .button_fill:hover {
   background: none;
-  border: 2px solid #E34040;
+  border: 2px solid #e34040;
   color: #000;
 }
 
@@ -2962,7 +3061,13 @@ form {
 
 #home_three .bg_menu_fl_block {
   position: absolute;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7)));
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(rgba(0, 0, 0, 0.7)),
+    to(rgba(0, 0, 0, 0.7))
+  );
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   height: 400px;
   width: 100%;
@@ -2971,7 +3076,7 @@ form {
 }
 
 #home_three .bg_menu_fl_block::after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   top: 0;
@@ -3060,8 +3165,16 @@ form {
 }
 
 #home_three .menu_fl:before {
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))), url("../img/Pizza_fon_menu_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/Pizza_fon_menu_l.png") no-repeat center top/cover;
+  background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0.7)),
+      to(rgba(0, 0, 0, 0.7))
+    ),
+    url("../img/Pizza_fon_menu_l.png") no-repeat center top/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../img/Pizza_fon_menu_l.png") no-repeat center top/cover;
 }
 
 @media screen and (max-width: 1200px) {
@@ -3204,7 +3317,8 @@ form {
   .awards_block {
     position: relative;
   }
-  .i_phone, .i_adress {
+  .i_phone,
+  .i_adress {
     padding-right: 20px;
   }
   .swiper-pagination {
@@ -3348,7 +3462,8 @@ form {
     padding-top: 30px;
     padding-bottom: 25px;
   }
-  #home_two .swiper-pagination, #home_three .swiper-pagination {
+  #home_two .swiper-pagination,
+  #home_three .swiper-pagination {
     display: block !important;
   }
   #contact .form_info {
@@ -3416,7 +3531,7 @@ form {
   .logos_p .col-6 {
     padding: 0;
   }
-  .logos img:nth-last-child(-n+3) {
+  .logos img:nth-last-child(-n + 3) {
     padding-top: 50px;
   }
   .info_title p {
@@ -3552,7 +3667,8 @@ form {
     max-width: 100%;
     padding-bottom: 10px;
   }
-  #single_post .review_block img, #single_post .commentar img {
+  #single_post .review_block img,
+  #single_post .commentar img {
     width: 60px;
     height: 60px;
   }
