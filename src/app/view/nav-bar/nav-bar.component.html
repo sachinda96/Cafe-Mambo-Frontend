@@ -1,5 +1,5 @@
-<header class="home">
-  <div class="bg_slider">
+<header class="home" *ngIf="router.url == '/'">
+  <div class="bg_slider" >
     <div class="swiper-container image-slider">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
@@ -36,7 +36,6 @@
           src="../../../assets/img/cafe_mambo_logo_adobespark.png"
           alt="logo" /></a
       ><span class="fas fa-bars" id="menu_icon"></span>
-
       <nav class="menu">
         <ul>
           <li class=""><a [routerLink]="['/']">Home</a></li>
@@ -104,3 +103,50 @@
 
 
 --></header>
+<div class="l_m_global headroom" *ngIf="router.url != '/'">
+  <div class="container l_m">
+    <a class="logo" href="index-2.html"
+    ><img
+      src="../../../assets/img/cafe_mambo_logo_adobespark.png"
+      alt="logo" /></a
+    ><span class="fas fa-bars" id="menu_icon"></span>
+    <nav class="menu">
+      <ul>
+        <li class=""><a [routerLink]="['/']">Home</a></li>
+        <li class="menu_mega">
+          <a class="drop_down_nav" [routerLink]="['/shop']">Shop</a>
+          <ul class="sub_menu shop">
+            <div class="sub_s_m">
+              <h5>Drinks</h5>
+              <li>
+                <a [routerLink]="['/shop/cocktail']">Cocktail</a>
+              </li>
+              <li><a [routerLink]="['/shop/mocktail']">Mocktail</a></li>
+              <li><a [routerLink]="['/shop/juice']">Juice</a></li>
+              <br /><br />
+            </div>
+            <div class="sub_s_m">
+              <h5>Food</h5>
+              <li><a [routerLink]="['/appetizer']">Appetizer</a></li>
+              <br /><br />
+            </div>
+          </ul>
+        </li>
+        <li><a [routerLink]="['/events']">Events</a></li>
+
+        <li><a [routerLink]="['/about-us']">About us</a></li>
+
+        <li><a [routerLink]="['/contact-us']">Contact us</a></li>
+        <li><a [routerLink]="['/register']">Register</a></li>
+      </ul>
+      &nbsp;&nbsp;
+      <ul>
+        <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
+      </ul>
+      <span>
+          <i class="fas fa-shopping-cart shop_cart"><span>1</span></i
+          ><i class="fas fa-search search_icon"></i>
+        </span>
+    </nav>
+  </div>
+</div>
