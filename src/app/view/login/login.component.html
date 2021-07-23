@@ -5,7 +5,7 @@
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
-      novalidate
+      validate
     >
       <div class="container">
         <div class="form">
@@ -16,19 +16,21 @@
           </div>
           <div class="form_info">
             <input
-              placeholder="Username"
-              type="text"
-              name="username"
+              placeholder="Email"
+              type="email"
+              name="email"
               required
-              [(ngModel)]="form.username"
-              #username="ngModel"
+              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
+              [(ngModel)]="form.email"
+              #email="ngModel"
             />
             <div
               class="alert alert-danger"
               role="alert"
-              *ngIf="username.errors && f.submitted"
+              *ngIf="email.errors && f.submitted"
+              style="color: aliceblue"
             >
-              Username is required!
+              Email is required!
             </div>
 
             <br />

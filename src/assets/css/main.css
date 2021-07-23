@@ -1685,9 +1685,9 @@ aside a:hover {
       from(rgba(0, 0, 0, 0.5)),
       to(rgba(0, 0, 0, 0.5))
     ),
-    url("../img/shop_fon_l.png") no-repeat center top/cover;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../img/shop_fon_l.png") no-repeat center top/cover;
+    url("../../assets/img/shop_fon_l.png") no-repeat center top/cover; /*shop_fon_l.png*/
+  background: linear-gradient(rgba(95, 91, 91, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../assets/img/shop_fon_l.png") no-repeat center top/cover;
 }
 
 .products_shop {

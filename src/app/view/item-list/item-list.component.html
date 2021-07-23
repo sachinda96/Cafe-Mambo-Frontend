@@ -1,0 +1,51 @@
+<div class="container content">
+  <section class="products_shop">
+    <div class="container">
+      <div class="row flex-wrap">
+        s
+        <div *ngFor="let item of items" class="col-lg-6">
+          <div class="products_sh">
+            <div class="image_product_add_to_cart">
+              <a class="button_line"
+                ><i class="fas fa-shopping-basket"></i>Add to Cart</a
+              ><img src="{{ item.imageUrl }}" alt="" />
+            </div>
+            <a class="cont_product" [routerLink]="['/']">
+              <div class="row align-items-center justify-content-between">
+                <span>Rs. {{ item.price }}</span>
+                <div class="star">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i
+                  ><i class="fas fa-star-half"></i><i class="fas fa-star"></i
+                  ><i class="fas fa-star"></i>
+                </div>
+              </div>
+              <h3>{{ item.name }}</h3>
+              <p style="font-size: small">{{ item.description }}</p></a
+            >
+          </div>
+        </div>
+      </div>
+      <div class="nav_pages">
+        <span>1</span>
+        <div class="num_p">2</div>
+        <div class="num_p">3</div>
+      </div>
+    </div>
+  </section>
+  <aside class="sidebar">
+    <div class="col-lg-12">
+      <div class="categories_p item_widget">
+        <h3>Categories</h3>
+        <a href="#">Mocktail</a><a href="#">Cocktail</a><a href="#">Appetizer</a
+        ><a href="#"></a>
+      </div>
+      <div class="tags item_widget">
+        <h3>Tags</h3>
+        <div class="tags_links">
+          <a href="#">Restaurant</a><a href="#">Cafe</a
+          ><a href="#">Eastern cuisine</a><a href="#">Pizza</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>

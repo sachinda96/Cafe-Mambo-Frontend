@@ -71,8 +71,13 @@
           <li><a [routerLink]="['/register']">Register</a></li>
         </ul>
         &nbsp;&nbsp;
-        <ul>
+        <ul *ngIf="isLoggedIn">
           <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
+        </ul>
+        <ul *ngIf="!isLoggedIn">
+          <li>
+            <a class="button_line" (click)="logout()">Logout</a>
+          </li>
         </ul>
         <span>
           <i class="fas fa-shopping-cart shop_cart"><span>1</span></i
@@ -151,8 +156,13 @@
         <li><a [routerLink]="['/register']">Register</a></li>
       </ul>
       &nbsp;&nbsp;
-      <ul>
+      <ul *ngIf="isLoggedIn">
         <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
+      </ul>
+      <ul *ngIf="!isLoggedIn">
+        <li>
+          <a class="button_line" (click)="logout()">Logout</a>
+        </li>
       </ul>
       <span>
         <i class="fas fa-shopping-cart shop_cart"><span>1</span></i

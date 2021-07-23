@@ -2,23 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Item } from '../items';
 
-@Injectable({})
+// @Injectable({})
 const itemsURL = '';
 export class ItemsService {
   items: Item[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getItems() {
+  getItems(type: string) {
     return this.http.get<
       {
         id: number;
         name: string;
         type: string;
+        subType: string;
         price: number;
         description: string;
+        imageUrl: string;
       }[]
-    >(itemsURL);
+    >(itemsURL + '?type=' + type);
     //return this.items;
   }
 

@@ -20,27 +20,31 @@
             </p>
           </div>
           <div class="form_info">
-            <div class="form_reserv">
-              <input
-                placeholder="Name"
-                type="text"
-                name="username"
-                required
-                minlength="3"
-                max="20"
-                [(ngModel)]="form.username"
-                #username="ngModel"
-              />
-              <div class="alert-danger" *ngIf="username.errors && f.submitted">
-                <div *ngIf="username.errors.required">Username is required</div>
-                <div *ngIf="username.errors.minlength">
-                  Username must be at least 3 characters
-                </div>
-                <div *ngIf="username.errors.maxlength">
-                  Username must be at most 20 characters
-                </div>
+            <br />
+            <input
+              placeholder="Name"
+              type="text"
+              name="username"
+              required
+              minlength="3"
+              max="20"
+              [(ngModel)]="form.username"
+              #username="ngModel"
+            />
+            <div
+              class="alert-danger"
+              *ngIf="username.errors && f.submitted"
+              style="color: aliceblue"
+            >
+              <div *ngIf="username.errors.required">Username is required</div>
+              <div *ngIf="username.errors.minlength">
+                Username must be at least 3 characters
+              </div>
+              <div *ngIf="username.errors.maxlength">
+                Username must be at most 20 characters
               </div>
             </div>
+
             <input
               placeholder="Email"
               type="email"
@@ -70,9 +74,9 @@
                 Password must be at least 6 characters
               </div>
             </div>
+            <br />
+            <a class="button_line" (onclick)="onSubmit()">Sign Up</a>
           </div>
-          <br />
-          <a class="button_line" (onclick)="onSubmit()">Sign Up</a>
         </div>
       </div>
     </form>
