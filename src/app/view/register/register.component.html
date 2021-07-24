@@ -27,14 +27,14 @@
               name="username"
               required
               minlength="3"
-              max="20"
+              maxlength="20"
               [(ngModel)]="form.username"
               #username="ngModel"
             />
             <div
-              class="alert-danger"
+              class="alert-danger field-error"
               *ngIf="username.errors && f.submitted"
-              style="color: aliceblue"
+              style="color: red"
             >
               <div *ngIf="username.errors.required">Username is required</div>
               <div *ngIf="username.errors.minlength">
@@ -53,7 +53,11 @@
               #email="ngModel"
               required
             />
-            <div class="alert-danger" *ngIf="email.errors && f.submitted">
+            <div
+              class="alert-danger field-error"
+              *ngIf="email.errors && f.submitted"
+              style="color: red"
+            >
               <div *ngIf="email.errors.required">Email is required</div>
               <div *ngIf="email.errors.email">
                 Email must be a valid email address
@@ -68,14 +72,27 @@
               #password="ngModel"
               required
             />
-            <div class="alert-danger" *ngIf="password.errors && f.submitted">
+            <div
+              class="alert-danger field-error"
+              *ngIf="password.errors && f.submitted"
+              style="color: red"
+            >
               <div *ngIf="password.errors.required">Password is required</div>
               <div *ngIf="password.errors.minlength">
                 Password must be at least 6 characters
               </div>
             </div>
             <br />
-            <a class="button_line" (onclick)="onSubmit()">Sign Up</a>
+            <div class="form-group">
+              <button class="button_line my-btn">Sign Up</button>
+            </div>
+
+            <div
+              class="alert alert-warning"
+              *ngIf="f.submitted && isSignUpFailed"
+            >
+              Signup failed!<br />{{ errorMessage }}
+            </div>
           </div>
         </div>
       </div>
