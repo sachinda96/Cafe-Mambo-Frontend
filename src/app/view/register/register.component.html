@@ -34,7 +34,7 @@
             <div
               class="alert-danger field-error"
               *ngIf="username.errors && f.submitted"
-              style="color: red"
+              style="color: aliceblue"
             >
               <div *ngIf="username.errors.required">Username is required</div>
               <div *ngIf="username.errors.minlength">
@@ -51,15 +51,16 @@
               name="email"
               [(ngModel)]="form.email"
               #email="ngModel"
+              pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
               required
             />
             <div
               class="alert-danger field-error"
               *ngIf="email.errors && f.submitted"
-              style="color: red"
+              style="color: aliceblue"
             >
               <div *ngIf="email.errors.required">Email is required</div>
-              <div *ngIf="email.errors.email">
+              <div *ngIf="email.errors.pattern">
                 Email must be a valid email address
               </div>
             </div>
@@ -75,7 +76,7 @@
             <div
               class="alert-danger field-error"
               *ngIf="password.errors && f.submitted"
-              style="color: red"
+              style="color: aliceblue"
             >
               <div *ngIf="password.errors.required">Password is required</div>
               <div *ngIf="password.errors.minlength">
@@ -87,10 +88,7 @@
               <button class="button_line my-btn">Sign Up</button>
             </div>
 
-            <div
-              class="alert alert-warning"
-              *ngIf="f.submitted && isSignUpFailed"
-            >
+            <div *ngIf="f.submitted && isSignUpFailed" style="color: aliceblue">
               Signup failed!<br />{{ errorMessage }}
             </div>
           </div>

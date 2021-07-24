@@ -20,17 +20,20 @@
               type="email"
               name="email"
               required
-              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
+              pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
               [(ngModel)]="form.email"
               #email="ngModel"
             />
+
             <div
-              class="alert alert-danger"
-              role="alert"
+              class="alert-danger field-error"
               *ngIf="email.errors && f.submitted"
               style="color: aliceblue"
             >
-              Email is required!
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.pattern">
+                Email must be a valid email address
+              </div>
             </div>
 
             <br />
@@ -46,6 +49,7 @@
               class="alert alert-danger"
               role="alert"
               *ngIf="password.errors && f.submitted"
+              style="color: aliceblue"
             >
               <div *ngIf="password.errors.required">Password is required</div>
               <div *ngIf="password.errors.minlength">
@@ -53,7 +57,17 @@
               </div>
             </div>
             <br />
-            <a class="button_line" (click)="onSubmit()">Login</a>
+
+            <div class="form-group">
+              <button class="button_line my-btn">Login</button>
+            </div>
+
+            <div
+              class="alert alert-warning"
+              *ngIf="f.submitted && isLoginFailed"
+            >
+              Signin failed!<br />{{ errorMessage }}
+            </div>
           </div>
         </div>
       </div>
