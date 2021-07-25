@@ -8,6 +8,7 @@ import { RegisterComponent } from './view/register/register.component';
 import { ReservationComponent } from './view/reservation/reservation.component';
 import { LoginComponent } from './view/login/login.component';
 import { EventComponent } from './view/event/event.component';
+import { CartComponent } from './view/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
   },
 ];
 
