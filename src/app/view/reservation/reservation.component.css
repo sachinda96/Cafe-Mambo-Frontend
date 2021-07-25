@@ -1,0 +1,41 @@
+.cont_product h3,
+p {
+  color: aliceblue;
+}
+
+textarea {
+  font-family: open-sans, sans-serif;
+}
+/*
+select {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  /*display: inline-block; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+*/
+
+select {
+  border-width: 0;
+  outline: none;
+  margin-right: 0px;
+  margin-bottom: 10px;
+  height: 40px;
+  width: 295px;
+  padding: 4px 4px;
+  background: #fff;
+  border-radius: 8px;
+  color: #5a5a5a;
+}
+
+button {
+  opacity: 1;
+  background-color: inherit;
+  color: #fff;
+  float: right;
+  width: 100%;
+  margin-top: 1em;
+}

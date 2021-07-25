@@ -1,1 +1,78 @@
-<p>reservation works!</p>
+<div id="contact">
+  <section class="forms">
+    <div class="container">
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <div class="row">
+        <div class="col-lg-3" *ngFor="let pack of packages">
+          <div class="products_sh">
+            <div class="">
+              <img
+                src="{
+                {pack.imageUrl}}"
+                alt=""
+              />
+            </div>
+            <div class="cont_product">
+              <div class="row align-items-center justify-content-between">
+                <span>{{ pack.price | currency: "LKR " }}</span>
+              </div>
+
+              <h3>{{ pack.name }}</h3>
+              <p>{{ pack.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form">
+        <div class="form_text">
+          <span class="up_i">Favorite cuisine</span>
+          <h2>Event Booking</h2>
+          <p>Lorem ipsum dolor sit amet purus vitae libero lacinia</p>
+        </div>
+        <div class="form_info">
+          <div class="form_reserv">
+            <input placeholder="Name" type="text" name="name" required="" />
+            <input placeholder="Email" type="email" name="email" required="" />
+            <input
+              placeholder="Contact Number"
+              type="text"
+              name="contactNo"
+              required=""
+            />
+            <input
+              placeholder="Location"
+              type="text"
+              name="location"
+              required
+            />
+            <br />
+          </div>
+          <div style="display: flex; flex-direction: row">
+            <input type="date" name="date" required />
+
+            <select class="typeDDL">
+              <option value="">Please Select-------------------</option>
+            </select>
+          </div>
+          <textarea
+            placeholder="Message"
+            type="message"
+            name="message"
+            required=""
+          ></textarea>
+
+          <button class="button_line">Reserve</button>
+          <!-- 
+            date picker  // get from api to findout 
+            package type // get form api url 
+          -->
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
