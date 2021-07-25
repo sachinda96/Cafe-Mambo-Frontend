@@ -1,0 +1,45 @@
+<div id="shop">
+  <header>
+    <div class="search_b">
+      <i class="fas fa-times search_icon"></i>
+      <input type="search" placeholder="Seacrh" />
+    </div>
+    <div class="container flex_center">
+      <div class="title">
+        <h1>Cart</h1>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+          Necessitatibus at suscipit enim expedita natus eligendi architecto
+          rerum asperiores.
+        </p>
+      </div>
+    </div>
+  </header>
+  <div class="container content">
+    <section class="products_shop">
+      <div class="container">
+        <div class="row flex-wrap">
+          <div *ngFor="let item of items" class="col-lg-6">
+            <div class="products_sh">
+              <div class="image_product_add_to_cart">
+                <img src="{{ item.imageUrl }}" alt="" />
+              </div>
+              <a class="cont_product" [routerLink]="['/']">
+                <div class="row align-items-center justify-content-between">
+                  <span>Rs. {{ item.price }}</span>
+                  <div class="star">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star-half"></i><i class="fas fa-star"></i
+                    ><i class="fas fa-star"></i>
+                  </div>
+                </div>
+                <h3>{{ item.name }}</h3>
+                <p style="font-size: small">{{ item.description }}</p></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

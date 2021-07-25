@@ -19,6 +19,8 @@ import { ReservationComponent } from './view/reservation/reservation.component';
 import { authInterceptorProviders } from './helper/auth.interceptor';
 import { ItemListComponent } from './view/item-list/item-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CartItemComponent } from './view/cart-item/cart-item.component';
+import { CartComponent } from './view/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     RegisterComponent,
     ReservationComponent,
     ItemListComponent,
+    CartItemComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

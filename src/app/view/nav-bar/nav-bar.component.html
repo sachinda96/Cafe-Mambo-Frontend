@@ -82,7 +82,10 @@
           </li>
         </ul>
         <span>
-          <i class="fas fa-shopping-cart shop_cart"><span>1</span></i
+          <a [routerLink]="['/cart']">
+            <i class="fas fa-shopping-cart shop_cart"
+              ><span>{{ this.cartService.items.length }}</span></i
+            ></a
           ><i class="fas fa-search search_icon"></i>
         </span>
       </nav>
@@ -167,7 +170,10 @@
         </li>
       </ul>
       <span>
-        <i class="fas fa-shopping-cart shop_cart"><span>1</span></i
+        <a [routerLink]="['/cart']">
+          <i class="fas fa-shopping-cart shop_cart"
+            ><span>{{ this.cartService.items.length }}</span></i
+          ></a
         ><i class="fas fa-search search_icon"></i>
       </span>
     </nav>
