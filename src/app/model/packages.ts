@@ -21,7 +21,7 @@ export const packages = [
     price: 50000,
     description: 'for 50',
     imageUrl:
-      'https://images.pexels.com/photos/110472/pexels-photo-110472.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+      'https://images.pexels.com/photos/338713/pexels-photo-338713.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
   },
   {
     id: 3,

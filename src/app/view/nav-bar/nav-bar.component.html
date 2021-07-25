@@ -33,7 +33,7 @@
     <div class="container l_m">
       <a class="logo" href="index-2.html"
         ><img
-          src="../../../assets/img/cafe_mambo_logo_adobespark.png"
+          src="../../../assets/img/Logo/Logo Original white copy.png"
           alt="logo" /></a
       ><span class="fas fa-bars" id="menu_icon"></span>
       <nav class="menu">
@@ -68,7 +68,9 @@
           <li><a [routerLink]="['/about-us']">About us</a></li>
 
           <li><a [routerLink]="['/contact-us']">Contact us</a></li>
-          <li><a [routerLink]="['/register']">Register</a></li>
+          <li *ngIf="isLoggedIn">
+            <a [routerLink]="['/register']">Register</a>
+          </li>
         </ul>
         &nbsp;&nbsp;
         <ul *ngIf="isLoggedIn">
@@ -117,7 +119,9 @@
 <div class="l_m_global headroom" *ngIf="router.url != '/'">
   <div class="container l_m">
     <a class="logo" [routerLink]="['/']">
-      ><img src="../../../assets/img/cafe_mambo_logo.jpg" alt="logo" /></a
+      ><img
+        src="../../../assets/img/Logo/Logo Original white copy.png"
+        alt="logo" /></a
     ><span class="fas fa-bars" id="menu_icon"></span>
     <nav class="menu">
       <ul>
@@ -151,7 +155,7 @@
         <li><a [routerLink]="['/about-us']">About us</a></li>
 
         <li><a [routerLink]="['/contact-us']">Contact us</a></li>
-        <li><a [routerLink]="['/register']">Register</a></li>
+        <li><a [routerLink]="['/register']" *ngIf="isLoggedIn">Register</a></li>
       </ul>
       &nbsp;&nbsp;
       <ul *ngIf="isLoggedIn">

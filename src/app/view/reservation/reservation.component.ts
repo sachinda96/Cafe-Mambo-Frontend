@@ -9,7 +9,13 @@ import { packages, Package } from '../../model/packages';
 export class ReservationComponent implements OnInit {
   packages = packages;
   //packages
-  types = [];
+  //  types = ['Golden', 'Silver', 'Bronze'];
+  types = [
+    {
+      id: 1,
+      value: 5,
+    },
+  ];
 
   form: any = {
     name: null,
@@ -26,4 +32,9 @@ export class ReservationComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  onSubmit(): void {
+    alert(this.form.name);
+    console.log(this.form);
+  }
 }

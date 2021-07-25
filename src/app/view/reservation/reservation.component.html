@@ -10,12 +10,9 @@
         <div class="col-lg-3" *ngFor="let pack of packages">
           <div class="products_sh">
             <div class="">
-              <img
-                src="{
-                {pack.imageUrl}}"
-                alt=""
-              />
+              <img src="{{ pack.imageUrl }}" alt="" />
             </div>
+            <br /><br />
             <div class="cont_product">
               <div class="row align-items-center justify-content-between">
                 <span>{{ pack.price | currency: "LKR " }}</span>
@@ -28,51 +25,115 @@
         </div>
       </div>
 
-      <div class="form">
-        <div class="form_text">
-          <span class="up_i">Favorite cuisine</span>
-          <h2>Event Booking</h2>
-          <p>Lorem ipsum dolor sit amet purus vitae libero lacinia</p>
-        </div>
-        <div class="form_info">
-          <div class="form_reserv">
-            <input placeholder="Name" type="text" name="name" required="" />
-            <input placeholder="Email" type="email" name="email" required="" />
+      <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form">
+          <div class="form_text">
+            <span class="up_i">Favorite Bar</span>
+            <h2>Event Booking</h2>
+            <p>Lorem ipsum dolor sit amet purus vitae libero lacinia</p>
+          </div>
+
+          <div class="form_info" style="display: flex; flex-direction: column">
+            <div>
+              <input
+                placeholder="Name"
+                type="text"
+                name="name"
+                [(ngModel)]="form.name"
+                #name="ngModel"
+                required
+              />
+              <div
+                class="alert-danger field-error"
+                *ngIf="name.errors && f.submitted"
+                style="color: aliceblue"
+              >
+                <div *ngIf="name.errors.required">Username is required</div>
+              </div>
+            </div>
+            <input
+              placeholder="Email"
+              type="email"
+              name="email"
+              [(ngModel)]="form.email"
+              #email="ngModel"
+              pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+              required
+            />
+            <div
+              class="alert-danger field-error"
+              *ngIf="email.errors && f.submitted"
+              style="color: aliceblue"
+            >
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.pattern">
+                Email must be a valid email address
+              </div>
+            </div>
+
             <input
               placeholder="Contact Number"
               type="text"
               name="contactNo"
-              required=""
+              [(ngModel)]="form.contactNo"
+              #contactNo="ngModel"
+              required
             />
             <input
               placeholder="Location"
               type="text"
               name="location"
+              [(ngModel)]="form.location"
+              #location="ngModel"
               required
             />
             <br />
-          </div>
-          <div style="display: flex; flex-direction: row">
-            <input type="date" name="date" required />
 
-            <select class="typeDDL">
-              <option value="">Please Select-------------------</option>
-            </select>
-          </div>
-          <textarea
-            placeholder="Message"
-            type="message"
-            name="message"
-            required=""
-          ></textarea>
+            <div>
+              <input
+                type="date"
+                name="date"
+                [(ngModel)]="form.date"
+                #date="ngModel"
+                required
+              />
 
-          <button class="button_line">Reserve</button>
-          <!-- 
-            date picker  // get from api to findout 
-            package type // get form api url 
-          -->
+              <select
+                class="typeDDL"
+                name="type"
+                [(ngModel)]="form.type"
+                #type="ngModel"
+              >
+                <option value=""></option>
+                <option *ngFor="let type of types" value="type.value">
+                  {{ type.value }}
+                </option>
+              </select>
+            </div>
+            <textarea
+              placeholder="Message"
+              type="message"
+              name="message"
+              [(ngModel)]="form.message"
+              #message="ngModel"
+              required=""
+            ></textarea>
+            <button class="button_line" (click)="onSubmit()">Reserve</button>
+            <!-- 
+              date picker  // get from api to findout 
+   <button class="button_line (click)="onSubmit()" >Reserve</button>
+ 
+              package type // get form api url 
+            -->
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </section>
 </div>

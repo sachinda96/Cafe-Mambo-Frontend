@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const AUTH_API = 'http://1ezlo.mocklab.io/api/auth/';
+const AUTH_API = 'http://yjv1g.mocklab.io/api/auth/';
 //'http:localhost:8080/api/auth/';
 
 const httpOptions = {
