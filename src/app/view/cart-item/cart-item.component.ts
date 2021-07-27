@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { items, Item } from '../../items';
+import { items, Item } from '../../model/items';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

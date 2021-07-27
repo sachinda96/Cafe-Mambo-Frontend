@@ -9,6 +9,8 @@ import { ReservationComponent } from './view/reservation/reservation.component';
 import { LoginComponent } from './view/login/login.component';
 import { EventComponent } from './view/event/event.component';
 import { CartComponent } from './view/cart/cart.component';
+import { PaymentComponent } from './view/payment/payment.component';
+import { ItemComponent } from './view/item/item.component';
 
 const routes: Routes = [
   {
@@ -23,10 +25,7 @@ const routes: Routes = [
     path: 'events',
     component: EventComponent,
   },
-  {
-    path: 'shop',
-    component: MenuComponent,
-  },
+
   {
     path: 'register',
     component: RegisterComponent,
@@ -46,6 +45,34 @@ const routes: Routes = [
   {
     path: 'cart',
     component: CartComponent,
+  },
+  {
+    path: 'shop/cocktail',
+    component: MenuComponent,
+  },
+  {
+    path: 'shop/mocktail',
+    component: MenuComponent,
+  },
+  {
+    path: 'shop/appetizer',
+    component: MenuComponent,
+  },
+  {
+    path: 'order/payment',
+    component: PaymentComponent,
+  },
+  {
+    path: 'shop/cocktail/:itemId',
+    component: ItemComponent,
+  },
+  {
+    path: 'shop/mocktail/:itemId',
+    component: ItemComponent,
+  },
+  {
+    path: 'shop/appetizer/:itemId',
+    component: ItemComponent,
   },
 ];
 

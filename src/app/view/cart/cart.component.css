@@ -1,0 +1,51 @@
+#cart {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#cart td,
+#cart th {
+  border: 1px none #ddd;
+  padding: 8px;
+}
+
+#cart tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#cart tr:hover {
+  background-color: #ddd;
+}
+
+#cart th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #f4f4f4;
+  color: #000;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.remove-btn {
+  border: 2px solid #eb9412;
+  background-color: #eb1212;
+  padding: 1rem;
+  color: #ddd;
+  font-weight: bold;
+  border-radius: 0.4em;
+}
+
+.cart-summary table,
+h3,
+th,
+tr {
+  border-color: #fff;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+}
+
+.cart-summary tr {
+  border-color: #fff;
+}

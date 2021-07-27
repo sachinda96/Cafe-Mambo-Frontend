@@ -40,7 +40,7 @@
         <ul>
           <li class=""><a [routerLink]="['/']">Home</a></li>
           <li class="menu_mega">
-            <a class="drop_down_nav" [routerLink]="['/shop']">Shop</a>
+            <a class="drop_down_nav">Shop</a>
             <ul class="sub_menu shop">
               <div class="sub_s_m"></div>
               <div class="sub_s_m">
@@ -57,7 +57,7 @@
               </div>
               <div class="sub_s_m">
                 <h5></h5>
-                <li><a [routerLink]="['/appetizer']">Appetizer</a></li>
+                <li><a [routerLink]="['/shop/appetizer']">Appetizer</a></li>
                 <br /><br />
               </div>
               <div class="sub_s_m"></div>
@@ -83,10 +83,16 @@
         </ul>
         <span>
           <a [routerLink]="['/cart']">
-            <i class="fas fa-shopping-cart shop_cart"
-              ><span>{{ this.cartService.items.length }}</span></i
-            ></a
-          ><i class="fas fa-search search_icon"></i>
+            <i class="fas fa-shopping-cart shop_cart">
+              <!--
+              <span *ngIf="this.cartService.getItemsTotalCount() != 0">{{
+                this.cartService.getItemsTotalCount()
+              }}</span>
+              <span *ngIf="this.cartService.getItemsTotalCount() == 0">{{
+                this.cartService.getItemsTotalCount()
+              }}</span> -->
+            </i></a
+          >
         </span>
       </nav>
     </div>
@@ -130,7 +136,7 @@
       <ul>
         <li class=""><a [routerLink]="['/']">Home</a></li>
         <li class="menu_mega">
-          <a class="drop_down_nav" [routerLink]="['/shop']">Shop</a>
+          <a class="drop_down_nav">Shop</a>
           <ul class="sub_menu shop">
             <div class="sub_s_m"></div>
             <div class="sub_s_m">
@@ -147,7 +153,7 @@
             </div>
             <div class="sub_s_m">
               <h5></h5>
-              <li><a [routerLink]="['/appetizer']">Appetizer</a></li>
+              <li><a [routerLink]="['/shop/appetizer']">Appetizer</a></li>
               <br /><br />
             </div>
             <div class="sub_s_m"></div>
@@ -171,10 +177,19 @@
       </ul>
       <span>
         <a [routerLink]="['/cart']">
-          <i class="fas fa-shopping-cart shop_cart"
-            ><span>{{ this.cartService.items.length }}</span></i
-          ></a
-        ><i class="fas fa-search search_icon"></i>
+          <i class="fas fa-shopping-cart shop_cart">
+            <!-- 
+<span *ngIf="this.cartService.getItemsTotalCount() != 0">{{
+              this.cartService.getItemsTotalCount()
+            }}</span>
+            <span *ngIf="this.cartService.getItemsTotalCount() == 0">{{
+              this.cartService.getItemsTotalCount()
+            }}</span>
+
+
+           -->
+          </i></a
+        >
       </span>
     </nav>
   </div>

@@ -21,6 +21,7 @@ import { ItemListComponent } from './view/item-list/item-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CartItemComponent } from './view/cart-item/cart-item.component';
 import { CartComponent } from './view/cart/cart.component';
+import { PaymentComponent } from './view/payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CartComponent } from './view/cart/cart.component';
     ItemListComponent,
     CartItemComponent,
     CartComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,

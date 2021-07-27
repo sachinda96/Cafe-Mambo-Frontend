@@ -18,28 +18,73 @@
   <div class="container content">
     <section class="products_shop">
       <div class="container">
-        <div class="row flex-wrap">
-          <div *ngFor="let item of items" class="col-lg-6">
-            <div class="products_sh">
-              <div class="image_product_add_to_cart">
-                <img src="{{ item.imageUrl }}" alt="" />
-              </div>
-              <a class="cont_product" [routerLink]="['/']">
-                <div class="row align-items-center justify-content-between">
-                  <span>Rs. {{ item.price }}</span>
-                  <div class="star">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star-half"></i><i class="fas fa-star"></i
-                    ><i class="fas fa-star"></i>
-                  </div>
-                </div>
-                <h3>{{ item.name }}</h3>
-                <p style="font-size: small">{{ item.description }}</p></a
-              >
-            </div>
-          </div>
+        <div class="row">
+          <table id="cart">
+            <tr>
+              <th></th>
+              <th>Item</th>
+              <th>Price</th>
+              <th>Discount</th>
+              <th>Quantity</th>
+              <th></th>
+              <th></th>
+              <th>Total Price</th>
+              <th></th>
+            </tr>
+            <tr *ngFor="let cItem of cartItems">
+              <td>
+                <img
+                  src="{{ cItem.item.imageUrl }}"
+                  style="height: 4rem; width: 4rem"
+                />
+              </td>
+              <td>{{ cItem.item.name }}</td>
+              <td>{{ cItem.item.price }}</td>
+              <td></td>
+              <td>{{ cItem.count }}</td>
+              <td><i class="fas fa-plus"></i></td>
+              <td><i class="fas fa-minus"></i></td>
+              <td>{{ cItem.count * cItem.item.price | currency: "LKR " }}</td>
+              <td>
+                <button
+                  class="button_line remove-btn"
+                  onclick="alert('remove')"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>Total Quantity/Price</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{{ totQuantity }}</td>
+              <td></td>
+              <td></td>
+              <td>{{ totPrice | currency: "LKR " }}</td>
+              <td>
+                <button
+                  *ngIf="cartItems.length > 0"
+                  class="button_line remove-btn"
+                  onclick="alert('f')"
+                >
+                  Clear All
+                </button>
+              </td>
+            </tr>
+          </table>
         </div>
       </div>
+      <br /><br />
+
+      <a
+        *ngIf="cartItems.length > 0"
+        class="button_line"
+        [routerLink]="['/order/payment']"
+      >
+        Proceed
+      </a>
     </section>
   </div>
 </div>

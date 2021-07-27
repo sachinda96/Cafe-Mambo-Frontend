@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { iif } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CartService } from 'src/app/service/cart.service';
 import { TokenStorageService } from '../../service/token-storage.service';
 
@@ -14,6 +14,7 @@ export class NavBarComponent implements OnInit {
   currentUser: any;
   isLoggedIn = false;
   username?: string;
+  cartCount = 0;
 
   constructor(
     public router: Router,
@@ -24,6 +25,7 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     alert(this.token.getToken());
     this.isLoggedIn = this.token.getToken() ? false : true;
+    this.cartCount = this.cartService.getItemsTotalCount();
 
     if (this.isLoggedIn) {
       this.currentUser = this.token.getUser();

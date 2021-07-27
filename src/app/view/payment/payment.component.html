@@ -6,25 +6,6 @@
       <br />
       <br />
 
-      <div class="row">
-        <div class="col-lg-3" *ngFor="let pack of packages">
-          <div class="products_sh">
-            <div class="">
-              <img src="{{ pack.imageUrl }}" alt="" />
-            </div>
-            <br /><br />
-            <div class="cont_product">
-              <div class="row align-items-center justify-content-between">
-                <span>{{ pack.price | currency: "LKR " }}</span>
-              </div>
-
-              <h3>{{ pack.name }}</h3>
-              <p>Lorem ipsum dolor sit amet purus vitae libero lacinia</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <form
         *ngIf="!isSuccessful"
         name="form"
@@ -35,7 +16,7 @@
         <div class="form">
           <div class="form_text">
             <span class="up_i">Favorite Bar</span>
-            <h2>Event Booking</h2>
+            <h2>Payment</h2>
             <p>Lorem ipsum dolor sit amet purus vitae libero lacinia</p>
           </div>
 
@@ -95,24 +76,14 @@
             />
 
             <div>
-              <input
-                type="date"
-                name="date"
-                [(ngModel)]="form.date"
-                #date="ngModel"
-                required
-              />
-
               <select
                 class="typeDDL"
                 name="type"
                 [(ngModel)]="form.type"
                 #type="ngModel"
               >
-                <option value=""></option>
-                <option *ngFor="let type of types" value="type.value">
-                  {{ type.value }}
-                </option>
+                <option value="cash">Cash on Delivery</option>
+                <option value="cash">Card</option>
               </select>
             </div>
             <input
@@ -124,13 +95,15 @@
               required=""
               aria-rowcount="5"
             />
-            <button class="button_line" (click)="onSubmit()">Reserve</button>
+            <button class="button_line" (click)="onSubmit()">
+              Place Order
+            </button>
             <!-- 
-              date picker  // get from api to findout 
-   <button class="button_line (click)="onSubmit()" >Reserve</button>
- 
-              package type // get form api url 
-            -->
+                date picker  // get from api to findout 
+     <button class="button_line (click)="onSubmit()" >Reserve</button>
+   
+                package type // get form api url 
+              -->
           </div>
         </div>
       </form>
