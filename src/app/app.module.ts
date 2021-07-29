@@ -23,6 +23,7 @@ import { CartItemComponent } from './view/cart-item/cart-item.component';
 import { CartComponent } from './view/cart/cart.component';
 import { PaymentComponent } from './view/payment/payment.component';
 import { ItemReviewComponent } from './view/item-review/item-review.component';
+import { UserNavBarComponent } from './view/user/user-nav-bar/user-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ItemReviewComponent } from './view/item-review/item-review.component';
     CartComponent,
     PaymentComponent,
     ItemReviewComponent,
+    UserNavBarComponent,
   ],
   imports: [
     BrowserModule,
