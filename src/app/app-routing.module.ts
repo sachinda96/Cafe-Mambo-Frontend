@@ -11,6 +11,7 @@ import { EventComponent } from './view/event/event.component';
 import { CartComponent } from './view/cart/cart.component';
 import { PaymentComponent } from './view/payment/payment.component';
 import { ItemComponent } from './view/item/item.component';
+import { ItemReviewComponent } from './view/item-review/item-review.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,10 @@ const routes: Routes = [
   {
     path: 'shop/appetizer/:itemId',
     component: ItemComponent,
+  },
+  {
+    path: 'review',
+    component: ItemReviewComponent,
   },
 ];
 
