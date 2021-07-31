@@ -6,7 +6,7 @@ export const environment = {
   production: false,
 };
 
-export const BASE_URL = 'http://localhost:4000/';
+export const BASE_URL = 'http://localhost:8080/';
 export const AUTH_API = '';
 export const ITEMS_LIST_URL = '';
 /*

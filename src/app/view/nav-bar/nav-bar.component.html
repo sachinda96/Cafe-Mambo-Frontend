@@ -46,18 +46,18 @@
               <div class="sub_s_m">
                 <h5></h5>
                 <li>
-                  <a [routerLink]="['/shop/cocktail']">Cocktail</a>
+                  <a [routerLink]="['/shop/cocktail']">Cocktails</a>
                 </li>
               </div>
               <div class="sub_s_m">
                 <h5></h5>
-                <li><a [routerLink]="['/shop/mocktail']">Mocktail</a></li>
+                <li><a [routerLink]="['/shop/mocktail']">Mocktails</a></li>
 
                 <br /><br />
               </div>
               <div class="sub_s_m">
                 <h5></h5>
-                <li><a [routerLink]="['/shop/appetizer']">Appetizer</a></li>
+                <li><a [routerLink]="['/shop/appetizer']">Appetizers</a></li>
                 <br /><br />
               </div>
               <div class="sub_s_m"></div>
@@ -82,16 +82,7 @@
           </li>
         </ul>
         <span>
-          <a [routerLink]="['/cart']">
-            <i class="fas fa-shopping-cart shop_cart">
-              <span *ngIf="this.cartService.getItemsTotalCount() != 0">{{
-                this.cartService.getItemsTotalCount()
-              }}</span>
-              <span *ngIf="this.cartService.getItemsTotalCount() == 0">{{
-                this.cartService.getItemsTotalCount()
-              }}</span>
-            </i></a
-          >
+          <a [routerLink]="['/cart']"> </a>
         </span>
       </nav>
     </div>
@@ -141,18 +132,18 @@
             <div class="sub_s_m">
               <h5></h5>
               <li>
-                <a [routerLink]="['/shop/cocktail']">Cocktail</a>
+                <a [routerLink]="['/shop/cocktail']">Cocktails</a>
               </li>
             </div>
             <div class="sub_s_m">
               <h5></h5>
-              <li><a [routerLink]="['/shop/mocktail']">Mocktail</a></li>
+              <li><a [routerLink]="['/shop/mocktail']">Mocktails</a></li>
 
               <br /><br />
             </div>
             <div class="sub_s_m">
               <h5></h5>
-              <li><a [routerLink]="['/shop/appetizer']">Appetizer</a></li>
+              <li><a [routerLink]="['/shop/appetizer']">Appetizers</a></li>
               <br /><br />
             </div>
             <div class="sub_s_m"></div>

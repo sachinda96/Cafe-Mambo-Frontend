@@ -27,7 +27,7 @@
       </div>
       <!--Mocktail Items-->
       <div class="row flex-wrap" *ngIf="isMocktail">
-        <div *ngFor="let item of mocktailItems" class="col-lg-6">
+        <div *ngFor="let item of mocktailItems" class="col-lg-9">
           <div class="products_sh">
             <div class="image_product_add_to_cart">
               <a class="button_line" (click)="addToCart(item)">
@@ -80,15 +80,18 @@
       </div>
     </div>
   </section>
-  <aside class="sidebar">
+  <!--   
+<aside class="sidebar">
     <div class="col-lg-12">
       <div class="categories_p item_widget">
         <h3>Categories</h3>
-        <a (click)="onClickItemTypeChange('mocktail')">Mocktail</a
-        ><a (click)="onClickItemTypeChange('cocktail')">Cocktail</a
-        ><a (click)="onClickItemTypeChange('appetizer')">Appetizer</a
+        <a (click)="onClickItemTypeChange('mocktail')">Mocktails</a
+        ><a (click)="onClickItemTypeChange('cocktail')">Cocktails</a
+        ><a (click)="onClickItemTypeChange('appetizer')">Appetizers</a
         ><a href="#"></a>
       </div>
     </div>
   </aside>
+
+  -->
 </div>
