@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './view/home/home.component';
 import { MenuComponent } from './view/menu/menu.component';
@@ -12,6 +12,7 @@ import { CartComponent } from './view/cart/cart.component';
 import { PaymentComponent } from './view/payment/payment.component';
 import { ItemComponent } from './view/item/item.component';
 import { ItemReviewComponent } from './view/item-review/item-review.component';
+import { EmployeeListComponent } from './view/user/employee/employee-list/employee-list.component';
 
 const routes: Routes = [
   {
@@ -78,6 +79,10 @@ const routes: Routes = [
   {
     path: 'review',
     component: ItemReviewComponent,
+  },
+  {
+    path: 'employees',
+    component: EmployeeListComponent,
   },
 ];
 

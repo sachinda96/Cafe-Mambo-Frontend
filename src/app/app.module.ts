@@ -26,7 +26,7 @@ import { ItemReviewComponent } from './view/item-review/item-review.component';
 import { UserNavBarComponent } from './view/user/user-nav-bar/user-nav-bar.component';
 import { DashboardComponent } from './view/user/dashboard/dashboard.component';
 import { SideBarComponent } from './view/user/side-bar/side-bar.component';
-import { ContentComponent } from './view/user/content/content.component';
+import { EmployeeListComponent } from './view/user/employee/employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { ContentComponent } from './view/user/content/content.component';
     UserNavBarComponent,
     DashboardComponent,
     SideBarComponent,
-    ContentComponent,
+    EmployeeListComponent,
   ],
   imports: [
     BrowserModule,
