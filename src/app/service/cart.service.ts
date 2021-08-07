@@ -14,7 +14,7 @@ export class CartService {
   //   Define methods to add items to the cart, return cart items, and clear the cart items.
 
   addToCart(item: Item) {
-    alert(item);
+    //alert(item);
     const index = this.cartItems.findIndex((c) => c.item.id === item.id);
 
     let cartItem: CartItem;
@@ -37,14 +37,14 @@ export class CartService {
     console.log('len' + this.cartItems.length);
   }
 
-  deleteFromCart(item: Item, count: number) {
+  deleteFromCart(item: Item) {
     const index = this.cartItems.findIndex((c) => c.item.id === item.id);
 
     if (this.cartItems[index].count == 1) {
       this.cartItems.splice(index);
       console.log(this.cartItems);
     } else {
-      this.cartItems[index].count = count;
+      this.cartItems[index].count--;
     }
 
     console.log(index);

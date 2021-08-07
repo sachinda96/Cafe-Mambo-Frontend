@@ -32,7 +32,7 @@ export class PaymentComponent {
   // ngOnInit(): void {}
 
   onSubmit(): void {
-    alert(this.form.name);
+    //alert(this.form.name);
     console.log(this.form);
   }
 }

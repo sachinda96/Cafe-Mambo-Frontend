@@ -5,10 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './employee-list.component.html',
   styleUrls: [
     './employee-list.component.css',
-    '../../../assets/admin.lte/plugins/fontawesome-free/css/all.min.css',
-    '../../../assets/admin.lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
-    '../../../assets/admin.lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
-    '../../../assets/admin.lte/dist/css/adminlte.min.css',
+    '../../admin.lte/plugins/fontawesome-free/css/all.min.css',
+    '../../admin.lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
+    '../../admin.lte/dist/css/adminlte.min.css',
   ],
 })
 export class EmployeeListComponent implements OnInit {

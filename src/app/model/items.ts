@@ -9,6 +9,30 @@ export interface Item {
   review: any;
 }
 
+export interface ItemEntity {
+  id: string;
+  name: string;
+  description: string;
+  ingredients: any; //List<string>
+  price: string;
+  path: string;
+  status: string;
+  createBy: string;
+  createDate: any;
+  updateBy: string;
+  updateDate: any;
+}
+
+export interface ItemDto {
+  id: string;
+  name: string;
+  description: string;
+  ingredients: any; //List<string>
+  price: number;
+  imagePath: string;
+  categoryId: string;
+  rateCount: number;
+}
 export interface CartItem {
   item: Item;
   count: number;

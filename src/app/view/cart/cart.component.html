@@ -42,8 +42,16 @@
               <td>{{ cItem.item.price }}</td>
               <td></td>
               <td>{{ cItem.count }}</td>
-              <td><i class="fas fa-plus"></i></td>
-              <td><i class="fas fa-minus"></i></td>
+              <td>
+                <a (click)="incrementItem(cItem.item)"
+                  ><i class="fas fa-plus"></i
+                ></a>
+              </td>
+              <td>
+                <a (click)="decrementItem(cItem.item)"
+                  ><i class="fas fa-minus"></i
+                ></a>
+              </td>
               <td>{{ cItem.count * cItem.item.price | currency: "LKR " }}</td>
               <td>
                 <button
@@ -83,7 +91,7 @@
         class="button_line"
         [routerLink]="['/order/payment']"
       >
-        Proceed
+        Checkout
       </a>
     </section>
   </div>

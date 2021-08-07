@@ -1,29 +1,59 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Item } from '../model/items';
+import { Item, ItemDto } from '../model/items';
+import { BASE_URL } from 'src/environments/environment';
 
 // @Injectable({})
-const itemsURL = '';
+const size: number = 9;
+@Injectable({
+  providedIn: 'root',
+})
 export class ItemsService {
   items: Item[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getItems(type: string) {
-    return this.http.get<
-      {
-        id: number;
-        name: string;
-        type: string;
-        subType: string;
-        price: number;
-        description: string;
-        imageUrl: string;
-      }[]
-    >(itemsURL + '?type=' + type);
+  getAllItems() {
+    return this.http.get<ItemDto[]>(BASE_URL + '/getAll');
+  }
+
+  getAllItemsByCategory(categoryId: string) {
+    return this.http.get<ItemDto[]>(
+      BASE_URL + '/getAllItemByCategory/' + categoryId
+    );
     //return this.items;
   }
 
+  getAllItemsByIndexAndCategory(index: string, categoryId: string) {
+    return this.http.get<ItemDto>(
+      BASE_URL +
+        '/getAllItemByIndexAndCategory/' +
+        index +
+        '/' +
+        size +
+        '/' +
+        categoryId
+    );
+  }
+
+  getAllItemsByIndex(index: string) {
+    return this.http.get<ItemDto>(
+      BASE_URL + '/getAllItemByIndex/' + index + '/' + size
+    );
+  }
+
+  getItemById(id: string) {
+    return this.http.get<Item>(BASE_URL + '/getItem/' + id);
+  }
+
+  addItem(values: any) {
+    // return this.http.post(BASE_URL + '/getItem/' + id);
+  }
+  updateitemByItem(file: any, item: ItemDto) {}
+  deleteItemById(id: string) {}
+}
+
+/*
   getItem(id: number) {
     return this.findItem(id);
   }
@@ -36,39 +66,4 @@ export class ItemsService {
     item = itemArray[0];
     return item;
   }
-}
-/*
-
-{
-       id: 1,
-        name: "tequila Mojito",
-        type: drink,
-        price: 300,
-        description: "tequila, mint, lime juice, club soda, water, sugar, fresh min leaves"
-
-},
-{
-       id: 2,
-        name: "tequila Sunrise",
-        type: drink,
-        price: 300,
-        description: "tequila,orange juice, ice cubes, fluid ounce grenadine syrup, orange, maraschino          cherry "
-
-},
-{
-       id: 3,
-        name: Classic Magarita",
-        type: drink,
-        price: 300,
-        description: "tequila, cointreau, fresh lime juice, magarita salt"
-},
-
-
-
-
-
-
-
-
-
-*/
+  */

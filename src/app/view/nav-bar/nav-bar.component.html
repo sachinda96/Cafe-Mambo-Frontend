@@ -8,6 +8,7 @@
             style="background: url(../../../assets/img/blog_fon_l.png)"
           ></div>
         </div>
+
         <div class="swiper-slide">
           <div
             class="slide-inner"
@@ -42,25 +43,14 @@
           <li class="menu_mega">
             <a class="drop_down_nav">Shop</a>
             <ul class="sub_menu shop">
-              <div class="sub_s_m"></div>
-              <div class="sub_s_m">
+              <div class="sub_s_m" *ngFor="let category of categoryList">
                 <h5></h5>
                 <li>
-                  <a [routerLink]="['/shop/cocktail']">Cocktails</a>
+                  <a (click)="routeItemByCategory(category.id)">{{
+                    category.name
+                  }}</a>
                 </li>
               </div>
-              <div class="sub_s_m">
-                <h5></h5>
-                <li><a [routerLink]="['/shop/mocktail']">Mocktails</a></li>
-
-                <br /><br />
-              </div>
-              <div class="sub_s_m">
-                <h5></h5>
-                <li><a [routerLink]="['/shop/appetizer']">Appetizers</a></li>
-                <br /><br />
-              </div>
-              <div class="sub_s_m"></div>
             </ul>
           </li>
           <li><a [routerLink]="['/events']">Events</a></li>
@@ -68,15 +58,15 @@
           <li><a [routerLink]="['/about-us']">About us</a></li>
 
           <li><a [routerLink]="['/contact-us']">Contact us</a></li>
-          <li *ngIf="isLoggedIn">
+          <li *ngIf="!isLoggedIn">
             <a [routerLink]="['/register']">Register</a>
           </li>
         </ul>
         &nbsp;&nbsp;
-        <ul *ngIf="isLoggedIn">
+        <ul *ngIf="!isLoggedIn">
           <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
         </ul>
-        <ul *ngIf="!isLoggedIn">
+        <ul *ngIf="isLoggedIn">
           <li>
             <a class="button_line" (click)="logout()">Logout</a>
           </li>
@@ -129,22 +119,13 @@
           <a class="drop_down_nav">Shop</a>
           <ul class="sub_menu shop">
             <div class="sub_s_m"></div>
-            <div class="sub_s_m">
+            <div class="sub_s_m" *ngFor="let category of categoryList">
               <h5></h5>
               <li>
-                <a [routerLink]="['/shop/cocktail']">Cocktails</a>
+                <a (click)="routeItemByCategory(category.id)">{{
+                  category.name
+                }}</a>
               </li>
-            </div>
-            <div class="sub_s_m">
-              <h5></h5>
-              <li><a [routerLink]="['/shop/mocktail']">Mocktails</a></li>
-
-              <br /><br />
-            </div>
-            <div class="sub_s_m">
-              <h5></h5>
-              <li><a [routerLink]="['/shop/appetizer']">Appetizers</a></li>
-              <br /><br />
             </div>
             <div class="sub_s_m"></div>
           </ul>
@@ -154,13 +135,15 @@
         <li><a [routerLink]="['/about-us']">About us</a></li>
 
         <li><a [routerLink]="['/contact-us']">Contact us</a></li>
-        <li><a [routerLink]="['/register']" *ngIf="isLoggedIn">Register</a></li>
+        <li>
+          <a [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
+        </li>
       </ul>
       &nbsp;&nbsp;
-      <ul *ngIf="isLoggedIn">
+      <ul *ngIf="!isLoggedIn">
         <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
       </ul>
-      <ul *ngIf="!isLoggedIn">
+      <ul *ngIf="isLoggedIn">
         <li>
           <a class="button_line" (click)="logout()">Logout</a>
         </li>

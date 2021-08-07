@@ -8,6 +8,6 @@ export class EventService {
   constructor(private http: HttpClient) {}
 
   getEventImages() {
-    return this.http.get('https://');
+    return this.http.get('');
   }
 }

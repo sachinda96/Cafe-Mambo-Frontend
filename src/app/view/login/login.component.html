@@ -64,20 +64,15 @@
             </div>
 
             <div
-              class="alert alert-warning"
+              class="alert alert-danger"
+              role="alert"
               *ngIf="f.submitted && isLoginFailed"
+              style="color: aliceblue"
             >
-              Signin failed!<br />{{ errorMessage }}
+              Login failed: {{ errorMessage }}
             </div>
           </div>
         </div>
-      </div>
-      <div
-        class="alert alert-danger"
-        role="alert"
-        *ngIf="f.submitted && isLoginFailed"
-      >
-        Login failed: {{ errorMessage }}
       </div>
     </form>
 

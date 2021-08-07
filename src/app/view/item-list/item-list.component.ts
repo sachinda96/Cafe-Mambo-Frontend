@@ -58,7 +58,7 @@ export class ItemListComponent implements OnInit {
       imageUrl: string;
     }>('');
 
-    console.log(this.route.parent?.snapshot?.paramMap);
+    //  console.log(this.route.parent?.snapshot?.paramMap);
   }
 
   addToCart(item: Item) {

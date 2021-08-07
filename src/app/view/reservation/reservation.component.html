@@ -131,7 +131,16 @@
               required=""
               aria-rowcount="5"
             />
-            <button class="button_line" (click)="onSubmit()">Reserve</button>
+            <button *ngIf="isLoggedIn" class="button_line" (click)="onSubmit()">
+              Reserve
+            </button>
+            <button
+              *ngIf="!isLoggedIn"
+              class="button_line"
+              aria-disabled="true"
+            >
+              Reserve
+            </button>
             <!-- 
               date picker  // get from api to findout 
    <button class="button_line (click)="onSubmit()" >Reserve</button>

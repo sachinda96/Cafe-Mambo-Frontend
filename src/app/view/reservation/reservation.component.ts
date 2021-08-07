@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { packages, Package } from '../../model/packages';
 
 @Component({
@@ -8,6 +9,7 @@ import { packages, Package } from '../../model/packages';
 })
 export class ReservationComponent implements OnInit {
   packages = packages;
+  isLoggedIn = false;
   //packages
   //  types = ['Golden', 'Silver', 'Bronze'];
   types = [
@@ -29,12 +31,14 @@ export class ReservationComponent implements OnInit {
 
   isSuccessful = false;
   errorMessage = '';
-  constructor() {}
+  constructor(public token: TokenStorageService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isLoggedIn = this.token.getToken() ? true : false;
+  }
 
   onSubmit(): void {
-    alert(this.form.name);
-    console.log(this.form);
+    // alert(this.form.name);
+    // console.log(this.form);
   }
 }

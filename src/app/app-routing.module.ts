@@ -13,6 +13,8 @@ import { PaymentComponent } from './view/payment/payment.component';
 import { ItemComponent } from './view/item/item.component';
 import { ItemReviewComponent } from './view/item-review/item-review.component';
 import { EmployeeListComponent } from './view/user/employee/employee-list/employee-list.component';
+import { ItemFormComponent } from './view/user/item/item-form/item-form.component';
+import { ItemListComponent } from './view/item-list/item-list.component';
 
 const routes: Routes = [
   {
@@ -49,17 +51,17 @@ const routes: Routes = [
     component: CartComponent,
   },
   {
-    path: 'shop/cocktail',
+    path: 'shop/:id',
     component: MenuComponent,
   },
-  {
-    path: 'shop/mocktail',
-    component: MenuComponent,
-  },
-  {
-    path: 'shop/appetizer',
-    component: MenuComponent,
-  },
+  // {
+  //   path: 'shop/mocktail',
+  //   component: MenuComponent,
+  // },
+  // {
+  //   path: 'shop/appetizer',
+  //   component: MenuComponent,
+  // },
   {
     path: 'order/payment',
     component: PaymentComponent,
@@ -83,6 +85,10 @@ const routes: Routes = [
   {
     path: 'employees',
     component: EmployeeListComponent,
+  },
+  {
+    path: 'items',
+    component: ItemFormComponent,
   },
 ];
 

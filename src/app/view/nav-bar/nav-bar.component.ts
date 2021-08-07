@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Category } from 'src/app/model/category';
+import { Item, ItemDto } from 'src/app/model/items';
 import { CartService } from 'src/app/service/cart.service';
 import { TokenStorageService } from '../../service/token-storage.service';
 
@@ -15,6 +17,8 @@ export class NavBarComponent implements OnInit {
   isLoggedIn = false;
   username?: string;
   cartCount = 0;
+  itemList: Array<ItemDto> = new Array();
+  categoryList: Array<Category> = new Array();
 
   constructor(
     public router: Router,
@@ -23,8 +27,8 @@ export class NavBarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    alert(this.token.getToken());
-    this.isLoggedIn = this.token.getToken() ? false : true;
+    // alert(this.token.getToken());
+    this.isLoggedIn = this.token.getToken() ? true : false;
     this.cartCount = this.cartService.getItemsTotalCount();
 
     if (this.isLoggedIn) {
@@ -32,11 +36,38 @@ export class NavBarComponent implements OnInit {
       this.roles = this.currentUser.roles;
       this.username = this.currentUser.username;
     }
+
+    this.getAllCategory();
+  }
+
+  getAllCategory() {
+    let categoryDto = new Category();
+    categoryDto.id = '1';
+    categoryDto.name = 'Cocktails';
+
+    this.categoryList.push(categoryDto);
+
+    let categoryDto1 = new Category();
+    categoryDto1.id = '2';
+    categoryDto1.name = 'Mocktails';
+
+    this.categoryList.push(categoryDto1);
+
+    let categoryDto2 = new Category();
+    categoryDto2.id = '3';
+    categoryDto2.name = 'Appetizers';
+
+    this.categoryList.push(categoryDto2);
   }
 
   logout(): void {
     this.token.signOut();
     //this.currentUser = null;
     window.location.reload();
+  }
+
+  routeItemByCategory(id: string) {
+    console.log(id);
+    this.router.navigate(['/shop/' + id]);
   }
 }

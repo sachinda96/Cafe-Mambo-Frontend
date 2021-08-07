@@ -9,6 +9,11 @@ const AUTH_API = 'http://yjv1g.mocklab.io/api/auth/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
+
+const httpOptionLogin = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  responseType: 'text',
+};
 //import baseURl
 @Injectable({
   providedIn: 'root',
@@ -16,20 +21,21 @@ const httpOptions = {
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(name: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<any> {
     return this.http.post(
-      BASE_URL + 'login',
+      BASE_URL + '/login',
       {
-        name,
+        email,
         password,
       },
+
       httpOptions
     );
   }
 
   register(name: string, email: string, password: string): Observable<any> {
     return this.http.post(
-      BASE_URL + 'user/registration',
+      BASE_URL + '/user/registration',
       {
         name,
         email,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Item } from 'src/app/model/items';
 import { CartService } from 'src/app/service/cart.service';
 
 @Component({
@@ -13,4 +14,12 @@ export class CartComponent implements OnInit {
   totPrice = this.cartService.getItemsTotalPrice();
   // items:
   ngOnInit(): void {}
+
+  incrementItem(item: Item) {
+    this.cartService.addToCart(item);
+  }
+
+  decrementItem(item: Item) {
+    this.cartService.deleteFromCart(item);
+  }
 }
