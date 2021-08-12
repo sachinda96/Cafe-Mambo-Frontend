@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ImageService } from 'src/app/service/image.service';
-import { ItemsService } from 'src/app/service/items.service';
+import { ItemService } from 'src/app/service/item.service';
 
 export class ImageSnippet {
   pending: boolean = false;
@@ -15,7 +15,7 @@ export class ImageSnippet {
 })
 export class ItemFormComponent {
   constructor(
-    private itemService: ItemsService,
+    private itemService: ItemService,
     private imageService: ImageService
   ) {}
 

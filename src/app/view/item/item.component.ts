@@ -15,7 +15,7 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class ItemComponent implements OnInit {
   item: Item | undefined;
-  items = [cocktailItems, mocktailItems, appetizerItems];
+
   cocktailItems = cocktailItems;
   mocktailItems = mocktailItems;
   appetizerItems = appetizerItems;
@@ -34,11 +34,19 @@ export class ItemComponent implements OnInit {
     const itemIdFromRoute = Number(routeParams.get('itemId'));
 
     // Find the product that correspond with the id provided in route.
-    this.item = items.find((item) => item.id === itemIdFromRoute);
-    if (this.item != undefined) this.findActive(this.item);
+    // this.item = items.find((item) => item.id === itemIdFromRoute);
   }
 
-  findActive(item: Item) {
+  addToCart(item: Item) {
+    this.cartService.addToCart(item);
+  }
+}
+
+/*
+items = [cocktailItems, mocktailItems, appetizerItems];
+
+if (this.item != undefined) this.findActive(this.item);
+findActive(item: Item) {
     switch (item.subType.toLowerCase()) {
       case 'cocktail':
         this.isCocktail = true;
@@ -72,7 +80,6 @@ export class ItemComponent implements OnInit {
     }
   }
 
-  addToCart(item: Item) {
-    this.cartService.addToCart(item);
-  }
-}
+
+
+*/

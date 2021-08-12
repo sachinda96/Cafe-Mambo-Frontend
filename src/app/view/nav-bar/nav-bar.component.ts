@@ -2,14 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Category } from 'src/app/model/category';
-import { Item, ItemDto } from 'src/app/model/items';
+import { Item } from 'src/app/model/items';
 import { CartService } from 'src/app/service/cart.service';
 import { TokenStorageService } from '../../service/token-storage.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css'],
+  styleUrls: [
+    './nav-bar.component.css',
+    '../../../assets/css/main.css',
+    '../../../assets/css/libs.min.css',
+    '../../../assets/cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css',
+  ],
 })
 export class NavBarComponent implements OnInit {
   private roles: string[] = [];
@@ -17,7 +22,7 @@ export class NavBarComponent implements OnInit {
   isLoggedIn = false;
   username?: string;
   cartCount = 0;
-  itemList: Array<ItemDto> = new Array();
+  itemList: Array<Item> = new Array();
   categoryList: Array<Category> = new Array();
 
   constructor(

@@ -6,7 +6,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Category</h3>
+            <h3 class="card-title">Items</h3>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -15,17 +15,25 @@
                 <tr>
                   <th style="display: none">id</th>
                   <th>Name</th>
-                  <th>Status</th>
-                  <th class="modify"></th>
+                  <th>Description</th>
+                  <th>Ingredients</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Image</th>
+                  <th>Rate Count</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let cat of categoryList">
-                  <td style="display: none">{{ cat.id }}</td>
-                  <td>{{ cat.name }}</td>
-                  <td>{{ cat.status }}</td>
-
-                  <td class="modify">
+                <tr *ngFor="let item of itemList">
+                  <td style="display: none">{{ item.id }}</td>
+                  <td>{{ item.name }}</td>
+                  <td class="description">{{ item.description }}</td>
+                  <td>{{ item.ingredients }}</td>
+                  <td>{{ getCategoryName(item.categoryId) }}</td>
+                  <td>{{ item.price | currency: "LKR " }}</td>
+                  <td><img src="{{ item.imagePath }}" class="item-image" /></td>
+                  <td>{{ item.rateCount }}</td>
+                  <td>
                     &nbsp;&nbsp;<a><i class="fas fa-external-link-alt"></i></a
                     >&nbsp;&nbsp; <a> <i class="fas fa-pen"></i></a>&nbsp;&nbsp;
                     <a><i class="fas fa-trash-alt"></i></a>
@@ -44,3 +52,11 @@
   </div>
   <!-- /.container-fluid -->
 </section>
+
+<!--
+   /* id: string; name: string; price: number; imagePath: string; categoryId:
+string; description: string; ingredients: any; //List<string>
+  rateCount: number; */</string
+
+
+ -->

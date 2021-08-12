@@ -1,48 +1,10 @@
-import { ItemEntity } from './items';
-
 export interface Package {
-  id: number;
-  name: string;
-  price: number;
-  description: string;
-  imageUrl: string;
-}
-
-export interface PackageEntity {
   id: string;
   name: string;
   description: string;
   price: number;
   status: string;
-  createBy: string;
-  createDate: any;
-  updateBy: string;
-  updateDate: any;
 }
-
-export interface PackageDetailsEntity {
-  id: string;
-  status: string;
-  createBy: string;
-  createDate: any;
-  updateBy: string;
-  updateDate: any;
-  itemEntity: ItemEntity;
-  packageEntity: PackageEntity;
-}
-
-
-export interface PackageDto{
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  status: string;
-
-
-  
-}
-
 
 export const packages = [
   {

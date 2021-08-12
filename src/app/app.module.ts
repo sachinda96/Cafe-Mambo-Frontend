@@ -55,7 +55,7 @@ import { SalesDetailComponent } from './view/user/sales/sales-detail/sales-detai
 import { ItemReviewListComponent } from './view/user/item-review/item-review-list/item-review-list.component';
 import { ItemReviewFormComponent } from './view/user/item-review/item-review-form/item-review-form.component';
 import { ItemReviewDetailsComponent } from './view/user/item-review/item-review-details/item-review-details.component';
-import { ItemsService } from './service/items.service';
+import { ItemListTableComponent } from './view/user/item/item-list-table/item-list-table.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +108,7 @@ import { ItemsService } from './service/items.service';
     ItemReviewListComponent,
     ItemReviewFormComponent,
     ItemReviewDetailsComponent,
+    ItemListTableComponent,
   ],
   imports: [
     BrowserModule,

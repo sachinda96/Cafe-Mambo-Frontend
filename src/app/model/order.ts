@@ -1,4 +1,4 @@
-import { PaymentEntity } from './payment';
+import { Payment } from './payment';
 import { UserEntity } from './user';
 
 export interface Order {
@@ -10,6 +10,6 @@ export interface Order {
   createDate: any;
   updateBy: string;
   updateDate: any;
-  paymentEntity: PaymentEntity;
+  paymentEntity: Payment;
   userEntity: UserEntity;
 }

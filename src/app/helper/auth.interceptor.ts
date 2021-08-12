@@ -24,8 +24,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
     if (token != null) {
       authReq = req.clone({
-        headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer' + token),
+        headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token),
       });
+      authReq.headers.set('x-Trigger', 'CORS');
     }
 
     return next.handle(authReq);

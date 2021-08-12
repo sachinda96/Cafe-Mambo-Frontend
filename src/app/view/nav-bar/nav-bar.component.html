@@ -1,83 +1,86 @@
-<header class="home" *ngIf="router.url == '/'">
-  <div class="bg_slider">
-    <div class="swiper-container image-slider">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <div
-            class="slide-inner"
-            style="background: url(../../../assets/img/blog_fon_l.png)"
-          ></div>
-        </div>
+<div class="home_two">
+  <header class="home" *ngIf="router.url == '/'">
+    <div class="bg_slider">
+      <div class="swiper-container image-slider">
+        <div class="swiper-wrapper slides">
+          <div class="swiper-slide" id="slides">
+            <div
+              class="slide-inner"
+              style="background: url(../../../assets/img/blog_fon_l.png)"
+            ></div>
+          </div>
 
-        <div class="swiper-slide">
-          <div
-            class="slide-inner"
-            style="background: url(../../../assets/img/blog_gon_two_l.png)"
-          ></div>
-        </div>
-        <div class="swiper-slide">
-          <div
-            class="slide-inner"
-            style="background: url(../../../assets/img/blog_three_l.png)"
-          ></div>
+          <div class="swiper-slide" id="#slide2">
+            <div
+              class="slide-inner"
+              style="background: url(../../../assets/img/blog_gon_two_l.png)"
+            ></div>
+          </div>
+          <div class="swiper-slide" id="#slide3">
+            <div
+              class="slide-inner"
+              style="background: url(../../../assets/img/blog_three_l.png)"
+            ></div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!--
+    <!--
 <div class="search_b">
   <i class="fas fa-times search_icon"></i>
   <input type="search" placeholder="Search" />
 </div>
 -->
-  <div class="l_m_global headroom">
-    <div class="container l_m">
-      <a class="logo" href="index-2.html"
-        ><img
-          src="../../../assets/img/Logo/Logo Original white copy.png"
-          alt="logo" /></a
-      ><span class="fas fa-bars" id="menu_icon"></span>
-      <nav class="menu">
-        <ul>
-          <li class=""><a [routerLink]="['/']">Home</a></li>
-          <li class="menu_mega">
-            <a class="drop_down_nav">Shop</a>
-            <ul class="sub_menu shop">
-              <div class="sub_s_m" *ngFor="let category of categoryList">
-                <h5></h5>
-                <li>
+    <div class="l_m_global headroom">
+      <div class="container l_m">
+        <a class="logo" [routerLink]="['/']"
+          ><img
+            src="../../../assets/img/Logo/Logo Original white copy.png"
+            alt="logo" /></a
+        ><span class="fas fa-bars" id="menu_icon"></span>
+        <nav class="menu">
+          <ul>
+            <li class=""><a [routerLink]="['/']">Home</a></li>
+            <li>
+              <a class="drop_down_nav">Shop</a>
+              <ul
+                class="sub_menu"
+                style="display: flex; flex-direction: column"
+              >
+                <li *ngFor="let category of categoryList">
                   <a (click)="routeItemByCategory(category.id)">{{
                     category.name
                   }}</a>
                 </li>
-              </div>
-            </ul>
-          </li>
-          <li><a [routerLink]="['/events']">Events</a></li>
+              </ul>
+            </li>
+            <li><a [routerLink]="['/events']">Events</a></li>
 
-          <li><a [routerLink]="['/about-us']">About us</a></li>
+            <li><a [routerLink]="['/about-us']">About us</a></li>
 
-          <li><a [routerLink]="['/contact-us']">Contact us</a></li>
-          <li *ngIf="!isLoggedIn">
-            <a [routerLink]="['/register']">Register</a>
-          </li>
-        </ul>
-        &nbsp;&nbsp;
-        <ul *ngIf="!isLoggedIn">
-          <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
-        </ul>
-        <ul *ngIf="isLoggedIn">
-          <li>
-            <a class="button_line" (click)="logout()">Logout</a>
-          </li>
-        </ul>
-        <span>
-          <a [routerLink]="['/cart']"> </a>
-        </span>
-      </nav>
+            <li><a [routerLink]="['/contact-us']">Contact us</a></li>
+            <li *ngIf="!isLoggedIn">
+              <a [routerLink]="['/register']">Register</a>
+            </li>
+          </ul>
+          &nbsp;&nbsp;
+          <ul *ngIf="!isLoggedIn">
+            <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
+          </ul>
+          <ul *ngIf="isLoggedIn">
+            <li>
+              <a class="button_line" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+          <span>
+            <a [routerLink]="['/cart']"
+              ><i class="fas fa-shopping-cart shop_cart"><span></span></i>
+            </a>
+          </span>
+        </nav>
+      </div>
     </div>
-  </div>
-  <!--
+    <!--
 <li class="menu_mega">
           <a class="drop_down_nav" href="post_right_sidebar.html">Shop</a>
           <ul class="sub_menu">
@@ -103,55 +106,51 @@
         </li>
 
 
---></header>
+-->
+  </header>
 
-<div class="l_m_global headroom" *ngIf="router.url != '/'">
-  <div class="container l_m">
-    <a class="logo" [routerLink]="['/']">
-      ><img
-        src="../../../assets/img/Logo/Logo Original white copy.png"
-        alt="logo" /></a
-    ><span class="fas fa-bars" id="menu_icon"></span>
-    <nav class="menu">
-      <ul>
-        <li class=""><a [routerLink]="['/']">Home</a></li>
-        <li class="menu_mega">
-          <a class="drop_down_nav">Shop</a>
-          <ul class="sub_menu shop">
-            <div class="sub_s_m"></div>
-            <div class="sub_s_m" *ngFor="let category of categoryList">
-              <h5></h5>
-              <li>
+  <div class="l_m_global headroom" *ngIf="router.url != '/'">
+    <div class="container l_m">
+      <a class="logo" [routerLink]="['/']">
+        ><img
+          src="../../../assets/img/Logo/Logo Original white copy.png"
+          alt="logo" /></a
+      ><span class="fas fa-bars" id="menu_icon"></span>
+      <nav class="menu">
+        <ul>
+          <li class=""><a [routerLink]="['/']">Home</a></li>
+          <li>
+            <a class="drop_down_nav">Shop</a>
+            <ul class="sub_menu" style="display: flex; flex-direction: column">
+              <li *ngFor="let category of categoryList">
                 <a (click)="routeItemByCategory(category.id)">{{
                   category.name
                 }}</a>
               </li>
-            </div>
-            <div class="sub_s_m"></div>
-          </ul>
-        </li>
-        <li><a [routerLink]="['/events']">Events</a></li>
+            </ul>
+          </li>
+          <li><a [routerLink]="['/events']">Events</a></li>
 
-        <li><a [routerLink]="['/about-us']">About us</a></li>
+          <li><a [routerLink]="['/about-us']">About us</a></li>
 
-        <li><a [routerLink]="['/contact-us']">Contact us</a></li>
-        <li>
-          <a [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
-        </li>
-      </ul>
-      &nbsp;&nbsp;
-      <ul *ngIf="!isLoggedIn">
-        <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
-      </ul>
-      <ul *ngIf="isLoggedIn">
-        <li>
-          <a class="button_line" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-      <span>
-        <a [routerLink]="['/cart']">
-          <i class="fas fa-shopping-cart shop_cart">
-            <!-- 
+          <li><a [routerLink]="['/contact-us']">Contact us</a></li>
+          <li>
+            <a [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
+          </li>
+        </ul>
+        &nbsp;&nbsp;
+        <ul *ngIf="!isLoggedIn">
+          <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
+        </ul>
+        <ul *ngIf="isLoggedIn">
+          <li>
+            <a class="button_line" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+        <span>
+          <a [routerLink]="['/cart']">
+            <i class="fas fa-shopping-cart shop_cart">
+              <!-- 
 <span *ngIf="this.cartService.getItemsTotalCount() != 0">{{
               this.cartService.getItemsTotalCount()
             }}</span>
@@ -161,9 +160,10 @@
 
 
            -->
-          </i></a
-        >
-      </span>
-    </nav>
+            </i></a
+          >
+        </span>
+      </nav>
+    </div>
   </div>
 </div>

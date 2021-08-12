@@ -15,6 +15,8 @@ import { ItemReviewComponent } from './view/item-review/item-review.component';
 import { EmployeeListComponent } from './view/user/employee/employee-list/employee-list.component';
 import { ItemFormComponent } from './view/user/item/item-form/item-form.component';
 import { ItemListComponent } from './view/item-list/item-list.component';
+import { ItemListTableComponent } from './view/user/item/item-list-table/item-list-table.component';
+import { CategoryListComponent } from './view/user/category/category-list/category-list.component';
 
 const routes: Routes = [
   {
@@ -89,6 +91,14 @@ const routes: Routes = [
   {
     path: 'items',
     component: ItemFormComponent,
+  },
+  {
+    path: 'item/list',
+    component: ItemListTableComponent,
+  },
+  {
+    path: 'category/list',
+    component: CategoryListComponent,
   },
 ];
 

@@ -6,9 +6,5 @@ export interface UserEntity {
   email: string;
   role: string;
   status: string;
-  createBy: string;
-  createDate: string;
-  updateBy: string;
-  updateDate: string;
   loginEntity: LoginEntity;
 }

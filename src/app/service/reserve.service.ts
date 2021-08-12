@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EventBookingDto, Reservation } from '../model/reservation';
+import { EventBooking } from '../model/reservation';
 import { BASE_URL } from 'src/environments/environment';
 import { Package } from '../model/packages';
 
@@ -18,14 +18,18 @@ export class ReserveService {
   /*for event  reservation  // event booking*/
 
   getAllReservations() {
-    return this.http.get<EventBookingDto[]>(BASE_URL + '/eventbooking/getAll');
+    return this.http.get<EventBooking[]>(BASE_URL + '/eventbooking/getAll');
   }
 
   getReservationById(id: string) {
     return this.http.get(BASE_URL + '/eventbooking/get/' + id, httpOptions);
   }
 
-  addReservation(reserve: EventBookingDto): Observable<any> {
+  getAllReservationsByUser() {}
+  getAllReservationsByDate() {}
+  getAllReservationsByMonth() {}
+  getAllReservationsByYear() {}
+  addReservation(reserve: EventBooking): Observable<any> {
     return this.http.post(
       BASE_URL + '/eventbooking/save',
       reserve,
@@ -33,7 +37,7 @@ export class ReserveService {
     );
   }
 
-  updateReservation(reserve: EventBookingDto) {
+  updateReservation(reserve: EventBooking) {
     return this.http.post(
       BASE_URL + '/eventbooking/update',
       reserve,

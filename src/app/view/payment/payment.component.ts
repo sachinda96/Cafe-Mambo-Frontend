@@ -27,6 +27,7 @@ export class PaymentComponent {
 
   isSuccessful = false;
   errorMessage = '';
+
   // constructor() {}
 
   // ngOnInit(): void {}

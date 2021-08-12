@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventBookingDto, Reservation } from 'src/app/model/reservation';
+import { EventBooking } from 'src/app/model/reservation';
 import { ReserveService } from 'src/app/service/reserve.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { ReserveService } from 'src/app/service/reserve.service';
   styleUrls: ['./booking-detail.component.css'],
 })
 export class BookingDetailComponent implements OnInit {
-  reservationArray: EventBookingDto[] = [];
+  reservationArray: EventBooking[] = [];
 
   constructor(private reservService: ReserveService) {
     // this.reservationArray = reservService.getAllReservations();
