@@ -13,7 +13,7 @@ export interface ItemEntity {
   id: string;
   name: string;
   description: string;
-  ingredients: any; //List<string>
+  ingredients: any;
   price: string;
   path: string;
   status: string;
