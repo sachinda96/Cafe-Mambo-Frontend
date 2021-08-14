@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from 'src/app/service/item.service';
-import { Item } from 'src/app/model/items';
+import { Item } from 'src/app/model/item';
 import { CategoryService } from 'src/app/service/category.service';
 import { Category } from 'src/app/model/category';
 
@@ -43,7 +43,7 @@ export class ItemListTableComponent implements OnInit {
     );
   }
 
-  getCategoryName(id: string) {
+  getCategoryName(id: any) {
     return this.getCategory(id)?.name;
   }
 

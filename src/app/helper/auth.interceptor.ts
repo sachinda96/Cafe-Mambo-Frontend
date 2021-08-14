@@ -12,38 +12,38 @@ import { Observable, throwError } from 'rxjs';
 const TOKEN_HEADER_KEY = 'Authorization'; //for backend
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class AuthInterceptor {
   constructor(private token: TokenStorageService) {}
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    let authReq = req;
-    const token = this.token.getToken();
+  //   intercept(
+  //     req: HttpRequest<any>,
+  //     next: HttpHandler
+  //   ): Observable<HttpEvent<any>> {
+  //     let authReq = req;
+  //     const token = this.token.getToken();
+  //
+  //     if (token != null) {
+  //       authReq = req.clone({
+  //         headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token),
+  //       });
+  //     }
+  //
+  //     return next.handle(authReq);
+  //   }
+  // }
+  //
+  // export const authInterceptorProviders = [
+  //   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  // ];
 
-    if (token != null) {
-      authReq = req.clone({
-        headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token),
-      });
-      authReq.headers.set('x-Trigger', 'CORS');
-    }
+  /*
+  .pipe(e,
+          catchError((e) => {
+            console.log('error is intercept');
+            console.error(error);
+            return throwError(error.message);
+          })
+        );
 
-    return next.handle(authReq);
-  }
+  */
 }
-
-export const authInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-];
-
-/*
-.pipe(e,
-        catchError((e) => {
-          console.log('error is intercept');
-          console.error(error);
-          return throwError(error.message);
-        })
-      );
-
-*/

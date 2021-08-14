@@ -56,28 +56,12 @@ const routes: Routes = [
     path: 'shop/:id',
     component: MenuComponent,
   },
-  // {
-  //   path: 'shop/mocktail',
-  //   component: MenuComponent,
-  // },
-  // {
-  //   path: 'shop/appetizer',
-  //   component: MenuComponent,
-  // },
   {
     path: 'order/payment',
     component: PaymentComponent,
   },
   {
-    path: 'shop/cocktail/:itemId',
-    component: ItemComponent,
-  },
-  {
-    path: 'shop/mocktail/:itemId',
-    component: ItemComponent,
-  },
-  {
-    path: 'shop/appetizer/:itemId',
+    path: 'item/:itemId',
     component: ItemComponent,
   },
   {

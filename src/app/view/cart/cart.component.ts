@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Item } from 'src/app/model/items';
 import { CartService } from 'src/app/service/cart.service';
+import {Item} from "../../model/item";
 
 @Component({
   selector: 'app-cart',
@@ -8,6 +8,7 @@ import { CartService } from 'src/app/service/cart.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+
   constructor(private cartService: CartService) {}
   cartItems = this.cartService.cartItems;
   totQuantity = this.cartService.getItemsTotalCount();

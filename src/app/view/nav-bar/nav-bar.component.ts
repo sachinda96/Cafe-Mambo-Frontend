@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Category } from 'src/app/model/category';
 import { Item } from 'src/app/model/items';
 import { CartService } from 'src/app/service/cart.service';
@@ -22,19 +21,23 @@ export class NavBarComponent implements OnInit {
   currentUser: any;
   isLoggedIn = false;
   username?: string;
+
   cartCount = 0;
   itemList: Array<Item> = new Array();
+
   categoryList: Array<Category> = new Array();
 
   constructor(
     public router: Router,
     public token: TokenStorageService,
-    private cartService: CartService,
+
+    public cartService: CartService,
     private categoryService: CategoryService
-  ) {}
+  ) {
+    this.cartCount = cartService.count;
+  }
 
   ngOnInit(): void {
-    // alert(this.token.getToken());
     this.isLoggedIn = this.token.getToken() ? true : false;
     this.cartCount = this.cartService.getItemsTotalCount();
 
@@ -48,12 +51,14 @@ export class NavBarComponent implements OnInit {
   }
 
   getAllCategory() {
-    this.categoryService.getAllCategories().subscribe(
-      (data) => {
-        this.categoryList = data;
+    this.categoryList = new Array<Category>();
+    this.categoryService.getAllCategory().subscribe(
+      (res) => {
+        console.log(res);
+        this.categoryList = res;
       },
-      (err) => {
-        console.log(err);
+      (error) => {
+        console.log(error);
       }
     );
   }
@@ -67,5 +72,9 @@ export class NavBarComponent implements OnInit {
   routeItemByCategory(id: string) {
     console.log(id);
     this.router.navigate(['/shop/' + id]);
+  }
+
+  updateCartCount(count: any) {
+    this.cartCount = count;
   }
 }

@@ -16,7 +16,6 @@ import { ItemComponent } from './view/item/item.component';
 import { LoginComponent } from './view/login/login.component';
 import { RegisterComponent } from './view/register/register.component';
 import { ReservationComponent } from './view/reservation/reservation.component';
-import { authInterceptorProviders } from './helper/auth.interceptor';
 import { ItemListComponent } from './view/item-list/item-list.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CartItemComponent } from './view/cart-item/cart-item.component';
@@ -119,7 +118,7 @@ import { ItemListTableComponent } from './view/user/item/item-list-table/item-li
     FormsModule,
     NgxPaginationModule,
   ],
-  providers: [authInterceptorProviders],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -11,4 +11,36 @@
       </div>
     </div>
   </header>
+  <section class="shop_info_two">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <img
+            src="{{ item.imagePath }}"
+            data-plh-src="https://via.placeholder.com/1920x1080"
+            alt=""
+          />
+        </div>
+        <div class="col-lg-7">
+          <div class="shop_info">
+            <div class="title_shop">
+              <h3>{{ item.name }}</h3>
+              <span>{{ item.price | currency: "LKR " }}</span>
+            </div>
+            <div class="star_two">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i><i class="fas fa-star"></i
+              ><i class="fas fa-star"></i>
+            </div>
+            <p>
+              {{ item.description }}
+            </p>
+            <a class="button_line" (click)="addToCart(item)"
+              ><i class="fas fa-shopping-basket"></i>Add to cart</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

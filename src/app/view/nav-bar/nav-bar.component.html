@@ -123,7 +123,7 @@
             <a class="drop_down_nav">Shop</a>
             <ul class="sub_menu" style="display: flex; flex-direction: column">
               <li *ngFor="let category of categoryList">
-                <a [routerLink]="['/shop/',{{category.name}}]">{{
+                <a (click)="routeItemByCategory(category.id)">{{
                   category.name
                 }}</a>
               </li>
@@ -151,6 +151,26 @@
           <a [routerLink]="['/cart']">
             <i class="fas fa-shopping-cart shop_cart">
               <!-- 
+=======
+        <li><a [routerLink]="['/contact-us']">Contact us</a></li>
+        <li>
+          <a [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
+        </li>
+      </ul>
+      &nbsp;&nbsp;
+      <ul *ngIf="!isLoggedIn">
+        <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
+      </ul>
+      <ul *ngIf="isLoggedIn">
+        <li>
+          <a class="button_line" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+      <span>
+        <a [routerLink]="['/cart']">
+          <i class="fas fa-shopping-cart shop_cart"><span>{{cartCount}}</span>
+            <!--
+>>>>>>> origin/Migrate-manage
 <span *ngIf="this.cartService.getItemsTotalCount() != 0">{{
               this.cartService.getItemsTotalCount()
             }}</span>

@@ -1,19 +1,42 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Item } from '../model/items';
-import { BASE_URL, ITEMS_PER_PAGE_COUNT } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { BASE_URL, ITEMS_PER_PAGE_COUNT } from '../../environments/environment';
+import { AuthService } from './auth.service';
+import { Item } from '../model/item';
 import { delay } from 'rxjs/operators';
 
-// @Injectable({})
-const size: number = ITEMS_PER_PAGE_COUNT;
+const size = ITEMS_PER_PAGE_COUNT;
 @Injectable({
   providedIn: 'root',
 })
 export class ItemService {
-  items: Item[] = [];
   itemCategorySelected = '';
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  constructor(private http: HttpClient) {}
+  countByCategory(categoryId: string): Observable<any> {
+    return this.http.get(BASE_URL + '/item/itemCountByCategory/' + categoryId);
+  }
+
+  getAllByPageIndexAndSize(
+    index: number,
+    size: number,
+    categoryId: String
+  ): Observable<Array<Item>> {
+    return this.http.get<Array<Item>>(
+      BASE_URL +
+        '/item/getAllItemsByIndexAndCategory/' +
+        index +
+        '/' +
+        size +
+        '/' +
+        categoryId
+    );
+  }
+
+  getItem(id: String): Observable<Item> {
+    return this.http.get<Item>(BASE_URL + '/item/getItem/' + id);
+  }
 
   setItemCategorySelected(categoryid: string): void {
     this.itemCategorySelected = categoryid;
@@ -73,18 +96,3 @@ export class ItemService {
     return this.http.post(BASE_URL + '/item/removeItem/' + id, {});
   }
 }
-
-/*
-  getItem(id: number) {
-    return this.findItem(id);
-  }
-
-  findItem(id: number) {
-    var item: Item;
-    var itemArray: Item[];
-
-    itemArray = this.items.filter((i) => i.id === id);
-    item = itemArray[0];
-    return item;
-  }
-  */
