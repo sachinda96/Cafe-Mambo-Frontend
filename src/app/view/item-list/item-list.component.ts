@@ -1,41 +1,30 @@
-import { Component, OnInit } from '@angular/core';
 import {
-  items,
-  Item,
-  CartItem,
-  mocktailItems,
-  cocktailItems,
-  appetizerItems,
-} from '../../model/items';
-import { HttpClient } from '@angular/common/http';
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { Observable } from 'rxjs';
+import { delay, map, tap } from 'rxjs/operators';
+import { items, Item } from '../../model/items';
 import { CartService } from 'src/app/service/cart.service';
-import { BASE_URL } from 'src/environments/environment';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { ItemService } from 'src/app/service/item.service';
+import { Category } from 'src/app/model/category';
+import { CategoryService } from 'src/app/service/category.service';
+
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemListComponent implements OnInit {
-  constructor(
-    private http: HttpClient,
-    private cartService: CartService,
-    private location: Location,
-    private route: ActivatedRoute
-  ) {}
-
-  items = items;
-  mocktailItems = mocktailItems;
-  cocktailItems = cocktailItems;
-  appetizerItems = appetizerItems;
-  path: string | undefined;
-
-  isMocktail = false;
-  isCocktail = true;
-  isAppetizer = false;
-
-  /**/
+  itemList: Array<Item> = new Array();
+  categoryList: Category[] = [];
+  catId: any;
+  catName: any;
 
   v: any;
   page = 1;
@@ -47,18 +36,46 @@ export class ItemListComponent implements OnInit {
     currentPage: 1,
   };
 
-  ngOnInit(): void {
-    this.v = this.http.get<{
-      id: number;
-      name: string;
-      type: string;
-      subType: string;
-      price: number;
-      description: string;
-      imageUrl: string;
-    }>('');
+  constructor(
+    private cartService: CartService,
+    private location: Location,
+    private route: ActivatedRoute,
+    private itemService: ItemService,
+    private catService: CategoryService
+  ) {
+    this.catId = '1';
+  }
 
+  ngOnInit(): void {
     //  console.log(this.route.parent?.snapshot?.paramMap);
+    this.route.paramMap.subscribe((params) => {
+      console.log('id' + params.get('id'));
+      this.catName = params.get('id') != null ? params.get('id') : 'mocktails';
+    });
+
+    // this.itemService.getAllItemsByIndexAndCategory(1, this.catId).subscribe(
+    //   (data) => {
+    //     this.itemList = data;
+    //   },
+    //   (err) => {
+    //     console.log(err);
+    //   }
+    // );
+    this.getItemsByCategory(this.catId);
+    console.log(this.itemList);
+
+    this.itemList.push({
+      id: '4',
+      name: 'Sweet Adeline',
+      price: 300,
+      description:
+        'orange-spice black tea blend into a hot mix of pomegranate juice and cinnamon syrup.',
+      imagePath:
+        'https://www.thespruceeats.com/thmb/tH26KI6ByF0tB0df1pBAb4r82Do=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/SweetAdeline-184832349-56a173485f9b58b7d0bf638a.jpg',
+      categoryId: '1',
+      ingredients: 'black tea',
+      rateCount: 2,
+    });
   }
 
   addToCart(item: Item) {
@@ -70,16 +87,44 @@ export class ItemListComponent implements OnInit {
     this.page = event;
   }
 
-  getItemsByType(type: string) {
-    return this.http.get(BASE_URL + '/items?type=' + type);
+  getItemsByCategory(categoryId: string) {
+    this.itemService
+      .getAllItemsByCategory(categoryId)
+      .pipe(delay(500))
+      .subscribe(
+        (data) => {
+          this.itemList = data;
+          console.log(data);
+          console.log('=====>');
+          console.log(this.itemList);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
-  onClickItemTypeChange(type: string) {
-    this.location.replaceState('/shop/' + type);
-    this.enableItemType(type);
+  onClickItemTypeChange(category: string) {
+    this.location.replaceState('/shop/' + category);
+    //this.enableItemType(type);
   }
 
-  enableItemType(type: string) {
+  getAllItemsByIndexAndCategory(index: number, categoryId: string) {
+    this.itemService.getAllItemsByIndexAndCategory(index, categoryId).subscribe(
+      (data) => {
+        this.itemList = data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+}
+
+/*
+
+
+enableItemType(type: string) {
     switch (type) {
       case 'cocktail':
         this.isCocktail = true;
@@ -100,4 +145,12 @@ export class ItemListComponent implements OnInit {
         break;
     }
   }
-}
+
+
+
+
+
+
+
+
+*/

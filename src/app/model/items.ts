@@ -142,14 +142,14 @@ export const mocktailItems = [
   {
     id: 4,
     name: 'Sweet Adeline',
-    type: 'drink',
-    subType: 'Mocktail',
     price: 300,
     description:
       'orange-spice black tea blend into a hot mix of pomegranate juice and cinnamon syrup.',
-    imageUrl:
+    imagePath:
       'https://www.thespruceeats.com/thmb/tH26KI6ByF0tB0df1pBAb4r82Do=/960x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/SweetAdeline-184832349-56a173485f9b58b7d0bf638a.jpg',
-    review: 2,
+    categoryId: '1',
+    ingredients: 'black tea',
+    rateCount: 2,
   },
   {
     id: 3,

@@ -17,9 +17,13 @@ export class CartComponent implements OnInit {
 
   incrementItem(item: Item) {
     this.cartService.addToCart(item);
+    this.totQuantity = this.cartService.getItemsTotalCount();
+    this.totPrice = this.cartService.getItemsTotalPrice();
   }
 
   decrementItem(item: Item) {
     this.cartService.deleteFromCart(item);
+    this.totQuantity = this.cartService.getItemsTotalCount();
+    this.totPrice = this.cartService.getItemsTotalPrice();
   }
 }

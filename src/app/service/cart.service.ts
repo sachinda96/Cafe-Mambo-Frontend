@@ -41,7 +41,7 @@ export class CartService {
     const index = this.cartItems.findIndex((c) => c.item.id === item.id);
 
     if (this.cartItems[index].count == 1) {
-      this.cartItems.splice(index);
+      this.cartItems.splice(index, 1);
       console.log(this.cartItems);
     } else {
       this.cartItems[index].count--;

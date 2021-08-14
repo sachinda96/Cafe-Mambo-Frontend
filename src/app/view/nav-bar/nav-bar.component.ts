@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Category } from 'src/app/model/category';
 import { Item } from 'src/app/model/items';
 import { CartService } from 'src/app/service/cart.service';
+import { CategoryService } from 'src/app/service/category.service';
 import { TokenStorageService } from '../../service/token-storage.service';
 
 @Component({
@@ -28,7 +29,8 @@ export class NavBarComponent implements OnInit {
   constructor(
     public router: Router,
     public token: TokenStorageService,
-    public cartService: CartService
+    private cartService: CartService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -46,23 +48,14 @@ export class NavBarComponent implements OnInit {
   }
 
   getAllCategory() {
-    let categoryDto = new Category();
-    categoryDto.id = '1';
-    categoryDto.name = 'Cocktails';
-
-    this.categoryList.push(categoryDto);
-
-    let categoryDto1 = new Category();
-    categoryDto1.id = '2';
-    categoryDto1.name = 'Mocktails';
-
-    this.categoryList.push(categoryDto1);
-
-    let categoryDto2 = new Category();
-    categoryDto2.id = '3';
-    categoryDto2.name = 'Appetizers';
-
-    this.categoryList.push(categoryDto2);
+    this.categoryService.getAllCategories().subscribe(
+      (data) => {
+        this.categoryList = data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   logout(): void {
