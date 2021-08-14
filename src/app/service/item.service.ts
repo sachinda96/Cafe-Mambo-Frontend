@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Item } from '../model/items';
-import { BASE_URL } from 'src/environments/environment';
+import { BASE_URL, ITEMS_PER_PAGE_COUNT } from 'src/environments/environment';
+import { delay } from 'rxjs/operators';
 
 // @Injectable({})
-const size: number = 9;
+const size: number = ITEMS_PER_PAGE_COUNT;
 @Injectable({
   providedIn: 'root',
 })
 export class ItemService {
   items: Item[] = [];
+  itemCategorySelected = '';
 
   constructor(private http: HttpClient) {}
 
+  setItemCategorySelected(categoryid: string): void {
+    this.itemCategorySelected = categoryid;
+  }
   getAllItems() {
     return this.http.get<Item[]>(BASE_URL + '/item/getAll');
   }
@@ -24,20 +29,22 @@ export class ItemService {
     //return this.items;
   }
 
-  getAllItemsByIndexAndCategory(index: string, categoryId: string) {
-    return this.http.get<Item>(
-      BASE_URL +
-        '/item/getAllItemByIndexAndCategory/' +
-        index +
-        '/' +
-        size +
-        '/' +
-        categoryId
-    );
+  getAllItemsByIndexAndCategory(index: number, categoryId: string | null) {
+    return this.http
+      .get<Item[]>(
+        BASE_URL +
+          '/item/getAllItemByIndexAndCategory/' +
+          index +
+          '/' +
+          size +
+          '/' +
+          categoryId
+      )
+      .pipe(delay(1000));
   }
 
-  getAllItemsByIndex(index: string) {
-    return this.http.get<Item>(
+  getAllItemsByIndex(index: number) {
+    return this.http.get<Item[]>(
       BASE_URL + '/item/getAllItemByIndex/' + index + '/' + size
     );
   }

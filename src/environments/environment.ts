@@ -10,6 +10,7 @@ export const BASE_URL = 'http://yjv1g.mocklab.io'; //'http://localhost:4001';
 export const CLOUD_API_URL = '';
 export const AUTH_API = '';
 export const ITEMS_LIST_URL = '';
+export const ITEMS_PER_PAGE_COUNT = 9;
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
