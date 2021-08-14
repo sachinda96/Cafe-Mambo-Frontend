@@ -44,4 +44,12 @@ export class AuthService {
       httpOptions
     );
   }
+
+  authorizationHeaders():HttpHeaders{
+    let httpHeaders = new HttpHeaders();
+    httpHeaders = httpHeaders.set('Content-Type', 'application/json');
+    httpHeaders = httpHeaders.set("Authorization", "Bearer "+sessionStorage.getItem("token")+"");
+
+    return httpHeaders;
+  }
 }

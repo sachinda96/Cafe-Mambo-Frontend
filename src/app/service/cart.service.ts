@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Item, CartItem } from '../model/items';
 import { BASE_URL } from 'src/environments/environment';
+import {Item} from "../model/item";
+import {CartItem} from "../model/cart-item";
+import {NavBarComponent} from "../view/nav-bar/nav-bar.component";
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   items: Item[] = [];
-  cartItems: CartItem[] = [];
+  cartItems: Array<CartItem> = new Array<CartItem>();
+  count:number = 0 ;
   constructor(private http: HttpClient) {}
 
-  //   Define methods to add items to the cart, return cart items, and clear the cart items.
-
   addToCart(item: Item) {
-    //alert(item);
-    const index = this.cartItems.findIndex((c) => c.item.id === item.id);
+    const index = this.cartItems.findIndex(c => c.item.id === item.id);
 
     let cartItem: CartItem;
 
-    console.log(index);
     if (index === -1) {
       cartItem = {
         item: item,
@@ -32,9 +31,8 @@ export class CartService {
       this.cartItems[index].count += 1;
     }
 
-    console.log(this.items);
-    console.log(this.cartItems);
-    console.log('len' + this.cartItems.length);
+    this.count = this.cartItems.length;
+    console.log(this.count)
   }
 
   deleteFromCart(item: Item) {
@@ -42,12 +40,10 @@ export class CartService {
 
     if (this.cartItems[index].count == 1) {
       this.cartItems.splice(index);
-      console.log(this.cartItems);
     } else {
       this.cartItems[index].count--;
     }
 
-    console.log(index);
   }
   getItems() {
     return this.cartItems;
@@ -72,7 +68,6 @@ export class CartService {
       this.cartItems.forEach((i) => {
         totPrice += i.count * i.item.price;
       });
-      console.log(totPrice);
       return totPrice;
     }
   }

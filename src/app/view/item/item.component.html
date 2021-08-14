@@ -12,11 +12,11 @@
     </div>
   </header>
   <section class="shop_info_two">
-    <div class="container" *ngIf="item">
+    <div class="container">
       <div class="row">
         <div class="col-lg-5">
           <img
-            src="{{ item.imageUrl }}"
+            src="{{item.imagePath}}"
             data-plh-src="https://via.placeholder.com/1920x1080"
             alt=""
           />
@@ -37,86 +37,6 @@
             </p>
             <a class="button_line" (click)="addToCart(item)"
               ><i class="fas fa-shopping-basket"></i>Add to cart</a
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="related_products">
-    <div class="container">
-      <h2>Related Products</h2>
-      <div class="row flex-wrap" *ngIf="isCocktail">
-        <div class="col-lg-4" *ngFor="let coktl of cocktailItems">
-          <div class="products_sh">
-            <div class="image_product_add_to_cart">
-              <a class="button_line"
-                ><i class="fas fa-shopping-basket"></i>Add to Cart</a
-              ><img src="{{ coktl.imageUrl }}" alt="" />
-            </div>
-            <a class="cont_product" href="single_products.html">
-              <div class="row align-items-center justify-content-between">
-                <span>{{ coktl.price | currency: "LKR " }}</span>
-                <div class="star">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-              </div>
-              <h3>{{ coktl.name }}</h3>
-              <p>
-                {{ coktl.description }}
-              </p></a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="row flex-wrap" *ngIf="isMocktail">
-        <div class="col-lg-4" *ngFor="let moktl of mocktailItems">
-          <div class="products_sh">
-            <div class="image_product_add_to_cart">
-              <a class="button_line"
-                ><i class="fas fa-shopping-basket"></i>Add to Cart</a
-              ><img src="{{ moktl.imageUrl }}" alt="" />
-            </div>
-            <a class="cont_product" href="single_products.html">
-              <div class="row align-items-center justify-content-between">
-                <span>{{ moktl.price | currency: "LKR " }}</span>
-                <div class="star">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-              </div>
-              <h3>{{ moktl.name }}</h3>
-              <p>
-                {{ moktl.description }}
-              </p></a
-            >
-          </div>
-        </div>
-      </div>
-      <div class="row flex-wrap" *ngIf="isAppetizer">
-        <div class="col-lg-4" *ngFor="let aptzr of appetizerItems">
-          <div class="products_sh">
-            <div class="image_product_add_to_cart">
-              <a class="button_line"
-                ><i class="fas fa-shopping-basket"></i>Add to Cart</a
-              ><img src="{{ aptzr.imageUrl }}" alt="" />
-            </div>
-            <a class="cont_product" href="single_products.html">
-              <div class="row align-items-center justify-content-between">
-                <span>{{ aptzr.price | currency: "LKR " }}</span>
-                <div class="star">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-              </div>
-              <h3>{{ aptzr.name }}</h3>
-              <p>
-                {{ aptzr.description }}
-              </p></a
             >
           </div>
         </div>

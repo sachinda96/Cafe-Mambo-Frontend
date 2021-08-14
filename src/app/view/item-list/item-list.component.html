@@ -1,64 +1,15 @@
 <div class="container content">
   <section class="products_shop">
     <div class="container">
-      <!--Cocktail Items-->
-      <div class="row flex-wrap" *ngIf="isCocktail">
-        <div *ngFor="let item of cocktailItems" class="col-lg-9">
+      <div class="row flex-wrap" >
+        <div *ngFor="let item of itemList" class="col-lg-3">
           <div class="products_sh">
             <div class="image_product_add_to_cart">
               <a class="button_line" (click)="addToCart(item)">
                 <i class="fas fa-shopping-basket"></i>Add to Cart</a
-              ><img src="{{ item.imageUrl }}" alt="" />
+              ><img src="{{item.imagePath}}" alt="" />
             </div>
-            <a class="cont_product" [routerLink]="['/shop/cocktail', item.id]">
-              <div class="row align-items-center justify-content-between">
-                <span>Rs. {{ item.price }}</span>
-                <div class="star">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star-half"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-              </div>
-              <h3>{{ item.name }}</h3>
-              <p style="font-size: small">{{ item.description }}</p></a
-            >
-          </div>
-        </div>
-      </div>
-      <!--Mocktail Items-->
-      <div class="row flex-wrap" *ngIf="isMocktail">
-        <div *ngFor="let item of mocktailItems" class="col-lg-9">
-          <div class="products_sh">
-            <div class="image_product_add_to_cart">
-              <a class="button_line" (click)="addToCart(item)">
-                <i class="fas fa-shopping-basket"></i>Add to Cart</a
-              ><img src="{{ item.imageUrl }}" alt="" />
-            </div>
-            <a class="cont_product" [routerLink]="['/shop/mocktail', item.id]">
-              <div class="row align-items-center justify-content-between">
-                <span>Rs. {{ item.price }}</span>
-                <div class="star">
-                  <i class="fas fa-star"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star-half"></i><i class="fas fa-star"></i
-                  ><i class="fas fa-star"></i>
-                </div>
-              </div>
-              <h3>{{ item.name }}</h3>
-              <p style="font-size: small">{{ item.description }}</p></a
-            >
-          </div>
-        </div>
-      </div>
-      <!--Appetizer Items-->
-      <div class="row flex-wrap" *ngIf="isAppetizer">
-        <div *ngFor="let item of appetizerItems" class="col-lg-6">
-          <div class="products_sh">
-            <div class="image_product_add_to_cart">
-              <a class="button_line" (click)="addToCart(item)">
-                <i class="fas fa-shopping-basket"></i>Add to Cart</a
-              ><img src="{{ item.imageUrl }}" alt="" />
-            </div>
-            <a class="cont_product" [routerLink]="['/shop/appetizer', item.id]">
+            <a class="cont_product" [routerLink]="['/item', item.id]">
               <div class="row align-items-center justify-content-between">
                 <span>Rs. {{ item.price }}</span>
                 <div class="star">
@@ -74,24 +25,8 @@
         </div>
       </div>
       <div class="nav_pages">
-        <span>1</span>
-        <div class="num_p">2</div>
-        <div class="num_p">3</div>
+        <div class="num_p" *ngFor="let data of pageNumbers" (click)="nextIndexList(data)">{{data}}</div>
       </div>
     </div>
   </section>
-  <!--   
-<aside class="sidebar">
-    <div class="col-lg-12">
-      <div class="categories_p item_widget">
-        <h3>Categories</h3>
-        <a (click)="onClickItemTypeChange('mocktail')">Mocktails</a
-        ><a (click)="onClickItemTypeChange('cocktail')">Cocktails</a
-        ><a (click)="onClickItemTypeChange('appetizer')">Appetizers</a
-        ><a href="#"></a>
-      </div>
-    </div>
-  </aside>
-
-  -->
 </div>
