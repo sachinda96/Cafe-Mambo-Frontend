@@ -21,7 +21,7 @@ export class ItemService {
   getAllByPageIndexAndSize(
     index: number,
     size: number,
-    categoryId: String
+    categoryId: string
   ): Observable<Array<Item>> {
     return this.http.get<Array<Item>>(
       BASE_URL +
@@ -34,7 +34,7 @@ export class ItemService {
     );
   }
 
-  getItem(id: String): Observable<Item> {
+  getItem(id: string | null): Observable<Item> {
     return this.http.get<Item>(BASE_URL + '/item/getItem/' + id);
   }
 
