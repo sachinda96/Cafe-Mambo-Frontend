@@ -34,7 +34,7 @@ export class ItemService {
     );
   }
 
-  getItem(id: string | null): Observable<Item> {
+  getItem(id: string): Observable<Item> {
     return this.http.get<Item>(BASE_URL + '/item/getItem/' + id);
   }
 

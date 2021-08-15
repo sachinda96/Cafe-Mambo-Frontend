@@ -5,15 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css'],
 })
-export class PaymentComponent {
-  packages = [];
+export class PaymentComponent implements OnInit {
   //  types = ['Golden', 'Silver', 'Bronze'];
-  types = [
-    {
-      id: 1,
-      value: 5,
-    },
-  ];
+  constructor() {}
+
+  ngOnInit(): void {}
 
   form: any = {
     name: null,
@@ -27,10 +23,6 @@ export class PaymentComponent {
 
   isSuccessful = false;
   errorMessage = '';
-
-  // constructor() {}
-
-  // ngOnInit(): void {}
 
   onSubmit(): void {
     //alert(this.form.name);

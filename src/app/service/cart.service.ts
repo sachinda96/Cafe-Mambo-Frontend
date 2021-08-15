@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from 'src/environments/environment';
 import { Item } from '../model/item';
 import { CartItem } from '../model/cart-item';
-import { NavBarComponent } from '../view/nav-bar/nav-bar.component';
 
 @Injectable({
   providedIn: 'root',
@@ -35,15 +34,20 @@ export class CartService {
     console.log(this.count);
   }
 
-  deleteFromCart(item: Item) {
-    const index = this.cartItems.findIndex((c) => c.item.id === item.id);
+  decrementFromCart(itemId: string | undefined) {
+    const index = this.cartItems.findIndex((c) => c.item.id === itemId);
 
-    if (this.cartItems[index].count == 1) {
-      this.cartItems.splice(index, 1);
-    } else {
+    if (this.cartItems[index].count != 1) {
       this.cartItems[index].count--;
     }
   }
+
+  RemoveFromCart(itemId: string | undefined) {
+    const index = this.cartItems.findIndex((c) => c.item.id === itemId);
+
+    this.cartItems = this.cartItems.splice(index, 1);
+  }
+
   getItems() {
     return this.cartItems;
   }
