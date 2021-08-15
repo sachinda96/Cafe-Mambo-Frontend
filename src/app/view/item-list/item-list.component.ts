@@ -34,7 +34,7 @@ export class ItemListComponent implements OnInit {
     this.routerActive.params.subscribe((params) => {
       if (params.id != null || params.id != undefined) {
         this.categoryId = params.id;
-        this.getItemByPage(0, 8, params.id);
+        this.getItemsByPage(0, 8, params.id);
       }
     });
 
@@ -45,7 +45,7 @@ export class ItemListComponent implements OnInit {
     this.cartService.addToCart(item);
   }
 
-  getItemByPage(index: any, size: any, id: any) {
+  getItemsByPage(index: any, size: any, id: any) {
     this.itemService
       .getAllByPageIndexAndSize(index, size, id)
       .subscribe((res) => {
@@ -55,7 +55,7 @@ export class ItemListComponent implements OnInit {
   }
 
   nextIndexList(index: any) {
-    this.getItemByPage(index - 1, 8, this.categoryId);
+    this.getItemsByPage(index - 1, 8, this.categoryId);
   }
 
   private countByCategory(categoryId: string) {

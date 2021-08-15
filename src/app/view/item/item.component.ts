@@ -10,7 +10,7 @@ import { ItemService } from '../../service/item.service';
 })
 export class ItemComponent implements OnInit {
   item: Item = new Item();
-  itemId: String = '';
+  itemId: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -19,16 +19,27 @@ export class ItemComponent implements OnInit {
     private itemService: ItemService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.routerActive.params.subscribe((params) => {
+      if (params.itemId != null || params.itemId != undefined) {
+        this.itemId = params.itemId;
+        this.getItem(this.itemId);
+        console.log(this.itemId);
+      }
+    });
 
-  addToCart(item: Item) {
-    //this.cartService.addToCart(item);
+    console.log(this.itemId);
   }
 
-  private getItem(itemId: String) {
+  addToCart(item: Item) {
+    this.cartService.addToCart(item);
+  }
+
+  getItem(itemId: string) {
     this.itemService.getItem(itemId).subscribe(
       (res) => {
         this.item = res;
+        console.log(res);
       },
       (error) => {
         console.log(error);
