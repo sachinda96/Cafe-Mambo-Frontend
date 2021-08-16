@@ -16,7 +16,7 @@
         <div class="form">
           <div class="form_text">
             <span class="up_i">Favorite Bar</span>
-            <h2>Payment</h2>
+            <h2>Payment & Delivery</h2>
           </div>
 
           <div class="form_info" style="display: flex; flex-direction: column">
@@ -66,11 +66,27 @@
               required
             />
             <input
-              placeholder="Location"
+              placeholder="Street"
               type="text"
-              name="location"
-              [(ngModel)]="form.location"
-              #location="ngModel"
+              name="street"
+              [(ngModel)]="form.street"
+              #street="ngModel"
+              required
+            />
+            <input
+              placeholder="City"
+              type="text"
+              name="city"
+              [(ngModel)]="form.city"
+              #city="ngModel"
+              required
+            />
+            <input
+              placeholder="District"
+              type="text"
+              name="district"
+              [(ngModel)]="form.district"
+              #district="ngModel"
               required
             />
 
@@ -80,12 +96,19 @@
                 name="type"
                 [(ngModel)]="form.type"
                 #type="ngModel"
+                required
               >
+                <option value="" selected>--Select a payment mode--</option>
                 <option value="cash">Cash on Delivery</option>
                 <option value="cash">Card</option>
               </select>
             </div>
-            <input
+            <div
+              class="alert-danger field-error"
+              *ngIf="type.errors && f.submitted"
+              style="color: aliceblue"
+            ></div>
+            <!-- <input
               type="text"
               placeholder="Message"
               name="message"
@@ -93,7 +116,17 @@
               #message="ngModel"
               required=""
               aria-rowcount="5"
-            />
+              aria-rowspan="6"
+            /> -->
+            <textarea
+              style="width: initial"
+              type="text"
+              placeholder="Message"
+              name="message"
+              [(ngModel)]="form.message"
+              #message="ngModel"
+            ></textarea>
+
             <button class="button_line" (click)="onSubmit()">
               Place Order
             </button>
@@ -103,6 +136,52 @@
    
                 package type // get form api url 
               -->
+          </div>
+
+          <div class="container content">
+            <section class="">
+              <div class="container">
+                <div class="row">
+                  <table id="cart" style="border-radius: 5px">
+                    <tr>
+                      <th></th>
+                      <th id="item">Item</th>
+                      <th id="price">Price(LKR)</th>
+                      <th id="discount">Discount</th>
+                      <th id="quantity">Quantity</th>
+                      <th></th>
+                    </tr>
+                    <tr *ngFor="let cItem of cartItemList">
+                      <td></td>
+                      <td>{{ cItem.item.name }}</td>
+                      <td>{{ cItem.item.price | currency: " " }}</td>
+                      <td></td>
+                      <td>{{ cItem.count }}</td>
+                      <td style="text-align: right">
+                        {{ cItem.count * cItem.item.price | currency: " " }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: left">Total Quantity</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{{ totalQuantity }}</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td style="text-align: left">Total Price(LKR)</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>{{ totalPrice | currency: " " }}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <br /><br />
+            </section>
           </div>
         </div>
       </form>

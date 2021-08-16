@@ -1,7 +1,7 @@
 import { Delivery } from './delivery';
-import { Item } from './item';
+import { CartItem } from './cart-item';
 import { Payment } from './payment';
-import { UserEntity } from './user';
+import { CheckoutItem } from './checkout-item';
 
 // export interface Order {
 //   id: string;
@@ -23,7 +23,7 @@ export class Order {
   orderDate: any;
   paymentDto: Payment = new Payment();
   DeliveryDto: Delivery = new Delivery();
-  itemDtoList: Array<Item> = new Array<Item>();
+  itemDtoList: Array<CheckoutItem> = new Array<CheckoutItem>();
 
   constructor() {}
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
-import { Item } from 'src/app/model/items';
+import { Item } from 'src/app/model/item';
 import { CartService } from 'src/app/service/cart.service';
 import { CategoryService } from 'src/app/service/category.service';
 import { TokenStorageService } from '../../service/token-storage.service';
