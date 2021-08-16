@@ -47,7 +47,7 @@ export class PaymentComponent implements OnInit {
 
   onSubmit(): void {
     //alert(this.form.name);
-    console.log(this.form);
+    console.log(this.form.name);
     this.order.orderDate = new Date().toString();
   }
 

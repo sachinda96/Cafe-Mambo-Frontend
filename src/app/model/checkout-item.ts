@@ -1,5 +1,5 @@
 export class CheckoutItem {
-  itemId: string = '';
+  id: string = '';
   count: number = 0;
   constructor() {}
 }
