@@ -1,29 +1,36 @@
 <div class="home_two">
   <header class="home" *ngIf="router.url == '/'">
     <div class="bg_slider">
-      <div class="swiper-container image-slider">
-        <div class="swiper-wrapper slides">
-          <div class="swiper-slide" id="slides">
-            <div
-              class="slide-inner"
-              style="background: url(../../../assets/img/blog_fon_l.png)"
-            ></div>
-          </div>
+      <owl-carousel-o [options]="customOptions" style="height: 180px">
+        <ng-template carouselSlide>
+          <img style="height: 650px" src="../../../assets/img/blog_fon_l.png">
+        </ng-template>
+        <ng-template carouselSlide><img style="height: 650px" src="../../../assets/img/blog_two_l.png"></ng-template>
+        <ng-template carouselSlide><img style="height: 650px" src="../../../assets/img/blog_three_l.png"></ng-template>
+      </owl-carousel-o>
+<!--      <div class="swiper-container image-slider">-->
+<!--        <div class="swiper-wrapper slides">-->
+<!--          <div class="swiper-slide" id="slides">-->
+<!--            <div-->
+<!--              class="slide-inner"-->
+<!--              style="background: url(../../../assets/img/blog_fon_l.png)"-->
+<!--            ></div>-->
+<!--          </div>-->
 
-          <div class="swiper-slide" id="#slide2">
-            <div
-              class="slide-inner"
-              style="background: url(../../../assets/img/blog_gon_two_l.png)"
-            ></div>
-          </div>
-          <div class="swiper-slide" id="#slide3">
-            <div
-              class="slide-inner"
-              style="background: url(../../../assets/img/blog_three_l.png)"
-            ></div>
-          </div>
-        </div>
-      </div>
+<!--          <div class="swiper-slide" id="#slide2">-->
+<!--            <div-->
+<!--              class="slide-inner"-->
+<!--              style="background: url(../../../assets/img/blog_gon_two_l.png)"-->
+<!--            ></div>-->
+<!--          </div>-->
+<!--          <div class="swiper-slide" id="#slide3">-->
+<!--            <div-->
+<!--              class="slide-inner"-->
+<!--              style="background: url(../../../assets/img/blog_three_l.png)"-->
+<!--            ></div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
     <!--
 <div class="search_b">
@@ -150,7 +157,7 @@
         <span>
           <a [routerLink]="['/cart']">
             <i class="fas fa-shopping-cart shop_cart">
-              <!-- 
+              <!--
 =======
         <li><a [routerLink]="['/contact-us']">Contact us</a></li>
         <li>

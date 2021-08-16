@@ -5,7 +5,6 @@ import { OrderService } from 'src/app/service/order.service';
 import { Order } from 'src/app/model/order';
 import { Delivery } from 'src/app/model/delivery';
 import { Payment } from 'src/app/model/payment';
-import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-payment',
@@ -72,7 +71,7 @@ id: string = '';
   deliveryNote: string = '';
   deliveryDate: any;
 
-//payment 
+//payment
   id: string = '';
   amount: number = 0;
   method: string = '';
