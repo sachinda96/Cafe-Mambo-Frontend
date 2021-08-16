@@ -20,9 +20,10 @@ import { CheckoutItem } from './checkout-item';
 
 export class Order {
   id: string = '';
-  orderDate: any;
+  orderDate: Date = new Date();
+  userId:string | null = '';
   paymentDto: Payment = new Payment();
-  DeliveryDto: Delivery = new Delivery();
+  deliveryDto: Delivery = new Delivery();
   itemDtoList: Array<CheckoutItem> = new Array<CheckoutItem>();
 
   constructor() {}

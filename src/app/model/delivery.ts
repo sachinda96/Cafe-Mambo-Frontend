@@ -13,7 +13,7 @@
 export class Delivery {
   id: string = '';
   name: string = '';
-  street: string = '';
+  address: string = '';
   city: string = '';
   district: string = '';
   postalCode: string = '';

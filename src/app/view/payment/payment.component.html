@@ -9,7 +9,6 @@
       <form
         *ngIf="!isSuccessful"
         name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
         #f="ngForm"
         novalidate
       >
@@ -60,32 +59,29 @@
             <input
               placeholder="Contact Number"
               type="text"
-              name="contactNo"
-              [(ngModel)]="order.contactNo"
+              name="mobileNo"
+              [(ngModel)]="order.deliveryDto.mobileNo"
               required
             />
             <input
               placeholder="Street"
               type="text"
-              name="street"
-              [(ngModel)]="form.street"
-              #street="ngModel"
+              name="address"
+              [(ngModel)]="order.deliveryDto.address"
               required
             />
             <input
               placeholder="City"
               type="text"
               name="city"
-              [(ngModel)]="form.city"
-              #city="ngModel"
+              [(ngModel)]="order.deliveryDto.city"
               required
             />
             <input
               placeholder="District"
               type="text"
               name="district"
-              [(ngModel)]="form.district"
-              #district="ngModel"
+              [(ngModel)]="order.deliveryDto.district"
               required
             />
 
@@ -98,8 +94,8 @@
                 required
               >
                 <option value="" selected>--Select a payment mode--</option>
-                <option value="cash">Cash on Delivery</option>
-                <option value="cash">Card</option>
+                <option value="cod">Cash on Delivery</option>
+                <option value="card">Card</option>
               </select>
             </div>
             <div
@@ -121,19 +117,18 @@
               style="width: initial"
               type="text"
               placeholder="Message"
-              name="message"
-              [(ngModel)]="form.message"
-              #message="ngModel"
+              name="deliveryNote"
+              [(ngModel)]="order.deliveryDto.deliveryNote"
             ></textarea>
 
             <button class="button_line" (click)="onSubmit()">
               Place Order
             </button>
-            <!-- 
-                date picker  // get from api to findout 
+            <!--
+                date picker  // get from api to findout
      <button class="button_line (click)="onSubmit()" >Reserve</button>
-   
-                package type // get form api url 
+
+                package type // get form api url
               -->
           </div>
 

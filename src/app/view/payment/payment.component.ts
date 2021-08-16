@@ -5,6 +5,8 @@ import { OrderService } from 'src/app/service/order.service';
 import { Order } from 'src/app/model/order';
 import { Delivery } from 'src/app/model/delivery';
 import { Payment } from 'src/app/model/payment';
+import {CheckoutItem} from "../../model/checkout-item";
+import {TokenStorageService} from "../../service/token-storage.service";
 
 @Component({
   selector: 'app-payment',
@@ -18,10 +20,14 @@ export class PaymentComponent implements OnInit {
   payment: Payment = new Payment();
   totalPrice = 0.0;
   order: Order = new Order();
+  checkoutItemList:Array<CheckoutItem> = new Array<CheckoutItem>();
+  cartItems: Array<CartItem> = new Array<CartItem>();
+
 
   constructor(
     private cartService: CartService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private tokenStorageService:TokenStorageService
   ) {}
 
   ngOnInit(): void {
@@ -46,17 +52,33 @@ export class PaymentComponent implements OnInit {
   errorMessage = '';
 
   onSubmit(): void {
-    //alert(this.form.name);
-    console.log(this.form.name);
-    this.order.orderDate = new Date().toString();
+
+    this.checkoutItemList = new Array<CheckoutItem>();
+    this.cartItems = this.cartService.getItems();
+
+    this.cartItems.forEach(e=>{
+      let checkoutItem = new CheckoutItem();
+      checkoutItem.id = e.item.id;
+      checkoutItem.qty = e.count;
+      this.checkoutItemList.push(checkoutItem);
+    })
+
+    this.order.itemDtoList = this.checkoutItemList;
+    this.order.paymentDto.method =  this.form.type;
+    this.order.userId =  this.tokenStorageService.getUserId();
+    console.log(this.order)
+    this.orderService.addOrder(this.order).subscribe(
+      res=>{
+        alert("Added")
+      },
+      error => {
+        error.error;
+      }
+    );
+
   }
 
-  setDelivery() {
-    this.delivery.name = this.form.name;
-    this.delivery.street = this.form.street;
-    this.delivery.city = this.form.city;
-    this.delivery = this.form.street;
-  }
+
 }
 
 /*
