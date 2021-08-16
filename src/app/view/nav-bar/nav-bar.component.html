@@ -1,12 +1,22 @@
 <header class="home" *ngIf="router.url == '/'">
+
   <div class="bg_slider">
+    <owl-carousel-o [options]="customOptions" style="height: 180px">
+      <ng-template carouselSlide>
+        <img style="height: 650px" src="../../../assets/img/blog_fon_l.png">
+      </ng-template>
+      <ng-template carouselSlide><img style="height: 650px" src="../../../assets/img/blog_two_l.png"></ng-template>
+      <ng-template carouselSlide><img style="height: 650px" src="../../../assets/img/blog_three_l.png"></ng-template>
+    </owl-carousel-o>
     <div class="swiper-container image-slider">
+
       <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <div
-            class="slide-inner"
-            style="background: url(../../../assets/img/blog_fon_l.png)"
-          ></div>
+
+<!--          <div-->
+<!--            class="slide-inner"-->
+<!--            style="background: url(../../../assets/img/blog_fon_l.png)"-->
+<!--          ></div>-->
         </div>
 
         <div class="swiper-slide">

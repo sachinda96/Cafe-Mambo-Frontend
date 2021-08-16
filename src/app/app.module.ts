@@ -55,6 +55,8 @@ import { ItemReviewListComponent } from './view/user/item-review/item-review-lis
 import { ItemReviewFormComponent } from './view/user/item-review/item-review-form/item-review-form.component';
 import { ItemReviewDetailsComponent } from './view/user/item-review/item-review-details/item-review-details.component';
 import { ItemsService } from './service/items.service';
+import {CarouselModule} from "ngx-owl-carousel-o";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -109,6 +111,8 @@ import { ItemsService } from './service/items.service';
     ItemReviewDetailsComponent,
   ],
   imports: [
+    CarouselModule,
+    BrowserAnimationsModule,
     BrowserModule,
     RouterModule,
     FormsModule,

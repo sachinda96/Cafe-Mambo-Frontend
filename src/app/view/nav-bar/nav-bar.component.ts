@@ -5,6 +5,7 @@ import { Item, ItemDto } from 'src/app/model/items';
 import { CartService } from 'src/app/service/cart.service';
 import { TokenStorageService } from '../../service/token-storage.service';
 import {CategoryService} from "../../service/category.service";
+import {OwlOptions} from "ngx-owl-carousel-o";
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,6 +20,32 @@ export class NavBarComponent implements OnInit {
   cartCount = 1;
   itemList: Array<ItemDto> = new Array();
   categoryList: Array<Category> = new Array();
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: true,
+    dots: false,
+    autoplay:true,
+    navSpeed: 10,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 1
+      }
+    },
+    nav: true
+  }
 
   constructor(
     public router: Router,
