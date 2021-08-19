@@ -55,7 +55,6 @@ import { ItemReviewListComponent } from './view/user/item-review/item-review-lis
 import { ItemReviewFormComponent } from './view/user/item-review/item-review-form/item-review-form.component';
 import { ItemReviewDetailsComponent } from './view/user/item-review/item-review-details/item-review-details.component';
 import { ItemListTableComponent } from './view/user/item/item-list-table/item-list-table.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RatingModule, RatingConfig } from 'ngx-bootstrap/rating';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
@@ -116,7 +115,6 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     // CarouselModule,
   ],
   imports: [
-    CarouselModule,
     BrowserAnimationsModule,
     BrowserModule,
     RouterModule,
