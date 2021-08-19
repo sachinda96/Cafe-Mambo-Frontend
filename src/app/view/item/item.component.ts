@@ -11,6 +11,8 @@ import { ItemService } from '../../service/item.service';
 export class ItemComponent implements OnInit {
   item: Item = new Item();
   itemId: string = '';
+  max: number = 5;
+  value: number = 3;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +41,8 @@ export class ItemComponent implements OnInit {
     this.itemService.getItem(itemId).subscribe(
       (res) => {
         this.item = res;
+        console.log(res);
+        this.value = res.rateCount != undefined ? res.rateCount : 3;
         console.log(res);
       },
       (error) => {

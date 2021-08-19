@@ -84,6 +84,10 @@ const routes: Routes = [
     path: 'category/list',
     component: CategoryListComponent,
   },
+  {
+    path: 'review',
+    component: ItemReviewComponent,
+  },
 ];
 
 @NgModule({

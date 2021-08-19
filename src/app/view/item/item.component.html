@@ -27,10 +27,13 @@
               <h3>{{ item.name }}</h3>
               <span>{{ item.price | currency: "LKR " }}</span>
             </div>
-            <div class="star_two">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i
-              ><i class="fas fa-star"></i><i class="fas fa-star"></i
-              ><i class="fas fa-star"></i>
+            <div class="">
+              <rating
+                [(ngModel)]="value"
+                [max]="max"
+                [readonly]="false"
+                [titles]="['one', 'two', 'three', 'four']"
+              ></rating>
             </div>
             <p>
               {{ item.description }}
@@ -38,8 +41,10 @@
             <a class="button_line" (click)="addToCart(item)"
               ><i class="fas fa-shopping-basket"></i>Add to cart</a
             >
+            <app-item-review></app-item-review>
           </div>
         </div>
+        <div class="col-lg-7"></div>
       </div>
     </div>
   </section>

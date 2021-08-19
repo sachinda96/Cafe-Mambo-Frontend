@@ -1,184 +1,213 @@
 <div id="contact">
   <section class="forms">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
     <div class="container">
-      <br />
-      <br />
-      <br />
-      <br />
+      <div class="row">
+        <div class="col-75">
+          <div class="form">
+            <!--class="container"-->
 
-      <form
-        *ngIf="!isSuccessful"
-        name="form"
-        #f="ngForm"
-        novalidate
-      >
-        <div class="form">
-          <div class="form_text">
-            <span class="up_i">Favorite Bar</span>
-            <h2>Payment & Delivery</h2>
-          </div>
+            <div class="row">
+              <form *ngIf="!isSuccessful" name="form" #f="ngForm" novalidate>
+                <div class="col-50 form_info">
+                  <h3>Billing Address</h3>
+                  <label for="fname"
+                    ><i class="fa fa-user"></i> Full Name</label
+                  >
+                  <div>
+                    <input
+                      type="text"
+                      id="fname"
+                      placeholder="John M. Doe"
+                      name="name"
+                      [(ngModel)]="form.name"
+                      #name="ngModel"
+                      required
+                    />
+                    <div
+                      class="alert-danger field-error"
+                      *ngIf="name.errors && f.submitted"
+                      style="color: aliceblue"
+                    >
+                      <div *ngIf="name.errors.required">
+                        Username is required
+                      </div>
+                    </div>
+                  </div>
 
-          <div class="form_info" style="display: flex; flex-direction: column">
-            <div>
-              <input
-                placeholder="Name"
-                type="text"
-                name="name"
-                [(ngModel)]="form.name"
-                #name="ngModel"
-                required
-              />
-              <div
-                class="alert-danger field-error"
-                *ngIf="name.errors && f.submitted"
-                style="color: aliceblue"
-              >
-                <div *ngIf="name.errors.required">Username is required</div>
-              </div>
-            </div>
-            <input
-              placeholder="Email"
-              type="email"
-              name="email"
-              [(ngModel)]="form.email"
-              #email="ngModel"
-              pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
-              required
-            />
-            <div
-              class="alert-danger field-error"
-              *ngIf="email.errors && f.submitted"
-              style="color: aliceblue"
-            >
-              <div *ngIf="email.errors.required">Email is required</div>
-              <div *ngIf="email.errors.pattern">
-                Email must be a valid email address
-              </div>
-            </div>
+                  <label for="adr"
+                    ><i class="fa fa-address-card-o"></i> Address</label
+                  >
+                  <input
+                    type="text"
+                    id="adr"
+                    name="address"
+                    placeholder="542 W. 15th Street"
+                    [(ngModel)]="order.deliveryDto.address"
+                    required
+                  />
+                  <label for="city"
+                    ><i class="fa fa-institution"></i> City</label
+                  >
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    placeholder="Colombo"
+                    [(ngModel)]="order.deliveryDto.city"
+                    required
+                  />
 
-            <input
-              placeholder="Contact Number"
-              type="text"
-              name="mobileNo"
-              [(ngModel)]="order.deliveryDto.mobileNo"
-              required
-            />
-            <input
-              placeholder="Street"
-              type="text"
-              name="address"
-              [(ngModel)]="order.deliveryDto.address"
-              required
-            />
-            <input
-              placeholder="City"
-              type="text"
-              name="city"
-              [(ngModel)]="order.deliveryDto.city"
-              required
-            />
-            <input
-              placeholder="District"
-              type="text"
-              name="district"
-              [(ngModel)]="order.deliveryDto.district"
-              required
-            />
-
-            <div>
-              <select
-                class="typeDDL"
-                name="type"
-                [(ngModel)]="form.type"
-                #type="ngModel"
-                required
-              >
-                <option value="" selected>--Select a payment mode--</option>
-                <option value="cod">Cash on Delivery</option>
-                <option value="card">Card</option>
-              </select>
-            </div>
-            <div
-              class="alert-danger field-error"
-              *ngIf="type.errors && f.submitted"
-              style="color: aliceblue"
-            ></div>
-            <!-- <input
-              type="text"
-              placeholder="Message"
-              name="message"
-              [(ngModel)]="form.message"
-              #message="ngModel"
-              required=""
-              aria-rowcount="5"
-              aria-rowspan="6"
-            /> -->
-            <textarea
-              style="width: initial"
-              type="text"
-              placeholder="Message"
-              name="deliveryNote"
-              [(ngModel)]="order.deliveryDto.deliveryNote"
-            ></textarea>
-
-            <button class="button_line" (click)="onSubmit()">
-              Place Order
-            </button>
-            <!--
-                date picker  // get from api to findout
-     <button class="button_line (click)="onSubmit()" >Reserve</button>
-
-                package type // get form api url
-              -->
-          </div>
-
-          <div class="container content">
-            <section class="">
-              <div class="container">
-                <div class="row">
-                  <table id="cart" style="border-radius: 5px">
-                    <tr>
-                      <th></th>
-                      <th id="item">Item</th>
-                      <th id="price">Price(LKR)</th>
-                      <th id="discount">Discount</th>
-                      <th id="quantity">Quantity</th>
-                      <th></th>
-                    </tr>
-                    <tr *ngFor="let cItem of cartItemList">
-                      <td></td>
-                      <td>{{ cItem.item.name }}</td>
-                      <td>{{ cItem.item.price | currency: " " }}</td>
-                      <td></td>
-                      <td>{{ cItem.count }}</td>
-                      <td style="text-align: right">
-                        {{ cItem.count * cItem.item.price | currency: " " }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="text-align: left">Total Quantity</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>{{ totalQuantity }}</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td style="text-align: left">Total Price(LKR)</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>{{ totalPrice | currency: " " }}</td>
-                    </tr>
-                  </table>
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="state">District</label>
+                      <input
+                        type="text"
+                        id="state"
+                        name="district"
+                        placeholder="Colombo"
+                        [(ngModel)]="order.deliveryDto.district"
+                        required
+                      />
+                    </div>
+                    <div class="col-50">
+                      <label for="zip">Contact No</label>
+                      <input
+                        type="text"
+                        id="mobileNo"
+                        name="mobileNo"
+                        placeholder="10001"
+                        [(ngModel)]="order.deliveryDto.mobileNo"
+                        required
+                      />
+                    </div>
+                    <div class="col-50">
+                      <label for="zip">Method of Payment</label>
+                      <select
+                        class="typeDDL"
+                        name="type"
+                        [(ngModel)]="form.type"
+                        #type="ngModel"
+                        required
+                      >
+                        <option value="" selected>
+                          ------------------Please Select------------------
+                        </option>
+                        <option value="card" selected>Card</option>
+                        <option value="cod">Cash on Delivery</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <br /><br />
-            </section>
+
+                <a
+                  class="button_fill"
+                  style="margin-left: 2%"
+                  (click)="onSubmit()"
+                  >Continue to checkout</a
+                >
+              </form>
+
+              <form>
+                <div
+                  class="col-50 form_info"
+                  *ngIf="form.type == 'card' && isCardDetails"
+                >
+                  <h3>Payment</h3>
+                  <label for="fname">Accepted Cards</label>
+                  <div class="icon-container">
+                    <i
+                      class="fa fa-cc-visa"
+                      style="color: navy"
+                      aria-hidden="true"
+                    ></i>
+                    <i class="fa fa" style="color: blue"></i>
+                    <i class="fa fa-cc-mastercard" style="color: red"></i>
+                    <i class="fa fa-cc-discover" style="color: orange"></i>
+                  </div>
+                  <label for="cname">Name on Card</label>
+                  <input
+                    type="text"
+                    id="cname"
+                    name="cardname"
+                    placeholder="John More Doe"
+                  />
+                  <label for="ccnum">Credit card number</label>
+                  <input
+                    type="text"
+                    id="ccnum"
+                    name="cardnumber"
+                    placeholder="1111-2222-3333-4444"
+                  />
+                  <label for="expmonth">Exp Month</label>
+                  <input
+                    type="text"
+                    id="expmonth"
+                    name="expmonth"
+                    placeholder="September"
+                  />
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="expyear">Exp Year</label>
+                      <input
+                        type="text"
+                        id="expyear"
+                        name="expyear"
+                        placeholder="2018"
+                      />
+                    </div>
+                    <div class="col-50">
+                      <label for="cvv">CVV</label>
+                      <input
+                        type="text"
+                        id="cvv"
+                        name="cvv"
+                        placeholder="352"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </form>
+        <div class="col-25">
+          <div class="container">
+            <h4>
+              Cart
+              <span class="price" style="color: black"
+                ><i class="fa fa-shopping-cart"></i>
+                <b>{{ totalQuantity }}</b></span
+              >
+            </h4>
+            <p *ngFor="let cartItem of cartItemList">
+              <a href="#">{{ cartItem.item.name }}</a>
+              <span class="price"
+                >{{ cartItem.item.price | currency: "Lkr " }}
+              </span>
+            </p>
+
+            <hr />
+            <p>
+              Total
+              <span class="price" style="color: black"
+                ><b>{{ totalPrice | currency: "LKR " }}</b></span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   </section>
 </div>

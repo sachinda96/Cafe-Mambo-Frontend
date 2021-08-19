@@ -5,8 +5,8 @@ import { OrderService } from 'src/app/service/order.service';
 import { Order } from 'src/app/model/order';
 import { Delivery } from 'src/app/model/delivery';
 import { Payment } from 'src/app/model/payment';
-import {CheckoutItem} from "../../model/checkout-item";
-import {TokenStorageService} from "../../service/token-storage.service";
+import { CheckoutItem } from '../../model/checkout-item';
+import { TokenStorageService } from '../../service/token-storage.service';
 
 @Component({
   selector: 'app-payment',
@@ -20,14 +20,15 @@ export class PaymentComponent implements OnInit {
   payment: Payment = new Payment();
   totalPrice = 0.0;
   order: Order = new Order();
-  checkoutItemList:Array<CheckoutItem> = new Array<CheckoutItem>();
+  checkoutItemList: Array<CheckoutItem> = new Array<CheckoutItem>();
   cartItems: Array<CartItem> = new Array<CartItem>();
-
+  isDeliveryDetails = true;
+  isCardDetails = false;
 
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
-    private tokenStorageService:TokenStorageService
+    private tokenStorageService: TokenStorageService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class PaymentComponent implements OnInit {
     name: null,
     email: null,
     contactNo: null,
-    street: null,
+    address: null,
     city: null,
     district: null,
     message: '',
@@ -48,42 +49,73 @@ export class PaymentComponent implements OnInit {
     date: null,
   };
 
+  cardForm: any = {
+    nameOnCard: null,
+    creditCardNo: null,
+    expMonth: null,
+    expYear: null,
+    CVV: null,
+  };
+
   isSuccessful = false;
   errorMessage = '';
 
   onSubmit(): void {
-
     this.checkoutItemList = new Array<CheckoutItem>();
     this.cartItems = this.cartService.getItems();
+    this.setDeliveryDetails();
+    this.setPaymentDetails();
 
-    this.cartItems.forEach(e=>{
+    this.cartItems.forEach((e) => {
       let checkoutItem = new CheckoutItem();
       checkoutItem.id = e.item.id;
       checkoutItem.qty = e.count;
       this.checkoutItemList.push(checkoutItem);
-    })
+    });
 
     this.order.itemDtoList = this.checkoutItemList;
-    this.order.paymentDto.method =  this.form.type;
-    this.order.userId =  this.tokenStorageService.getUserId();
-    console.log(this.order)
-    this.orderService.addOrder(this.order).subscribe(
-      res=>{
-        alert("Added")
-      },
-      error => {
-        error.error;
-      }
-    );
+    this.order.paymentDto = this.payment;
+    this.order.deliveryDto = this.delivery;
+    this.order.userId = this.tokenStorageService.getUserId();
+    console.log(this.order);
 
+    if (this.form.type == 'cod')
+      this.orderService.addOrder(this.order).subscribe(
+        (res) => {
+          alert('Added');
+        },
+        (error) => {
+          error.error;
+        }
+      );
   }
 
-
+  setDeliveryDetails() {
+    this.delivery = {
+      id: '',
+      name: this.form.name,
+      address: this.form.address,
+      city: this.form.city,
+      district: this.form.district,
+      postalCode: '',
+      mobileNo: this.form.contactNo,
+      deliveryNote: this.form.message,
+      deliveryDate: this.form.date,
+    };
+  }
+  setPaymentDetails() {
+    this.payment = {
+      id: '',
+      amount: this.totalPrice,
+      method: this.form.type,
+      paymentStatus: '',
+    };
+  }
 }
 
 /*
 Delivery
-id: string = '';
+id string = '';
   name: string = '';
   address: string = '';
   city: string = '';

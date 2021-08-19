@@ -2156,7 +2156,8 @@ form {
   width: 600px;
 }
 
-#contact .form_info input {
+#contact .form_info input,
+select {
   border-width: 0;
   outline: none;
   margin-right: 10px;
@@ -3473,7 +3474,8 @@ form {
   #contact .form_info .form_reserv {
     width: 100%;
   }
-  #contact .form_info input {
+  #contact .form_info input,
+  select {
     width: calc(50% - 5px);
   }
   #contact .adress_map {
@@ -3588,10 +3590,12 @@ form {
   .form_info {
     flex-wrap: wrap;
   }
-  .form_info input {
+  .form_info input,
+  select {
     width: 50%;
   }
-  .form_info input:nth-child(2n) {
+  .form_info input:nth-child(2n),
+  select:nth-child(2n) {
     margin-right: 0px;
   }
   .form_info textarea {

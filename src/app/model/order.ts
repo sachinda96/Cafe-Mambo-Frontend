@@ -1,5 +1,4 @@
 import { Delivery } from './delivery';
-import { CartItem } from './cart-item';
 import { Payment } from './payment';
 import { CheckoutItem } from './checkout-item';
 
@@ -21,7 +20,7 @@ import { CheckoutItem } from './checkout-item';
 export class Order {
   id: string = '';
   orderDate: Date = new Date();
-  userId:string | null = '';
+  userId: string | null = '';
   paymentDto: Payment = new Payment();
   deliveryDto: Delivery = new Delivery();
   itemDtoList: Array<CheckoutItem> = new Array<CheckoutItem>();

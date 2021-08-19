@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EventBooking } from '../model/reservation';
+import { EventBooking, EventBookingUser } from '../model/reservation';
 import { BASE_URL } from 'src/environments/environment';
 import { Package } from '../model/packages';
 
@@ -32,6 +32,14 @@ export class ReserveService {
   addReservation(reserve: EventBooking): Observable<any> {
     return this.http.post(
       BASE_URL + '/eventbooking/save',
+      reserve,
+      httpOptions
+    );
+  }
+
+  addReservationUser(reserve: EventBookingUser): Observable<any> {
+    return this.http.post(
+      BASE_URL + '/eventbooking/user/save',
       reserve,
       httpOptions
     );

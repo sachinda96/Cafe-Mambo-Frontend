@@ -6,11 +6,11 @@
       <br />
       <br />
 
-      <div class="row">
+      <div class="row" *ngIf="packages.length > 0">
         <div class="col-lg-3" *ngFor="let pack of packages">
           <div class="products_sh">
             <div class="">
-              <img src="{{ pack.imageUrl }}" alt="" />
+              <img src="{{ pack.imagePath }}" alt="" />
             </div>
             <br /><br />
             <div class="cont_product">
@@ -47,7 +47,7 @@
           </div>
 
           <div class="form_info" style="display: flex; flex-direction: column">
-            <div>
+            <div *ngIf="!isLoggedIn">
               <input
                 placeholder="Name"
                 type="text"
@@ -64,26 +64,27 @@
                 <div *ngIf="name.errors.required">Username is required</div>
               </div>
             </div>
-            <input
-              placeholder="Email"
-              type="email"
-              name="email"
-              [(ngModel)]="form.email"
-              #email="ngModel"
-              pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
-              required
-            />
-            <div
-              class="alert-danger field-error"
-              *ngIf="email.errors && f.submitted"
-              style="color: aliceblue"
-            >
-              <div *ngIf="email.errors.required">Email is required</div>
-              <div *ngIf="email.errors.pattern">
-                Email must be a valid email address
+            <span *ngIf="!isLoggedIn">
+              <input
+                placeholder="Email"
+                type="email"
+                name="email"
+                [(ngModel)]="form.email"
+                #email="ngModel"
+                pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
+                required
+              />
+              <div
+                class="alert-danger field-error"
+                *ngIf="email.errors && f.submitted"
+                style="color: aliceblue"
+              >
+                <div *ngIf="email.errors.required">Email is required</div>
+                <div *ngIf="email.errors.pattern">
+                  Email must be a valid email address
+                </div>
               </div>
-            </div>
-
+            </span>
             <input
               placeholder="Contact Number"
               type="text"
@@ -112,9 +113,9 @@
 
               <select
                 class="typeDDL"
-                name="type"
-                [(ngModel)]="form.type"
-                #type="ngModel"
+                name="package"
+                [(ngModel)]="form.package"
+                #package="ngModel"
               >
                 <option value=""></option>
                 <option *ngFor="let type of types" value="type.value">
