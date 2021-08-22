@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/service/cart.service';
+import { SITE } from 'src/environments/environment';
 import { Item } from '../../model/item';
 import { ItemService } from '../../service/item.service';
 @Component({
@@ -9,6 +10,8 @@ import { ItemService } from '../../service/item.service';
   styleUrls: ['./item.component.css'],
 })
 export class ItemComponent implements OnInit {
+  @Output() setContentEvent = new EventEmitter<string>();
+  //
   item: Item = new Item();
   itemId: string = '';
   max: number = 5;
@@ -22,6 +25,8 @@ export class ItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setContentEvent.emit(SITE);
+
     this.routerActive.params.subscribe((params) => {
       if (params.itemId != null || params.itemId != undefined) {
         this.itemId = params.itemId;

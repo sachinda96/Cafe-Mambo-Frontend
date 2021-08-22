@@ -7,6 +7,14 @@ import { Delivery } from 'src/app/model/delivery';
 import { Payment } from 'src/app/model/payment';
 import { CheckoutItem } from '../../model/checkout-item';
 import { TokenStorageService } from '../../service/token-storage.service';
+import {
+  BASE_URL,
+  CANCEL_URL,
+  MERCHANT_ID,
+  NOTIFY_URL,
+  RETURN_URL,
+} from 'src/environments/environment';
+declare var payhere: any;
 
 @Component({
   selector: 'app-payment',
@@ -22,14 +30,28 @@ export class PaymentComponent implements OnInit {
   order: Order = new Order();
   checkoutItemList: Array<CheckoutItem> = new Array<CheckoutItem>();
   cartItems: Array<CartItem> = new Array<CartItem>();
-  isDeliveryDetails = true;
-  isCardDetails = false;
+  showDeliveryDetails = true;
+  showSuccessModal = false;
+  cardItemArray: string[] = [];
 
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
     private tokenStorageService: TokenStorageService
-  ) {}
+  ) {
+    payhere.onCompleted = function onCompleted(orderId: any) {
+      console.log('Payment completed. OrderID:' + orderId);
+      this.sendOrder();
+    };
+
+    payhere.onDismissed = function onDismissed() {
+      console.log('Payment dismissed');
+    };
+
+    payhere.onError = function onError(error: any) {
+      console.log('Error:' + error);
+    };
+  }
 
   ngOnInit(): void {
     this.cartItemList = this.cartService.getItems();
@@ -57,10 +79,12 @@ export class PaymentComponent implements OnInit {
     CVV: null,
   };
 
-  isSuccessful = false;
+  isOrderSuccessful = false;
+  isPaymentSuccessful = false;
   errorMessage = '';
 
   onSubmit(): void {
+    console.log(this.cardForm);
     this.checkoutItemList = new Array<CheckoutItem>();
     this.cartItems = this.cartService.getItems();
     this.setDeliveryDetails();
@@ -79,17 +103,42 @@ export class PaymentComponent implements OnInit {
     this.order.userId = this.tokenStorageService.getUserId();
     console.log(this.order);
 
-    if (this.form.type == 'cod')
-      this.orderService.addOrder(this.order).subscribe(
-        (res) => {
-          alert('Added');
-        },
-        (error) => {
-          error.error;
-        }
-      );
+    if (this.form.type != 'cod' && this.isOrderSuccessful) {
+      this.paynow();
+    } else {
+      this.sendOrder();
+    }
   }
 
+  paynow() {
+    // Put the payment variables here
+
+    var payment = {
+      sandbox: true,
+      merchant_id: MERCHANT_ID, // Replace your Merchant ID
+      return_url: RETURN_URL, // Important
+      cancel_url: CANCEL_URL, // Important
+      notify_url: NOTIFY_URL,
+      order_id: 'ItemNo12345',
+      items: this.getItemsAsCommaSeperatedList(),
+      currency: 'LKR',
+      amount: this.order.paymentDto.amount,
+      first_name: this.form.name,
+      last_name: '',
+      email: 'samanp@gmail.com',
+      phone: this.form.contactNo,
+      address: this.form.address,
+      city: this.form.city,
+      country: 'Sri Lanka',
+      delivery_address: this.form.address,
+      delivery_city: this.form.city,
+      delivery_country: 'Sri Lanka',
+      custom_1: '',
+      custom_2: '',
+    };
+    console.log('==>' + payment);
+    payhere.startPayment(payment);
+  }
   setDeliveryDetails() {
     this.delivery = {
       id: '',
@@ -110,6 +159,41 @@ export class PaymentComponent implements OnInit {
       method: this.form.type,
       paymentStatus: '',
     };
+  }
+
+  addOrder() {}
+
+  getOrderByUserIdAndDate(uid: string, date: Date) {
+    this.orderService.getOrderByUserAndDate(uid, date).subscribe(
+      (data) => {
+        //  this.order = data;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  sendOrder() {
+    this.orderService.addOrder(this.order).subscribe(
+      (res) => {
+        //alert('Added');
+        console.log('==>' + res);
+        this.isOrderSuccessful = true;
+      },
+      (error) => {
+        // error.error;
+        this.isOrderSuccessful = false;
+      }
+    );
+  }
+
+  getItemsAsCommaSeperatedList() {
+    let str = '';
+    this.cartItemList.forEach((c) => {
+      str += c.item.id + ' ' + c.count + '*' + c.item.price + ', ';
+    });
+    return str;
   }
 }
 

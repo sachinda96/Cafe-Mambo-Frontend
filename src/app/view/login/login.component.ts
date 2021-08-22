@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { TokenStorageService } from '../../service/token-storage.service';
 
@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
-    private route: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
 
         this.roles = this.tokenStorage.getUser().roles;
 
-        this.route.navigate(['']);
+        this.router.navigate(['./user/dashboard'], { relativeTo: this.route });
         this.reloadPage();
       },
       (err) => {

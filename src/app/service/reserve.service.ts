@@ -25,21 +25,18 @@ export class ReserveService {
     return this.http.get(BASE_URL + '/eventbooking/get/' + id, httpOptions);
   }
 
-  getAllReservationsByUser() {}
+  getAllReservationsByUser(id: string | null) {
+    return this.http.get<Array<EventBooking>>(
+      BASE_URL + '/eventbooking/user/getAll/' + id,
+      httpOptions
+    );
+  }
   getAllReservationsByDate() {}
   getAllReservationsByMonth() {}
   getAllReservationsByYear() {}
   addReservation(reserve: EventBooking): Observable<any> {
     return this.http.post(
       BASE_URL + '/eventbooking/save',
-      reserve,
-      httpOptions
-    );
-  }
-
-  addReservationUser(reserve: EventBookingUser): Observable<any> {
-    return this.http.post(
-      BASE_URL + '/eventbooking/user/save',
       reserve,
       httpOptions
     );
@@ -59,16 +56,6 @@ export class ReserveService {
   getFreeDates() {
     return this.http.get<{ availableDates: string[] }>(
       BASE_URL + '/events/reservation/dates/available'
-    );
-  }
-
-  getPackages() {
-    return this.http.get<Package>(BASE_URL + '/events/reservation/packages');
-  }
-
-  getPackageTypes() {
-    return this.http.get<{ types: string[] }>(
-      BASE_URL + '/events/reservation/types'
     );
   }
 

@@ -17,6 +17,7 @@ export class PaymentService {
   getAllpayments() {
     return this.http.get<Payment[]>(BASE_URL + '/payment/getAll');
   }
+
   getAllPaymentsByUser(userId: string) {
     return this.http.get<Payment[]>(
       BASE_URL + '/payment/getAll/user/' + userId,

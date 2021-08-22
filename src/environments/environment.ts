@@ -11,6 +11,17 @@ export const CLOUD_API_URL = '';
 export const AUTH_API = '';
 export const ITEMS_LIST_URL = '';
 export const ITEMS_PER_PAGE_COUNT = 9;
+
+export const DASHBOARD = 'dashboard';
+export const SITE = '';
+
+//Pay Here Constants
+export const MERCHANT_ID = '1218370';
+export const RETURN_URL = 'http://localhost:4200/';
+export const NOTIFY_URL = '';
+export const CANCEL_URL = '';
+export const SECRET_KEY = '4TrWQT1xQe38W2QiBGA8KT4p5V7MTvGZa8LWN9YV0MpF';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

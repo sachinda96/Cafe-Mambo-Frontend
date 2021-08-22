@@ -1,10 +1,11 @@
-import { LoginEntity } from './login';
+import { Login, LoginDto } from './login';
 
-export interface UserEntity {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  status: string;
-  loginEntity: LoginEntity;
+export class User {
+  id: string = '';
+  name: string = '';
+  email: string = '';
+  role: string = '';
+  status: string = '';
+  loginDto: Login = new Login();
+  constructor() {}
 }

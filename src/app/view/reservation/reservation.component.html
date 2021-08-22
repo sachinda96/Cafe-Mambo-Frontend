@@ -19,7 +19,7 @@
               </div>
 
               <h3>{{ pack.name }}</h3>
-              <p>Lorem ipsum dolor sit amet purus vitae libero lacinia</p>
+              <p>{{ pack.description }}</p>
             </div>
           </div>
         </div>
@@ -110,7 +110,8 @@
                 #date="ngModel"
                 required
               />
-
+            </div>
+            <div>
               <select
                 class="typeDDL"
                 name="package"
@@ -118,7 +119,8 @@
                 #package="ngModel"
               >
                 <option value=""></option>
-                <option *ngFor="let type of types" value="type.value">
+                <option *ngFor="let type of types">
+                  <!-- value="type.value"-->
                   {{ type.value }}
                 </option>
               </select>

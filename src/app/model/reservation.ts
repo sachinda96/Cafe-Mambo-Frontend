@@ -1,10 +1,7 @@
-import { Delivery } from './delivery';
-import { Payment } from './payment';
-
 export class EventBookingUser {
   id: string | undefined;
   userId: string | null = '';
-  contactNo: string = '';
+  contactNumber: string = '';
   location: string = '';
   message: string = '';
   date: Date = new Date();
@@ -17,11 +14,12 @@ export class EventBooking {
   id: string | undefined;
   name: string = '';
   email: string = '';
-  contactNo: string = '';
+  contactNumber: string = '';
   location: string = '';
   message: string = '';
-  date: Date = new Date();
+  bookDate: Date = new Date();
   packageId: string | undefined = '';
+  userId: string | null = '';
 
   constructor() {}
 }

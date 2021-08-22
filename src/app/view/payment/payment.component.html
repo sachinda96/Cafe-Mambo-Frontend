@@ -14,7 +14,12 @@
             <!--class="container"-->
 
             <div class="row">
-              <form *ngIf="!isSuccessful" name="form" #f="ngForm" novalidate>
+              <form
+                *ngIf="!isOrderSuccessful || showDeliveryDetails"
+                name="form"
+                #f="ngForm"
+                novalidate
+              >
                 <div class="col-50 form_info">
                   <h3>Billing Address</h3>
                   <label for="fname"
@@ -99,6 +104,7 @@
                         <option value="" selected>
                           ------------------Please Select------------------
                         </option>
+
                         <option value="card" selected>Card</option>
                         <option value="cod">Cash on Delivery</option>
                       </select>
@@ -112,67 +118,6 @@
                   (click)="onSubmit()"
                   >Continue to checkout</a
                 >
-              </form>
-
-              <form>
-                <div
-                  class="col-50 form_info"
-                  *ngIf="form.type == 'card' && isCardDetails"
-                >
-                  <h3>Payment</h3>
-                  <label for="fname">Accepted Cards</label>
-                  <div class="icon-container">
-                    <i
-                      class="fa fa-cc-visa"
-                      style="color: navy"
-                      aria-hidden="true"
-                    ></i>
-                    <i class="fa fa" style="color: blue"></i>
-                    <i class="fa fa-cc-mastercard" style="color: red"></i>
-                    <i class="fa fa-cc-discover" style="color: orange"></i>
-                  </div>
-                  <label for="cname">Name on Card</label>
-                  <input
-                    type="text"
-                    id="cname"
-                    name="cardname"
-                    placeholder="John More Doe"
-                  />
-                  <label for="ccnum">Credit card number</label>
-                  <input
-                    type="text"
-                    id="ccnum"
-                    name="cardnumber"
-                    placeholder="1111-2222-3333-4444"
-                  />
-                  <label for="expmonth">Exp Month</label>
-                  <input
-                    type="text"
-                    id="expmonth"
-                    name="expmonth"
-                    placeholder="September"
-                  />
-                  <div class="row">
-                    <div class="col-50">
-                      <label for="expyear">Exp Year</label>
-                      <input
-                        type="text"
-                        id="expyear"
-                        name="expyear"
-                        placeholder="2018"
-                      />
-                    </div>
-                    <div class="col-50">
-                      <label for="cvv">CVV</label>
-                      <input
-                        type="text"
-                        id="cvv"
-                        name="cvv"
-                        placeholder="352"
-                      />
-                    </div>
-                  </div>
-                </div>
               </form>
             </div>
           </div>

@@ -13,7 +13,7 @@ import { packages, Package } from '../../model/packages';
 export class ReservationComponent implements OnInit {
   packages: Array<Package> = new Array<Package>();
   reservation: EventBooking = new EventBooking();
-  reservationUser: EventBookingUser = new EventBookingUser();
+  reservationUser: EventBooking = new EventBooking();
   payment: Payment = new Payment();
   isLoggedIn = false;
   //packages
@@ -48,32 +48,67 @@ export class ReservationComponent implements OnInit {
 
   onSubmit(): void {
     // alert(this.form.name);
-    // console.log(this.form);
+    console.log(this.form);
 
     if (!this.isLoggedIn) {
+      console.log(this.form);
       this.reservation = {
         id: '',
         name: this.form.name,
         email: this.form.email,
-        contactNo: this.form.contactNo,
+        contactNumber: this.form.contactNo,
         location: this.form.location,
         message: this.form.message,
-        date: this.form.date,
+        bookDate: this.form.date,
         packageId: this.form.package,
+        userId: '',
       };
-      this.reserveService.addReservation(this.reservation);
+      this.reserveService.addReservation(this.reservation).subscribe(
+        (res) => {
+          console.log(res);
+          this.form = {
+            name: null,
+            email: null,
+            contactNo: null,
+            location: null,
+            message: '',
+            package: null,
+            date: Date,
+          };
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     } else {
       this.reservationUser = {
         id: '',
         userId: this.token.getUserId(),
-        contactNo: this.form.contactNo,
+        contactNumber: this.form.contactNo,
         location: this.form.location,
         message: this.form.message,
-        date: this.form.date,
+        bookDate: this.form.date,
         packageId: this.form.package,
+        name: '',
+        email: '',
       };
 
-      this.reserveService.addReservationUser(this.reservationUser);
+      this.reserveService.addReservation(this.reservationUser).subscribe(
+        (data) => {
+          this.form = {
+            name: null,
+            email: null,
+            contactNo: null,
+            location: null,
+            message: '',
+            package: null,
+            date: Date,
+          };
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }
   }
 }

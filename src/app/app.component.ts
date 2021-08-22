@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartService } from './service/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Cafe-Mambo-Frontend';
+  content = '';
+  cartCount = 0;
+
+  constructor(private cartService: CartService) {}
+
+  setContent(content: string): void {
+    this.content = content;
+  }
+
+  getContent() {
+    return this.content;
+  }
+
+  getCartCount() {
+    return this.cartService.getItemsTotalCount();
+  }
 }

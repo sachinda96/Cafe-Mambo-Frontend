@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { CartService } from 'src/app/service/cart.service';
@@ -9,6 +9,7 @@ import { ItemService } from 'src/app/service/item.service';
 import { Category } from 'src/app/model/category';
 import { CategoryService } from 'src/app/service/category.service';
 import { Item } from 'src/app/model/item';
+import { SITE } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-list',
@@ -16,6 +17,8 @@ import { Item } from 'src/app/model/item';
   styleUrls: ['./item-list.component.css'],
 })
 export class ItemListComponent implements OnInit {
+  @Output() setContentEvent = new EventEmitter<string>();
+
   itemList: Array<Item> = new Array<Item>();
   categoryId: string = '';
   pageNumbers: Array<number> = new Array<number>();
@@ -26,7 +29,9 @@ export class ItemListComponent implements OnInit {
     private location: Location,
     private routerActive: ActivatedRoute,
     private itemService: ItemService
-  ) {}
+  ) {
+    this.setContentEvent.emit(SITE);
+  }
 
   path: string | undefined;
 

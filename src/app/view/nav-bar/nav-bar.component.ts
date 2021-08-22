@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
 import { Item } from 'src/app/model/item';
 import { CartService } from 'src/app/service/cart.service';
 import { CategoryService } from 'src/app/service/category.service';
 import { TokenStorageService } from '../../service/token-storage.service';
-import {OwlOptions} from "ngx-owl-carousel-o";
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-nav-bar',
@@ -34,25 +34,25 @@ export class NavBarComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     dots: false,
-    autoplay:true,
+    autoplay: true,
     navSpeed: 10,
     navText: ['', ''],
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
       400: {
-        items: 2
+        items: 2,
       },
       740: {
-        items: 3
+        items: 3,
       },
       940: {
-        items: 1
-      }
+        items: 1,
+      },
     },
-    nav: true
-  }
+    nav: true,
+  };
 
   constructor(
     public router: Router,

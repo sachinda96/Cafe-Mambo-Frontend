@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { ItemReviewService } from 'src/app/service/item-review.service';
 import { ActivatedRoute } from '@angular/router';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { SITE } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-review',
@@ -10,6 +11,8 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
   styleUrls: ['./item-review.component.css'],
 })
 export class ItemReviewComponent implements OnInit {
+  @Output() setContentEvent = new EventEmitter<string>();
+
   value: number = 3;
   options: Options = {
     floor: 0,
@@ -45,6 +48,7 @@ export class ItemReviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setContentEvent.emit(SITE);
     this.routerActive.params.subscribe((params) => {
       if (params.itemId != null || params.itemId != undefined) {
         this.form.itemId = params.itemId;
@@ -58,6 +62,6 @@ export class ItemReviewComponent implements OnInit {
     console.log(this.form);
     this.form.rate = this.value;
     this.form.userId = this.tokenService.getUserId();
-    //   this.itemReviewService.addReview(this.form);
+    this.itemReviewService.addReview(this.form);
   }
 }
