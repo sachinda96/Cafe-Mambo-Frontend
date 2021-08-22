@@ -1,0 +1,183 @@
+<header></header>
+<div class="row">
+  <div class="col-sm-2">
+    <app-user-nav-bar></app-user-nav-bar>
+  </div>
+  <div class="col-sm-8">
+    <div class="wrapper">
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>Profile</h1>
+              </div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active">profile</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <!-- /.container-fluid -->
+        </section>
+
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+          <!-- <div class="card-body box-profile">
+            <div class="text-center">
+              <img
+                class="profile-user-img img-fluid img-circle"
+                src="../../../assets/avatar.png"
+                alt="User profile picture"
+              />
+            </div>
+
+            <h3 class="profile-username text-center">Nina Mcintire</h3>
+
+            <p class="text-muted text-center">Software Engineer</p>
+
+            <a
+              href="#"
+              class="btn btn-primary btn-block"
+              data-toggle="modal"
+              data-target="#userImageModal"
+              ><b>Upload</b></a
+            >
+          </div> -->
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+        <!-- Main content -->
+        <div class="row">
+          <div class="col-md-3">
+            <!-- About Me Box -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">About Me</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-voicemail mr-1"></i> Email</strong>
+
+                <p class="text-muted">
+                  B.S. in Computer Science from the University of Tennessee at
+                  Knoxville
+                </p>
+
+                <hr />
+
+                <strong
+                  ><i class="fas fa-arrow-alt-circle-down -alt mr-1"></i>Joined
+                  Date</strong
+                >
+
+                <p class="text-muted">Malibu, California</p>
+
+                <hr />
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <!-- /.card-header -->
+              <div class="card-body">
+                <div class="card card-primary">
+                  <div class="card-header">
+                    <h3 class="card-title">Profile Details</h3>
+                  </div>
+                  <!-- /.card-header -->
+                  <!-- form start -->
+                  <form>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Name</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id=""
+                            placeholder="Name"
+                          />
+                        </div>
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          placeholder="Enter email"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="exampleInputPassword1"
+                          placeholder="Password"
+                        />
+                      </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">
+                        Update
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="userImageModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="userImageModalTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userImageModalTitle">
+          Upload Profile Image
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-file-upload></app-file-upload>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
