@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -36,6 +36,13 @@ import { ProfileComponent } from './view/user/profile/profile.component';
 import { CardComponent } from './view/card/card.component';
 import { UserNavBarComponent } from './view/user/user-nav-bar/user-nav-bar.component';
 import { UserReservationComponent } from './view/user/user-reservation/user-reservation.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ShopOrderComponent } from './view/shop-order/shop-order.component';
+import { ListItemComponent } from './component/list-item/list-item.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalDialogModule } from 'ngx-modal-dialog';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AlertModule } from 'ngx-bootstrap/alert';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,9 +74,11 @@ import { UserReservationComponent } from './view/user/user-reservation/user-rese
     CardComponent,
     UserNavBarComponent,
     UserReservationComponent,
+    ShopOrderComponent,
+    ListItemComponent,
   ],
   imports: [
-    // BrowserAnimationsModule,
+    BrowserAnimationsModule,
     BrowserModule,
     RouterModule,
     FormsModule,
@@ -80,9 +89,14 @@ import { UserReservationComponent } from './view/user/user-reservation/user-rese
     RatingModule,
     NgxSliderModule,
     CarouselModule,
+    NgxSpinnerModule,
+    ModalDialogModule.forRoot(),
+    ModalModule.forRoot(),
+    AlertModule.forRoot(),
   ],
   providers: [RatingConfig],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
 
