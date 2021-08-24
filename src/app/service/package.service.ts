@@ -10,24 +10,6 @@ export class PackageService {
   constructor(private http: HttpClient) {}
 
   getAllPackages() {
-    return this.http.get<Package[]>(BASE_URL + '/events/reservation/packages');
-  }
-
-  getPackageTypes() {
-    return this.http.get<{ types: string[] }>(
-      BASE_URL + '/events/reservation/types'
-    );
-  }
-
-  addPackage(pack: Package) {
-    return this.http.post(BASE_URL + '/package', pack);
-  }
-
-  deletePackage(pack: Package) {
-    return this.http.post(BASE_URL + '/package/removePackage/', pack);
-  }
-
-  updatePackage(pack: Package) {
-    return this.http.post(BASE_URL + '/package/updatePackage/', pack);
+    return this.http.get<Package[]>(BASE_URL + '/package');
   }
 }
