@@ -7,6 +7,24 @@ textarea {
   font-family: open-sans, sans-serif;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+  color: white;
+}
+
+th,
+td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  color: white;
+}
+
+tr:hover {
+  /*background-color: yellow; */
+}
+
 /* select {
   border-width: 0;
   outline: none;

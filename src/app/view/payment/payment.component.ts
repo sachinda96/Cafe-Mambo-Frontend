@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
@@ -7,6 +12,9 @@ import { Delivery } from 'src/app/model/delivery';
 import { Payment } from 'src/app/model/payment';
 import { CheckoutItem } from '../../model/checkout-item';
 import { TokenStorageService } from '../../service/token-storage.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
 import {
   BASE_URL,
   CANCEL_URL,
@@ -14,7 +22,11 @@ import {
   NOTIFY_URL,
   RETURN_URL,
 } from 'src/environments/environment';
+
 declare var payhere: any;
+
+const SUCCESS_MSG = 'Order is  succesfully completed';
+const FAIL_MSG = 'Order is not completed sucessfully';
 
 @Component({
   selector: 'app-payment',
@@ -33,11 +45,17 @@ export class PaymentComponent implements OnInit {
   showDeliveryDetails = true;
   showSuccessModal = false;
   cardItemArray: string[] = [];
+  userId: string | null = '';
+
+  modalRef: BsModalRef = new BsModalRef();
 
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private spinner: NgxSpinnerService,
+    private viewRef: ViewContainerRef,
+    private modalService: BsModalService
   ) {
     payhere.onCompleted = function onCompleted(orderId: any) {
       console.log('Payment completed. OrderID:' + orderId);
@@ -46,10 +64,12 @@ export class PaymentComponent implements OnInit {
 
     payhere.onDismissed = function onDismissed() {
       console.log('Payment dismissed');
+      this.spinner.hide();
     };
 
     payhere.onError = function onError(error: any) {
       console.log('Error:' + error);
+      this.spinner.hide();
     };
   }
 
@@ -57,6 +77,7 @@ export class PaymentComponent implements OnInit {
     this.cartItemList = this.cartService.getItems();
     this.totalQuantity = this.cartService.getItemsTotalCount();
     this.totalPrice = this.cartService.getItemsTotalPrice();
+    this.userId = this.tokenStorageService.getUserId();
   }
 
   form: any = {
@@ -80,10 +101,13 @@ export class PaymentComponent implements OnInit {
   };
 
   isOrderSuccessful = false;
+  isOrderFail = false;
   isPaymentSuccessful = false;
   errorMessage = '';
+  Message = '';
 
   onSubmit(): void {
+    this.spinner.show();
     console.log(this.cardForm);
     this.checkoutItemList = new Array<CheckoutItem>();
     this.cartItems = this.cartService.getItems();
@@ -103,10 +127,12 @@ export class PaymentComponent implements OnInit {
     this.order.userId = this.tokenStorageService.getUserId();
     console.log(this.order);
 
-    if (this.form.type != 'cod' && this.isOrderSuccessful) {
+    if (this.form.type != 'cod') {
       this.paynow();
-    } else {
+    } else if (this.form.type != 'cash') {
       this.sendOrder();
+    } else {
+      this.spinner.hide();
     }
   }
 
@@ -137,6 +163,7 @@ export class PaymentComponent implements OnInit {
       custom_2: '',
     };
     console.log('==>' + payment);
+    this.spinner.hide();
     payhere.startPayment(payment);
   }
   setDeliveryDetails() {
@@ -175,15 +202,20 @@ export class PaymentComponent implements OnInit {
   }
 
   sendOrder() {
+    console.log(this.order);
     this.orderService.addOrder(this.order).subscribe(
       (res) => {
         //alert('Added');
         console.log('==>' + res);
         this.isOrderSuccessful = true;
+        //this.Message = SUCCESS_MSG;
       },
       (error) => {
         // error.error;
         this.isOrderSuccessful = false;
+        this.isOrderFail = true;
+        this.spinner.hide();
+        //this.Message = FAIL_MSG;
       }
     );
   }
@@ -194,6 +226,10 @@ export class PaymentComponent implements OnInit {
       str += c.item.id + ' ' + c.count + '*' + c.item.price + ', ';
     });
     return str;
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }
 

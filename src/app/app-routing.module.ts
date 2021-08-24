@@ -19,6 +19,7 @@ import { ProfileComponent } from './view/user/profile/profile.component';
 import { FeedbackComponent } from './view/user/feedback/feedback.component';
 import { FileUploadComponent } from './component/file-upload/file-upload.component';
 import { UserReservationComponent } from './view/user/user-reservation/user-reservation.component';
+import { ShopOrderComponent } from './view/shop-order/shop-order.component';
 
 const routes: Routes = [
   {
@@ -110,6 +111,10 @@ const routes: Routes = [
   {
     path: 'file',
     component: FileUploadComponent,
+  },
+  {
+    path: 'shoporder',
+    component: ShopOrderComponent,
   },
 ];
 

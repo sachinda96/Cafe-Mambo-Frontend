@@ -1,4 +1,4 @@
-<div id="contact">
+<div id="contact" *ngIf="userId != '' || (userId != null && totalQuantity > 0)">
   <section class="forms">
     <br />
     <br />
@@ -71,10 +71,10 @@
 
                   <div class="row">
                     <div class="col-50">
-                      <label for="state">District</label>
+                      <label for="district">District</label>
                       <input
                         type="text"
-                        id="state"
+                        id="district"
                         name="district"
                         placeholder="Colombo"
                         [(ngModel)]="order.deliveryDto.district"
@@ -93,13 +93,15 @@
                       />
                     </div>
                     <div class="col-50">
-                      <label for="zip">Method of Payment</label>
+                      <label for="mop">Method of Payment</label>
                       <select
                         class="typeDDL"
+                        id="mop"
                         name="type"
                         [(ngModel)]="form.type"
                         #type="ngModel"
                         required
+                        style="color: black; font-size: 0.7rem"
                       >
                         <option value="" selected>
                           ------------------Please Select------------------
@@ -116,35 +118,54 @@
                   class="button_fill"
                   style="margin-left: 2%"
                   (click)="onSubmit()"
+                  *ngIf="form.type == 'cod'"
                   >Continue to checkout</a
                 >
+                <a
+                  class="button_fill"
+                  style="margin-left: 2%"
+                  (click)="onSubmit()"
+                  *ngIf="form.type == 'cash'"
+                  >Place Order</a
+                >
               </form>
+              <alert type="success" *ngIf="isOrderSuccessful">
+                <strong>Well done!</strong> Order is Successfully Completed
+                <a href="#" class="alert-link">this important alert message</a>.
+              </alert>
+              <alert type="danger" *ngIf="isOrderFail">
+                <strong>Oh snap!</strong>
+                <a href="#" class="alert-link"></a> Try Again !!!!!
+              </alert>
             </div>
           </div>
         </div>
         <div class="col-25">
           <div class="container">
-            <h4>
-              Cart
-              <span class="price" style="color: black"
-                ><i class="fa fa-shopping-cart"></i>
-                <b>{{ totalQuantity }}</b></span
-              >
-            </h4>
-            <p *ngFor="let cartItem of cartItemList">
-              <a href="#">{{ cartItem.item.name }}</a>
-              <span class="price"
-                >{{ cartItem.item.price | currency: "Lkr " }}
-              </span>
-            </p>
-
-            <hr />
-            <p>
-              Total
-              <span class="price" style="color: black"
-                ><b>{{ totalPrice | currency: "LKR " }}</b></span
-              >
-            </p>
+            <table style="border-color: black">
+              <thead>
+                <tr>
+                  <th>Cart</th>
+                  <th>
+                    <i class="fa fa-shopping-cart"></i>
+                    <b>{{ totalQuantity }}</b>
+                  </th>
+                </tr>
+                <tr *ngFor="let cartItem of cartItemList">
+                  <td>{{ cartItem.item.name }}</td>
+                  <td class="price">
+                    {{ cartItem.item.price | currency: "Lkr " }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Total</td>
+                  <td class="price">
+                    {{ totalPrice | currency: "LKR " }}
+                  </td>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -156,3 +177,12 @@
     </div>
   </section>
 </div>
+<ngx-spinner
+  bdColor="rgba(229,221,221,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-zig-zag-deflect"
+  [fullScreen]="false"
+>
+  <p style="font-size: 20px; color: white">Processing....</p></ngx-spinner
+>
