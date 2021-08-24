@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Payment } from 'src/app/model/payment';
 import { EventBooking, EventBookingUser } from 'src/app/model/reservation';
+import { PackageService } from 'src/app/service/package.service';
 import { ReserveService } from 'src/app/service/reserve.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { packages, Package } from '../../model/packages';
@@ -18,12 +19,7 @@ export class ReservationComponent implements OnInit {
   isLoggedIn = false;
   //packages
   //  types = ['Golden', 'Silver', 'Bronze'];
-  types = [
-    {
-      id: 1,
-      value: 'pack1',
-    },
-  ];
+  types: Package[] = [];
 
   form: any = {
     name: null,
@@ -39,11 +35,16 @@ export class ReservationComponent implements OnInit {
   errorMessage = '';
   constructor(
     public token: TokenStorageService,
-    private reserveService: ReserveService
+    private reserveService: ReserveService,
+    private packageService: PackageService
   ) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.token.getToken() ? true : false;
+
+    this.packageService.getAllPackages().subscribe((res) => {
+      this.types = res;
+    });
   }
 
   onSubmit(): void {

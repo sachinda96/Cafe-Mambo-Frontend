@@ -119,9 +119,9 @@
                 #package="ngModel"
               >
                 <option value=""></option>
-                <option *ngFor="let type of types">
+                <option *ngFor="let type of types" value="{{ type.id }}">
                   <!-- value="type.value"-->
-                  {{ type.value }}
+                  {{ type.name }}
                 </option>
               </select>
             </div>
