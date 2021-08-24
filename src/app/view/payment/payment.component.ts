@@ -7,7 +7,7 @@ import {
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
-import { Order } from 'src/app/model/order';
+import { Order, OrderDTO } from 'src/app/model/order';
 import { Delivery } from 'src/app/model/delivery';
 import { Payment } from 'src/app/model/payment';
 import { CheckoutItem } from '../../model/checkout-item';
@@ -22,6 +22,7 @@ import {
   NOTIFY_URL,
   RETURN_URL,
 } from 'src/environments/environment';
+import { Item, ItemDTO } from 'src/app/model/item';
 
 declare var payhere: any;
 
@@ -39,9 +40,8 @@ export class PaymentComponent implements OnInit {
   delivery: Delivery = new Delivery();
   payment: Payment = new Payment();
   totalPrice = 0.0;
-  order: Order = new Order();
-  checkoutItemList: Array<CheckoutItem> = new Array<CheckoutItem>();
-  cartItems: Array<CartItem> = new Array<CartItem>();
+  order: OrderDTO = new OrderDTO();
+
   showDeliveryDetails = true;
   showSuccessModal = false;
   cardItemArray: string[] = [];
@@ -108,23 +108,15 @@ export class PaymentComponent implements OnInit {
 
   onSubmit(): void {
     this.spinner.show();
-    console.log(this.cardForm);
-    this.checkoutItemList = new Array<CheckoutItem>();
-    this.cartItems = this.cartService.getItems();
+    this.modalRef.hide();
+
+    this.order.total = this.totalQuantity;
+    this.order.orderDate = new Date();
+    this.setCustomerDetails();
     this.setDeliveryDetails();
     this.setPaymentDetails();
+    this.setItemDtoDetails();
 
-    this.cartItems.forEach((e) => {
-      let checkoutItem = new CheckoutItem();
-      checkoutItem.id = e.item.id;
-      checkoutItem.qty = e.count;
-      this.checkoutItemList.push(checkoutItem);
-    });
-
-    this.order.itemDtoList = this.checkoutItemList;
-    this.order.paymentDto = this.payment;
-    this.order.deliveryDto = this.delivery;
-    this.order.userId = this.tokenStorageService.getUserId();
     console.log(this.order);
 
     if (this.form.type != 'cod') {
@@ -167,7 +159,7 @@ export class PaymentComponent implements OnInit {
     payhere.startPayment(payment);
   }
   setDeliveryDetails() {
-    this.delivery = {
+    this.order.deliveryDto = {
       id: '',
       name: this.form.name,
       address: this.form.address,
@@ -180,7 +172,7 @@ export class PaymentComponent implements OnInit {
     };
   }
   setPaymentDetails() {
-    this.payment = {
+    this.order.paymentDto = {
       id: '',
       amount: this.totalPrice,
       method: this.form.type,
@@ -188,19 +180,20 @@ export class PaymentComponent implements OnInit {
     };
   }
 
-  addOrder() {}
-
-  getOrderByUserIdAndDate(uid: string, date: Date) {
-    this.orderService.getOrderByUserAndDate(uid, date).subscribe(
-      (data) => {
-        //  this.order = data;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+  setCustomerDetails() {
+    this.order.customerDto.id = this.userId;
+    this.order.customerDto.email = this.form.email;
+    this.order.customerDto.name = this.form.name;
   }
 
+  setItemDtoDetails() {
+    let item: ItemDTO = new ItemDTO();
+    this.cartItemList.forEach((ci) => {
+      item.id = ci.item.id;
+      item.qty = ci.count;
+      this.order.itemDtoList.push(item);
+    });
+  }
   sendOrder() {
     console.log(this.order);
     this.orderService.addOrder(this.order).subscribe(
@@ -232,7 +225,6 @@ export class PaymentComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 }
-
 /*
 Delivery
 id string = '';

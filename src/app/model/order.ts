@@ -2,7 +2,7 @@ import { Delivery } from './delivery';
 import { Payment } from './payment';
 import { CheckoutItem } from './checkout-item';
 import { Customer } from './customer';
-import { Item } from './item';
+import { Item, ItemDTO } from './item';
 
 // export interface Order {
 //   id: string;
@@ -37,6 +37,6 @@ export class OrderDTO {
   orderDate: Date = new Date();
   paymentDto: Payment = new Payment();
   deliveryDto: Delivery = new Delivery();
-  itemDtoList: Array<Item> = new Array<Item>();
+  itemDtoList: Array<ItemDTO> = new Array<ItemDTO>();
   //i need the count as well
 }

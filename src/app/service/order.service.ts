@@ -9,9 +9,9 @@ import { Order, OrderDTO } from '../model/order';
 export class OrderService {
   constructor(private http: HttpClient) {}
 
-  getAllOrders() {
-    return this.http.get<Array<OrderDTO>>(BASE_URL + '/order/getAllorders');
-  }
+  // getAllOrders() {
+  //   return this.http.get<Array<OrderDTO>>(BASE_URL + '/order/getAllorders');
+  // }
   getAllOrdersByUser(uid: string | null) {
     return this.http.get<OrderDTO[]>(BASE_URL + '/order/getAllorders/' + uid);
   }
@@ -33,7 +33,7 @@ export class OrderService {
   getOrderById(id: string) {
     return this.http.get<OrderDTO>(BASE_URL + '/order/getAllOrdersById/' + id);
   }
-  addOrder(order: Order) {
+  addOrder(order: OrderDTO) {
     return this.http.post(BASE_URL + '/order', order);
   }
   updateOrder(order: Order) {

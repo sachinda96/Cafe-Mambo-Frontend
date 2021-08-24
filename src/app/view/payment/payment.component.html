@@ -54,7 +54,7 @@
                     id="adr"
                     name="address"
                     placeholder="542 W. 15th Street"
-                    [(ngModel)]="order.deliveryDto.address"
+                    [(ngModel)]="form.address"
                     required
                   />
                   <label for="city"
@@ -65,7 +65,7 @@
                     id="city"
                     name="city"
                     placeholder="Colombo"
-                    [(ngModel)]="order.deliveryDto.city"
+                    [(ngModel)]="form.city"
                     required
                   />
 
@@ -77,7 +77,7 @@
                         id="district"
                         name="district"
                         placeholder="Colombo"
-                        [(ngModel)]="order.deliveryDto.district"
+                        [(ngModel)]="form.district"
                         required
                       />
                     </div>
@@ -88,7 +88,7 @@
                         id="mobileNo"
                         name="mobileNo"
                         placeholder="10001"
-                        [(ngModel)]="order.deliveryDto.mobileNo"
+                        [(ngModel)]="form.mobileNo"
                         required
                       />
                     </div>
@@ -101,14 +101,24 @@
                         [(ngModel)]="form.type"
                         #type="ngModel"
                         required
-                        style="color: black; font-size: 0.7rem"
+                        style="
+                          color: black;
+                          font-size: small;
+                          height: fit-content;
+                        "
                       >
-                        <option value="" selected>
-                          ------------------Please Select------------------
+                        <option value="" selected style="color: black">
+                          <b>
+                            ------------------Please Select------------------</b
+                          >
                         </option>
 
-                        <option value="card" selected>Card</option>
-                        <option value="cod">Cash on Delivery</option>
+                        <option value="card" selected style="color: black">
+                          <b>Card</b>
+                        </option>
+                        <option value="cod" style="color: black">
+                          <b>Cash on Delivery</b>
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -117,15 +127,15 @@
                 <a
                   class="button_fill"
                   style="margin-left: 2%"
-                  (click)="onSubmit()"
-                  *ngIf="form.type == 'cod'"
+                  (click)="openModal(template)"
+                  *ngIf="form.type == 'card'"
                   >Continue to checkout</a
                 >
                 <a
                   class="button_fill"
                   style="margin-left: 2%"
-                  (click)="onSubmit()"
-                  *ngIf="form.type == 'cash'"
+                  (click)="openModal(template)"
+                  *ngIf="form.type == 'cod'"
                   >Place Order</a
                 >
               </form>
@@ -186,3 +196,27 @@
 >
   <p style="font-size: 20px; color: white">Processing....</p></ngx-spinner
 >
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirmation</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h3 style="color: black">Are you Sure?</h3>
+    <div style="flex-direction: row">
+      <a
+        (click)="onSubmit()"
+        class="button_fill btn btn-primary"
+        style="width: 5rem; padding-right: 3rem"
+        >Yes</a
+      >
+    </div>
+  </div>
+</ng-template>
