@@ -7,10 +7,9 @@ import {
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
-import { Order, OrderDTO } from 'src/app/model/order';
+import { OrderDTO } from 'src/app/model/order';
 import { Delivery } from 'src/app/model/delivery';
 import { Payment } from 'src/app/model/payment';
-import { CheckoutItem } from '../../model/checkout-item';
 import { TokenStorageService } from '../../service/token-storage.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -23,6 +22,7 @@ import {
   RETURN_URL,
 } from 'src/environments/environment';
 import { Item, ItemDTO } from 'src/app/model/item';
+import { Router } from '@angular/router';
 
 declare var payhere: any;
 
@@ -55,7 +55,8 @@ export class PaymentComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private spinner: NgxSpinnerService,
     private viewRef: ViewContainerRef,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private router: Router
   ) {
     payhere.onCompleted = function onCompleted(orderId: any) {
       console.log('Payment completed. OrderID:' + orderId);
@@ -78,6 +79,7 @@ export class PaymentComponent implements OnInit {
     this.totalQuantity = this.cartService.getItemsTotalCount();
     this.totalPrice = this.cartService.getItemsTotalPrice();
     this.userId = this.tokenStorageService.getUserId();
+    if (this.userId == null) this.router.navigate(['']);
   }
 
   form: any = {
@@ -90,14 +92,6 @@ export class PaymentComponent implements OnInit {
     message: '',
     type: '',
     date: null,
-  };
-
-  cardForm: any = {
-    nameOnCard: null,
-    creditCardNo: null,
-    expMonth: null,
-    expYear: null,
-    CVV: null,
   };
 
   isOrderSuccessful = false;
@@ -201,14 +195,13 @@ export class PaymentComponent implements OnInit {
         //alert('Added');
         console.log('==>' + res);
         this.isOrderSuccessful = true;
-        //this.Message = SUCCESS_MSG;
+        this.router.navigate(['']);
       },
       (error) => {
         // error.error;
         this.isOrderSuccessful = false;
         this.isOrderFail = true;
         this.spinner.hide();
-        //this.Message = FAIL_MSG;
       }
     );
   }
