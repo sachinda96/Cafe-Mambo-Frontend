@@ -40,6 +40,8 @@ export class ItemReviewComponent implements OnInit {
     rate: null,
     userId: null,
     itemId: null,
+    userName: null,
+    level: null,
   };
   constructor(
     private itemReviewService: ItemReviewService,

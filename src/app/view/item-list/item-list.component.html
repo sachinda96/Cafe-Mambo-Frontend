@@ -7,7 +7,11 @@
             <div class="image_product_add_to_cart">
               <a class="button_line" (click)="addToCart(item)">
                 <i class="fas fa-shopping-basket"></i>Add to Cart</a
-              ><img src="{{ item.imagePath }}" alt="" />
+              ><img
+                src="{{ item.imagePath }}"
+                alt=""
+                style="max-width: 2rem; min-width: 2 rem"
+              />
             </div>
             <a class="cont_product" [routerLink]="['/item', item.id]">
               <div class="row align-items-center justify-content-between">

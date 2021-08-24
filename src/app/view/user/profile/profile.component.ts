@@ -8,7 +8,6 @@ import { UserService } from 'src/app/service/user.service';
   templateUrl: './profile.component.html',
   styleUrls: [
     './profile.component.css',
-    '../admin.lte/plugins/fontawesome-free/css/all.min.css',
     '../admin.lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css',
     '../admin.lte/dist/css/adminlte.min.css',
   ],

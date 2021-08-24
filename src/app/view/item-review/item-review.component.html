@@ -1,8 +1,9 @@
-<div>
+<div class="latest_post item_widget">
   <section class="forms">
     <div class="container">
       <form>
-        <div class="form" *ngIf="isLoggedIn">
+        <div class="form">
+          <!--*ngIf="isLoggedIn"-->
           <form name="form" #review="ngForm" novalidate>
             <div class="form_info">
               <div
@@ -18,11 +19,7 @@
                   required=""
                   aria-rowcount="5"
                   aria-colcount="4"
-                  style="
-                    font-family: open-sans, sans-;
-                    font-style: italic;
-                    border-radius: 0.4rem;
-                  "
+                  style="font-style: italic; border-radius: 0.4rem"
                   [(ngModel)]="form.review"
                   required
                 ></textarea>
