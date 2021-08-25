@@ -102,7 +102,7 @@ export class NavBarComponent implements OnInit {
   }
 
   routeToDashboard() {
-    this.router.navigate(['/' + this.token.getUserId + '/dashboard']);
+    this.router.navigate(['/user/dashboard']);
   }
   updateCartCount(count: any) {
     this.cartCount = count;

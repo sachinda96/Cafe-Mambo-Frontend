@@ -78,7 +78,7 @@ const routes: Routes = [
     component: ItemReviewComponent,
   },
   {
-    path: ':uid',
+    path: 'user',
 
     children: [
       {
@@ -113,7 +113,7 @@ const routes: Routes = [
     component: FileUploadComponent,
   },
   {
-    path: 'shoporder',
+    path: 'shop-order',
     component: ShopOrderComponent,
   },
 ];
