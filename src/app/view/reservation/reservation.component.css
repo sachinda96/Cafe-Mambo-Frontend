@@ -31,14 +31,14 @@ select {
   color: #5a5a5a;
 }
 
-button {
+/* button {
   opacity: 1;
   background-color: inherit;
   color: #fff;
   float: right;
   width: 62%;
   margin-top: 1em;
-}
+} */
 
 .reservef input {
   width: 100%;

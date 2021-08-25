@@ -7,6 +7,7 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { packages, Package } from '../../model/packages';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 const SUCCESS_MSG = 'Reservation Successful!!';
 const FAIL_MSG = 'Please Try Again !!!!!';
@@ -47,7 +48,8 @@ export class ReservationComponent implements OnInit {
     private reserveService: ReserveService,
     private packageService: PackageService,
     private modalService: BsModalService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -58,76 +60,49 @@ export class ReservationComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
+  onSubmit(template: TemplateRef<any>): void {
+    this.spinner.show();
     // alert(this.form.name);
     console.log(this.form);
 
-    if (!this.isLoggedIn) {
-      console.log(this.form);
-      this.reservation = {
-        id: '',
-        name: this.form.name,
-        email: this.form.email,
-        contactNumber: this.form.contactNo,
-        location: this.form.location,
-        message: this.form.message,
-        bookDate: this.form.date,
-        packageId: this.form.package,
-        userId: '',
-      };
-      this.validation();
-      if (!this.isValidationFail)
-        this.reserveService.addReservation(this.reservation).subscribe(
-          (res) => {
-            console.log(res);
-            this.clear();
-            this.isSuccessful = true;
-            this.messageModal = SUCCESS_MSG;
-          },
-          (err) => {
-            console.log('==>' + err);
-            this.isError = true;
-            this.messageModal = FAIL_MSG;
-          }
-        );
-    } else {
-      this.reservationUser = {
-        id: '',
-        userId: this.token.getUserId(),
-        contactNumber: this.form.contactNo,
-        location: this.form.location,
-        message: this.form.message,
-        bookDate: this.form.date,
-        packageId: this.form.package,
-        name: '',
-        email: '',
-      };
-      this.validation();
-      if (!this.isValidationFail)
-        this.reserveService.addReservation(this.reservationUser).subscribe(
-          (data) => {
-            this.clear();
-            this.isSuccessful = true;
-            this.messageModal = SUCCESS_MSG;
-            this.clear();
-          },
-          (err) => {
-            console.log('==>' + err);
-            this.isError = true;
-            this.messageModal = FAIL_MSG;
-          }
-        );
+    console.log(this.form);
+    this.reservation = {
+      id: '',
+      name: this.form.name,
+      email: this.form.email,
+      contactNumber: this.form.contactNo,
+      location: this.form.location,
+      message: this.form.message,
+      bookDate: this.form.date,
+      packageId: this.form.package,
+      userId: this.isLoggedIn ? this.token.getUserId() : '',
+    };
+    this.validation();
+    if (!this.isValidationFail) {
+      this.reserveService.addReservation(this.reservation).subscribe(
+        (res) => {
+          console.log(res);
+          this.clear();
+          this.isSuccessful = true;
+          this.messageModal = SUCCESS_MSG;
+          this.router.navigateByUrl('');
+        },
+        (err) => {
+          console.log('==>' + err);
+          this.isError = true;
+          this.messageModal = FAIL_MSG;
+        }
+      );
     }
+    this.openModal(template);
+    this.spinner.hide();
   }
 
   openModal(template: TemplateRef<any>) {
-    this.onSubmit();
-    console.log(this.isSuccessful);
-    console.log(this.isError);
+    // console.log(this.isSuccessful);
+    // console.log(this.isError);
     if (this.isSuccessful != this.isError || this.isValidationFail)
       this.modalRef = this.modalService.show(template);
-
-    if (this.isSuccessful) this.router.navigate(['']);
   }
 
   clear() {
@@ -155,10 +130,15 @@ export class ReservationComponent implements OnInit {
     console.log(this.form.date);
     let currentDate = new Date();
     console.log('==<<<<<' + currentDate.getFullYear());
+
+    console.log(this.form.date.substring(8));
+    console.log(this.form.date.substring(5, 7));
+    console.log(this.form.date.substring(0, 4));
+
     if (
-      parseInt(this.form.date.substring(8)) > currentDate.getDate() ||
-      parseInt(this.form.date.substring(5, 7)) >= currentDate.getMonth() ||
-      parseInt(this.form.date.substring(0, 4)) >= currentDate.getFullYear()
+      parseInt(this.form.date.substring(0, 4)) < currentDate.getFullYear() ||
+      parseInt(this.form.date.substring(5, 7)) < currentDate.getMonth() ||
+      parseInt(this.form.date.substring(8)) <= currentDate.getDate()
     ) {
       this.messageModal = 'Select a valid date\n';
       this.isValidationFail = true;

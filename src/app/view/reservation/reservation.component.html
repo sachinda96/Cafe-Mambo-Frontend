@@ -38,15 +38,14 @@
             make your personal rock and roll fantasy.
           </p>
         </div>
-
-        <div class="form_info" style="display: flex; flex-direction: column">
-          <form
-            *ngIf="!isSuccessful"
-            name="form"
-            (ngSubmit)="f.form.valid && openModal(template)"
-            #f="ngForm"
-            validate
-          >
+        <form
+          *ngIf="!isSuccessful"
+          name="form"
+          (ngSubmit)="f.form.valid && onSubmit(template)"
+          #f="ngForm"
+          validate
+        >
+          <div class="form_info" style="display: flex; flex-direction: column">
             <div *ngIf="!isLoggedIn">
               <input
                 placeholder="Name"
@@ -95,6 +94,16 @@
               #contactNo="ngModel"
               required
             />
+            <div
+              class="alert-danger field-error"
+              *ngIf="contactNo.errors && f.submitted"
+              style="color: white; background: none; width: 60%"
+            >
+              <div *ngIf="contactNo.errors.required">
+                Contact Number is required
+              </div>
+            </div>
+
             <input
               placeholder="Location"
               type="text"
@@ -134,48 +143,36 @@
               required=""
               aria-rowcount="5"
             />
-            <button
-              *ngIf="isLoggedIn"
-              class="button_line"
-              (click)="openModal(template)"
-            >
-              Reserve
-            </button>
-            <button
-              *ngIf="!isLoggedIn"
-              class="button_line"
-              aria-disabled="true"
-              (click)="openModal(template)"
-            >
-              Reserve
-            </button>
-          </form>
-          <!-- 
+            <div>
+              <button class="button_fill">Reserve</button>
+            </div>
+
+            <!-- 
               date picker  // get from api to findout 
    <button class="button_line (click)="onSubmit()" >Reserve</button>
  
               package type // get form api url 
             -->
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   </section>
 </div>
 
+<ngx-spinner
+  bdColor="rgba(229,221,221,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-zig-zag-deflect"
+  [fullScreen]="false"
+>
+  <p style="font-size: 20px; color: white">Processing....</p></ngx-spinner
+>
+
 <ng-template #template>
-  <div class="modal-header">
-    <h6 style="text-align: center">{{ messageModal }}</h6>
-    <button
-      type="button"
-      class="close pull-right"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
   <div class="modal-body">
-    <h3 style="color: black"></h3>
+    <h3 style="color: black; text-align: center">{{ messageModal }}</h3>
     <div style="text-align: center">
       <object
         data="../../../assets/img/svg/checked.svg"
