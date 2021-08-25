@@ -27,13 +27,14 @@
               <h3>{{ item.name }}</h3>
               <span>{{ item.price | currency: "LKR " }}</span>
             </div>
-            <div class="">
-              <rating
+            <div class="stars">
+              <!-- <rating
                 [(ngModel)]="value"
                 [max]="max"
                 [readonly]="false"
                 [titles]="['one', 'two', 'three', 'four']"
-              ></rating>
+              ></rating> -->
+              Ratings: {{ item.rateCount | number }}
             </div>
             <p>
               {{ item.description }}

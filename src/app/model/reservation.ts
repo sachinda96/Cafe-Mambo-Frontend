@@ -1,15 +1,3 @@
-export class EventBookingUser {
-  id: string | undefined;
-  userId: string | null = '';
-  contactNumber: string = '';
-  location: string = '';
-  message: string = '';
-  date: Date = new Date();
-  packageId: string | undefined = '';
-
-  constructor() {}
-}
-
 export class EventBooking {
   id: string | undefined;
   name: string = '';
@@ -20,6 +8,7 @@ export class EventBooking {
   bookDate: Date = new Date();
   packageId: string | undefined = '';
   userId: string | null = '';
+  packageName: string | undefined = '';
 
   constructor() {}
 }

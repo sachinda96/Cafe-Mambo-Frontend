@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Payment } from 'src/app/model/payment';
-import { EventBooking, EventBookingUser } from 'src/app/model/reservation';
+import { EventBooking } from 'src/app/model/reservation';
 import { PackageService } from 'src/app/service/package.service';
 import { ReserveService } from 'src/app/service/reserve.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
@@ -8,6 +8,7 @@ import { packages, Package } from '../../model/packages';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UuidService } from 'src/app/service/uuid.service';
 
 const SUCCESS_MSG = 'Reservation Successful!!';
 const FAIL_MSG = 'Please Try Again !!!!!';
@@ -49,7 +50,8 @@ export class ReservationComponent implements OnInit {
     private packageService: PackageService,
     private modalService: BsModalService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private uuidService: UuidService
   ) {}
 
   ngOnInit(): void {
@@ -64,19 +66,24 @@ export class ReservationComponent implements OnInit {
     this.spinner.show();
     // alert(this.form.name);
     console.log(this.form);
+    this.isValidationFail = false;
 
     console.log(this.form);
     this.reservation = {
-      id: '',
+      id: this.uuidService.generateUUID(),
       name: this.form.name,
       email: this.form.email,
       contactNumber: this.form.contactNo,
-      location: this.form.location,
       message: this.form.message,
-      bookDate: this.form.date,
+      location: this.form.location,
+      userId: this.isLoggedIn
+        ? this.token.getUserId()
+        : this.uuidService.generateUUID(),
+      bookDate: new Date(this.form.date),
       packageId: this.form.package,
-      userId: this.isLoggedIn ? this.token.getUserId() : '',
+      packageName: this.findPackageName(this.form.packageId),
     };
+    console.log(this.reservation);
     this.validation();
     if (!this.isValidationFail) {
       this.reserveService.addReservation(this.reservation).subscribe(
@@ -88,13 +95,15 @@ export class ReservationComponent implements OnInit {
           this.router.navigateByUrl('');
         },
         (err) => {
-          console.log('==>' + err);
+          console.log('==>' + err.error);
           this.isError = true;
           this.messageModal = FAIL_MSG;
         }
       );
     }
+
     this.openModal(template);
+
     this.spinner.hide();
   }
 
@@ -127,21 +136,22 @@ export class ReservationComponent implements OnInit {
       this.isValidationFail = true;
     }
 
-    console.log(this.form.date);
+    console.log(typeof this.form.date);
     let currentDate = new Date();
     console.log('==<<<<<' + currentDate.getFullYear());
 
-    console.log(this.form.date.substring(8));
-    console.log(this.form.date.substring(5, 7));
-    console.log(this.form.date.substring(0, 4));
+    // parseInt(this.form.date.substring(8)) <= currentDate.getDate()
 
-    if (
-      parseInt(this.form.date.substring(0, 4)) < currentDate.getFullYear() ||
-      parseInt(this.form.date.substring(5, 7)) < currentDate.getMonth() ||
-      parseInt(this.form.date.substring(8)) <= currentDate.getDate()
-    ) {
+    let today: Date = new Date();
+    let slectedDate: Date = new Date(this.form.date);
+    if (slectedDate.getTime() < today.getTime()) {
       this.messageModal = 'Select a valid date\n';
       this.isValidationFail = true;
     }
+  }
+
+  findPackageName(id: string | undefined) {
+    let p = this.packages.find((p) => (p.id = this.form.package));
+    return p?.name;
   }
 }

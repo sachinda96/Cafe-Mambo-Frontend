@@ -2,32 +2,33 @@
   <section class="products_shop">
     <div class="container">
       <div class="row flex-wrap">
-        <div *ngFor="let itm of itemRatingArray" class="col-lg-4">
+        <div *ngFor="let item of itemList" class="col-lg-4">
           <div class="products_sh">
             <div class="image_product_add_to_cart">
-              <a class="button_line" (click)="addToCart(itm.item)">
+              <a class="button_line" (click)="addToCart(item)">
                 <i class="fas fa-shopping-basket"></i>Add to Cart</a
               ><img
-                src="{{ itm.item.imagePath }}"
+                src="{{ item.imagePath }}"
                 alt=""
                 style="max-height: 10rem; min-height: 10rem"
               />
             </div>
-            <a class="cont_product" [routerLink]="['/item', itm.item.id]">
+            <a class="cont_product" [routerLink]="['/item', item.id]">
               <div class="row align-items-center justify-content-between">
-                <span>Rs. {{ itm.item.price }}</span>
+                <span>Rs. {{ item.price }}</span>
                 <div class="star">
-                  <rating
+                  <!-- <rating
                     [(ngModel)]="ratingArrayList[itm.index]"
                     [max]="max"
                     [readonly]="isReadonly"
                     style="height: 3rem; width: 3rem"
-                  ></rating>
+                  ></rating> -->
+                  Ratings: {{ item.rateCount }}
                 </div>
               </div>
               <p style="display: none"></p>
-              <h3>{{ itm.item.name }}</h3>
-              <p style="font-size: small">{{ itm.item.description }}</p></a
+              <h3>{{ item.name }}</h3>
+              <p style="font-size: small">{{ item.description }}</p></a
             >
           </div>
         </div>
