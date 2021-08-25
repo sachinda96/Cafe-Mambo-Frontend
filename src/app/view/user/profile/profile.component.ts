@@ -13,6 +13,7 @@ import { UserService } from 'src/app/service/user.service';
   ],
 })
 export class ProfileComponent implements OnInit {
+  isLoggedIn = false;
   constructor(
     private userService: UserService,
     private tokenService: TokenStorageService
@@ -20,8 +21,18 @@ export class ProfileComponent implements OnInit {
   user: User = new User();
   uid: string | null = '';
 
+  form: any = {
+    name: null,
+    email: null,
+    password: null,
+  };
+
   ngOnInit(): void {
     this.uid = this.tokenService.getUserId();
     if (this.uid != null) this.userService.getUserById(this.uid);
+  }
+
+  onUpdate() {
+    this.userService.updateUser(this.form);
   }
 }

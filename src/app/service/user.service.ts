@@ -28,4 +28,8 @@ export class UserService {
   getUserById(uid: string) {
     return this.http.get<User>(BASE_URL + '/getUser/' + uid);
   }
+
+  updateUser(user: User | any) {
+    return this.http.post(BASE_URL + '/save', user);
+  }
 }

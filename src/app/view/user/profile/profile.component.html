@@ -63,10 +63,7 @@
               <div class="card-body">
                 <strong><i class="fas fa-voicemail mr-1"></i> Email</strong>
 
-                <p class="text-muted">
-                  B.S. in Computer Science from the University of Tennessee at
-                  Knoxville
-                </p>
+                <p class="text-muted"></p>
 
                 <hr />
 
@@ -75,7 +72,7 @@
                   Date</strong
                 >
 
-                <p class="text-muted">Malibu, California</p>
+                <p class="text-muted"></p>
 
                 <hr />
               </div>
@@ -85,58 +82,107 @@
           </div>
           <!-- /.col -->
           <div class="col-md-9">
-            <div class="card">
-              <!-- /.card-header -->
-              <div class="card-body">
-                <div class="card card-primary">
-                  <div class="card-header">
-                    <h3 class="card-title">Profile Details</h3>
-                  </div>
-                  <!-- /.card-header -->
-                  <!-- form start -->
-                  <form>
-                    <div class="card-body">
-                      <div class="form-group">
+            <form
+              *ngIf="!isLoggedIn"
+              name="form"
+              (ngSubmit)="f.form.valid && onUpdate()"
+              #f="ngForm"
+              novalidate
+            >
+              <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="card card-primary">
+                    <div class="card-header">
+                      <h3 class="card-title">Profile Details</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form>
+                      <div class="card-body">
                         <div class="form-group">
-                          <label for="exampleInputPassword1">Name</label>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Name</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id=""
+                              name="name"
+                              placeholder="Name"
+                              [(ngModel)]="form.name"
+                              #name="ngModel"
+                              [ngClass]="{
+                                'is-invalid': f.submitted && name.invalid
+                              }"
+                            />
+                            <div
+                              class="alert-danger field-error"
+                              *ngIf="name.errors && f.submitted"
+                              style="color: aliceblue; background: none"
+                            >
+                              <div *ngIf="name.errors.required">
+                                Username is required
+                              </div>
+                              <div *ngIf="name.errors.minlength">
+                                Username must be at least 3 characters
+                              </div>
+                              <div *ngIf="name.errors.maxlength">
+                                Username must be at most 20 characters
+                              </div>
+                            </div>
+                          </div>
+                          <label for="exampleInputEmail1">Email address</label>
                           <input
-                            type="text"
+                            type="email"
                             class="form-control"
-                            id=""
-                            placeholder="Name"
+                            id="exampleInputEmail1"
+                            placeholder="Enter email"
                           />
                         </div>
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="exampleInputEmail1"
-                          placeholder="Enter email"
-                        />
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Password</label>
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="exampleInputPassword1"
+                            placeholder="Password"
+                            name="password"
+                            [(ngModel)]="form.password"
+                            #password="ngModel"
+                            required
+                            minlength="6"
+                            [ngClass]="{
+                              'is-invalid': f.submitted && password.invalid
+                            }"
+                          />
+                          <div
+                            class="alert-danger field-error"
+                            *ngIf="password.errors && f.submitted"
+                            style="color: aliceblue; background: none"
+                          >
+                            <div *ngIf="password.errors.required">
+                              Password is required
+                            </div>
+                            <div *ngIf="password.errors.minlength">
+                              Password must be at least 6 characters
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="exampleInputPassword1"
-                          placeholder="Password"
-                        />
-                      </div>
-                    </div>
-                    <!-- /.card-body -->
+                      <!-- /.card-body -->
 
-                    <div class="card-footer">
-                      <button type="submit" class="btn btn-primary">
-                        Update
-                      </button>
-                    </div>
-                  </form>
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">
+                          Update
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
+                <!-- /.card-body -->
               </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+              <!-- /.card -->
+            </form>
           </div>
           <!-- /.col -->
         </div>
