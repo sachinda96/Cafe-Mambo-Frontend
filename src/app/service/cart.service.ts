@@ -45,7 +45,16 @@ export class CartService {
   RemoveFromCart(itemId: string | undefined) {
     const index = this.cartItems.findIndex((c) => c.item.id === itemId);
 
-    this.cartItems = this.cartItems.splice(index, 1);
+    if (index == 0) {
+      this.cartItems = this.cartItems.slice(index + 1);
+    } else if (index == this.cartItems.length - 1) {
+      this.cartItems = this.cartItems.slice(0, index);
+    } else {
+      let arr1 = this.cartItems.slice(0, index);
+      let arr2 = this.cartItems.slice(index + 1);
+
+      this.cartItems = arr1.concat(arr2);
+    }
   }
 
   getItems() {
