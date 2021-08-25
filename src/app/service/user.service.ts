@@ -30,6 +30,6 @@ export class UserService {
   }
 
   updateUser(user: User | any) {
-    return this.http.post(BASE_URL + '/save', user);
+    return this.http.post(BASE_URL + '/update', user);
   }
 }
