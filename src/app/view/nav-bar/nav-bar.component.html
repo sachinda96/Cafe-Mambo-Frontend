@@ -81,6 +81,10 @@
             <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
           </ul>
           <ul *ngIf="isLoggedIn">
+            <li><a (click)="routeToDashboard()">Dashboard</a></li>
+            &nbsp;
+          </ul>
+          <ul *ngIf="isLoggedIn">
             <li>
               <a class="button_line" (click)="logout()">Logout</a>
             </li>
@@ -155,6 +159,9 @@
         &nbsp;&nbsp;
         <ul *ngIf="!isLoggedIn">
           <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
+        </ul>
+        <ul *ngIf="isLoggedIn">
+          <li><a (click)="routeToDashboard()">Dashboard</a></li>
         </ul>
         <ul *ngIf="isLoggedIn">
           <li>

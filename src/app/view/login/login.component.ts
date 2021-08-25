@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
+import { BASE_URL } from 'src/environments/environment';
 import { TokenStorageService } from '../../service/token-storage.service';
 
 @Component({
@@ -50,8 +51,8 @@ export class LoginComponent implements OnInit {
 
         this.roles = this.tokenStorage.getUser().roles;
 
-        this.router.navigate(['']);
-        this.reloadPage();
+        this.router.navigateByUrl('/');
+        //  this.reloadPage();
       },
       (err) => {
         console.log('errLog', err);
