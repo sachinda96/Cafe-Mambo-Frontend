@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Payment } from 'src/app/model/payment';
 import { EventBooking, EventBookingUser } from 'src/app/model/reservation';
 import { PackageService } from 'src/app/service/package.service';
 import { ReserveService } from 'src/app/service/reserve.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { packages, Package } from '../../model/packages';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
+
+const SUCCESS_MSG = 'Reservation Successful!!';
+const FAIL_MSG = 'Please Try Again !!!!!';
 
 @Component({
   selector: 'app-reservation',
@@ -17,7 +22,12 @@ export class ReservationComponent implements OnInit {
   reservationUser: EventBooking = new EventBooking();
   payment: Payment = new Payment();
   isLoggedIn = false;
-  //packages
+  isSuccessful = false;
+  isError = false;
+  modalRef: BsModalRef = new BsModalRef();
+  valueWidth = false;
+  messageModal = '';
+  isValidationFail = false;
   //  types = ['Golden', 'Silver', 'Bronze'];
   types: Package[] = [];
 
@@ -31,12 +41,13 @@ export class ReservationComponent implements OnInit {
     date: Date,
   };
 
-  isSuccessful = false;
   errorMessage = '';
   constructor(
     public token: TokenStorageService,
     private reserveService: ReserveService,
-    private packageService: PackageService
+    private packageService: PackageService,
+    private modalService: BsModalService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -64,23 +75,21 @@ export class ReservationComponent implements OnInit {
         packageId: this.form.package,
         userId: '',
       };
-      this.reserveService.addReservation(this.reservation).subscribe(
-        (res) => {
-          console.log(res);
-          this.form = {
-            name: null,
-            email: null,
-            contactNo: null,
-            location: null,
-            message: '',
-            package: null,
-            date: Date,
-          };
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      this.validation();
+      if (!this.isValidationFail)
+        this.reserveService.addReservation(this.reservation).subscribe(
+          (res) => {
+            console.log(res);
+            this.clear();
+            this.isSuccessful = true;
+            this.messageModal = SUCCESS_MSG;
+          },
+          (err) => {
+            console.log('==>' + err);
+            this.isError = true;
+            this.messageModal = FAIL_MSG;
+          }
+        );
     } else {
       this.reservationUser = {
         id: '',
@@ -93,23 +102,66 @@ export class ReservationComponent implements OnInit {
         name: '',
         email: '',
       };
+      this.validation();
+      if (!this.isValidationFail)
+        this.reserveService.addReservation(this.reservationUser).subscribe(
+          (data) => {
+            this.clear();
+            this.isSuccessful = true;
+            this.messageModal = SUCCESS_MSG;
+            this.clear();
+          },
+          (err) => {
+            console.log('==>' + err);
+            this.isError = true;
+            this.messageModal = FAIL_MSG;
+          }
+        );
+    }
+  }
 
-      this.reserveService.addReservation(this.reservationUser).subscribe(
-        (data) => {
-          this.form = {
-            name: null,
-            email: null,
-            contactNo: null,
-            location: null,
-            message: '',
-            package: null,
-            date: Date,
-          };
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+  openModal(template: TemplateRef<any>) {
+    this.onSubmit();
+    console.log(this.isSuccessful);
+    console.log(this.isError);
+    if (this.isSuccessful != this.isError || this.isValidationFail)
+      this.modalRef = this.modalService.show(template);
+
+    if (this.isSuccessful) this.router.navigate(['']);
+  }
+
+  clear() {
+    this.form = {
+      name: null,
+      email: null,
+      contactNo: null,
+      location: null,
+      message: '',
+      package: null,
+      date: Date,
+    };
+  }
+  validation() {
+    if (this.form.package == null || this.form.package == '') {
+      this.messageModal = 'Select a valid Package \n';
+      this.isValidationFail = true;
+    }
+
+    if (this.form.contactNo == null) {
+      this.messageModal += 'Enter a Contact No \n';
+      this.isValidationFail = true;
+    }
+
+    console.log(new Date());
+    let currentDate = new Date();
+    console.log('==<<<<<' + currentDate.getFullYear());
+    if (
+      parseInt(this.form.date.substring(8)) <= currentDate.getDate() ||
+      parseInt(this.form.date.substring(5, 7)) <= currentDate.getMonth() ||
+      parseInt(this.form.date.substring(0, 4)) <= currentDate.getFullYear()
+    ) {
+      this.messageModal = 'Select a valid date\n';
+      this.isValidationFail = true;
     }
   }
 }
