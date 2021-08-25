@@ -78,7 +78,7 @@ const routes: Routes = [
     component: ItemReviewComponent,
   },
   {
-    path: ':uid',
+    path: 'user',
 
     children: [
       {
