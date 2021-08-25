@@ -24,12 +24,13 @@
               pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
               [(ngModel)]="form.email"
               #email="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
             />
 
             <div
               class="alert-danger field-error"
               *ngIf="email.errors && f.submitted"
-              style="color: aliceblue"
+              style="color: aliceblue; background: none; border-style: none"
             >
               <div *ngIf="email.errors.required">Email is required</div>
               <div *ngIf="email.errors.pattern">
@@ -45,12 +46,14 @@
               required
               [(ngModel)]="form.password"
               #password="ngModel"
+              minlength="6"
             />
             <div
               class="alert alert-danger"
               role="alert"
               *ngIf="password.errors && f.submitted"
-              style="color: aliceblue"
+              style="color: aliceblue; background: none; border-style: none"
+              [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
             >
               <div *ngIf="password.errors.required">Password is required</div>
               <div *ngIf="password.errors.minlength">

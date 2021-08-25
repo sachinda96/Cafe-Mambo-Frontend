@@ -28,9 +28,8 @@
       <form
         *ngIf="!isSuccessful"
         name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
+        (ngSubmit)="f.form.valid && openModal(template)"
         #f="ngForm"
-        novalidate
       >
         <div class="form">
           <div class="form_text">
