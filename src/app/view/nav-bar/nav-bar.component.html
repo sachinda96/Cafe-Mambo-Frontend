@@ -61,7 +61,7 @@
                 style="display: flex; flex-direction: column"
               >
                 <li *ngFor="let category of categoryList">
-                  <a (click)="routeItemByCategory(category.name)">{{
+                  <a (click)="routeItemByCategory(category.id)">{{
                     category.name
                   }}</a>
                 </li>

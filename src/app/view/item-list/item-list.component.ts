@@ -34,6 +34,8 @@ export class ItemListComponent implements OnInit {
   ratingArrayList: Array<number> = new Array<number>();
   itemRatingArray: ItemRating[] = [];
 
+
+
   constructor(
     private http: HttpClient,
     private cartService: CartService,
@@ -45,6 +47,7 @@ export class ItemListComponent implements OnInit {
   }
 
   path: string | undefined;
+  isLoaded: boolean = false;
 
   ngOnInit(): void {
     this.routerActive.params.subscribe((params) => {
@@ -62,12 +65,14 @@ export class ItemListComponent implements OnInit {
   }
 
   getItemsByPage(index: any, size: any, id: any) {
+    this.isLoaded = false;
     this.itemService
       .getAllByPageIndexAndSize(index, size, id)
       .subscribe((res) => {
-        console.log(res);
         this.itemList = res;
-        this.fillRatingArray();
+        console.log(this.itemList)
+        this.isLoaded = true;
+        //this.fillRatingArray();
       });
   }
 
