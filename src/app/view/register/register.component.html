@@ -3,7 +3,7 @@
     <form
       *ngIf="!isSuccessful"
       name="form"
-      (ngSubmit)="f.form.valid && onSubmit()"
+      (ngSubmit)="f.form.valid && onSubmit(template)"
       #f="ngForm"
       novalidate
     >
@@ -30,11 +30,12 @@
               maxlength="20"
               [(ngModel)]="form.username"
               #username="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && username.invalid }"
             />
             <div
               class="alert-danger field-error"
               *ngIf="username.errors && f.submitted"
-              style="color: aliceblue"
+              style="color: aliceblue; background: none"
             >
               <div *ngIf="username.errors.required">Username is required</div>
               <div *ngIf="username.errors.minlength">
@@ -53,11 +54,12 @@
               #email="ngModel"
               pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
               required
+              [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
             />
             <div
               class="alert-danger field-error"
               *ngIf="email.errors && f.submitted"
-              style="color: aliceblue"
+              style="color: aliceblue; background: none"
             >
               <div *ngIf="email.errors.required">Email is required</div>
               <div *ngIf="email.errors.pattern">
@@ -72,15 +74,39 @@
               [(ngModel)]="form.password"
               #password="ngModel"
               required
+              minlength="6"
+              [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
             />
             <div
               class="alert-danger field-error"
               *ngIf="password.errors && f.submitted"
-              style="color: aliceblue"
+              style="color: aliceblue; background: none"
             >
               <div *ngIf="password.errors.required">Password is required</div>
               <div *ngIf="password.errors.minlength">
                 Password must be at least 6 characters
+              </div>
+            </div>
+            <input
+              placeholder="Confirm Password"
+              type="password"
+              name="cpassword"
+              [(ngModel)]="form.cpassword"
+              #cpassword="ngModel"
+              minlength="6"
+              required
+              [ngClass]="{ 'is-invalid': f.submitted && cpassword.invalid }"
+            />
+            <div
+              class="alert-danger field-error"
+              *ngIf="cpassword.errors && f.submitted"
+              style="color: aliceblue; background: none"
+            >
+              <div *ngIf="cpassword.errors.required">
+                Confirmation Password is required
+              </div>
+              <div *ngIf="cpassword.errors.minlength">
+                Confirmation Password must be at least 6 characters
               </div>
             </div>
             <br />
@@ -88,12 +114,58 @@
               <button class="button_line my-btn">Sign Up</button>
             </div>
 
-            <div *ngIf="f.submitted && isSignUpFailed" style="color: aliceblue">
+            <div
+              *ngIf="f.submitted && isSignUpFailed"
+              style="color: aliceblue; background: none"
+            >
               Signup failed!<br />{{ errorMessage }}
             </div>
+            <alert type="warning" *ngIf="!isPasswordsMatch">
+              <strong>Passwords mismatch!!!</strong> Check your password
+            </alert>
           </div>
         </div>
       </div>
     </form>
   </section>
 </div>
+<ngx-spinner
+  bdColor="rgba(229,221,221,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-zig-zag-deflect"
+  [fullScreen]="false"
+>
+  <p style="font-size: 20px; color: white">Registering....</p></ngx-spinner
+>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h6 style="text-align: center">{{ messageModal }}</h6>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h3 style="color: black"></h3>
+    <div style="text-align: center">
+      <object
+        data="../../../assets/img/svg/checked.svg"
+        type="image/svg+xml"
+        style="height: 3rem; width: 3rem"
+        *ngIf="isSuccessful"
+      ></object>
+      <object
+        data="../../../assets/img/svg/report.svg"
+        type="image/svg+xml"
+        style="height: 3rem; width: 3rem"
+        *ngIf="isSignUpFailed"
+      ></object>
+    </div>
+  </div>
+</ng-template>
