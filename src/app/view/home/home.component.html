@@ -26,7 +26,7 @@
   </div>
 </div>
 
-<section class="image_f img_inf_n">
+<section class="image_f img_inf_n" style="padding-top: 1.4rem">
   <div class="row align-items-center">
     <div class="col-12 col-lg-6">
       <div class="bg_inf_p bg_products"></div>
@@ -90,72 +90,21 @@
       </div>
       <div class="row">
         <!--   data-aos="fade-right" -->
-        <div class="col-lg-6">
+        <div class="col-lg-6" *ngFor="let item of itemList">
           <div class="img_text_menu">
-            <img
-              src="../../../assets/img/drinks/Tasty Grape Fanta Cocktails.jpg"
-              alt="menu_img"
-            />
+            <img src="{{ item.imagePath }}" alt="menu_img" />
             <div class="info_title">
-              <h3>Tasty Grape Fanta Cocktail</h3>
-              <p>
-                Lorem ipsum dolor sit amet purus vitae libero lacinia accumsan
-                vitae, dapibus et.
-              </p>
+              <h3>{{ item.name }}</h3>
+              <p style="word-break: break-word">{{ item.description }}</p>
             </div>
-            <span>LKR 900</span>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="img_text_menu">
-            <img
-              src="../../../assets/img/drinks/Minty Mojito Mocktail.jpg"
-              alt="menu_img"
-            />
-            <div class="info_title">
-              <h3>Minty Mojito Mocktail</h3>
-              <p>
-                Lorem ipsum dolor sit amet purus vitae libero lacinia accumsan
-                vitae, dapibus et.
-              </p>
-            </div>
-            <span> LKR 770</span>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="img_text_menu">
-            <img
-              src="../../../assets/img/drinks/Easy_Rum_Cocktail.jpg"
-              alt="menu_img"
-            />
-            <div class="info_title">
-              <h3>Rum Cocktail</h3>
-              <p>
-                Lorem ipsum dolor sit amet purus vitae libero lacinia accumsan
-                vitae, dapibus et.
-              </p>
-            </div>
-            <span>LKR 450</span>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="img_text_menu">
-            <img
-              src="../../../assets/img/drinks/raspberry-collins.jpg"
-              alt="menu_img"
-            />
-            <div class="info_title">
-              <h3>Raspberry Collins</h3>
-              <p>
-                Lorem ipsum dolor sit amet purus vitae libero lacinia accumsan
-                vitae, dapibus et.
-              </p>
-            </div>
-            <span>LKR 1120</span>
+            <br />
+            <span style="padding-left: 0.5rem; transform: translateY(1rem)">{{
+              item.price | currency: "LKR "
+            }}</span>
           </div>
         </div>
       </div>
-      <a class="button_line" [routerLink]="['/shop']"> More</a>
+      <a class="button_line" [routerLink]="['/shop/', catId]"> More</a>
     </div>
   </div>
 </section>

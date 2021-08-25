@@ -3,14 +3,14 @@
     <div class="bg_slider">
       <owl-carousel-o [options]="customOptions" style="height: 180px">
         <ng-template carouselSlide>
-          <img style="height: 825px" src="../../../assets/img/blog_fon_l.png" />
+          <img style="height: 870px" src="../../../assets/img/blog_fon_l.png" />
         </ng-template>
         <ng-template carouselSlide
-          ><img style="height: 825px" src="../../../assets/img/blog_two_l.png"
+          ><img style="height: 870px" src="../../../assets/img/blog_two_l.png"
         /></ng-template>
         <ng-template carouselSlide
           ><img
-            style="height: 825px"
+            style="height: 870px"
             src="../../../assets/img/blog_three_l.png"
         /></ng-template>
       </owl-carousel-o>
@@ -81,15 +81,20 @@
             <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
           </ul>
           <ul *ngIf="isLoggedIn">
-            <li><a (click)="routeToDashboard()">Dashboard</a></li>
-            &nbsp;
+            <li>
+              <a (click)="routeToDashboard()" style="padding-right: 0.2rem"
+                >Dashboard</a
+              >
+            </li>
           </ul>
+
           <ul *ngIf="isLoggedIn">
             <li>
               <a class="button_line" (click)="logout()">Logout</a>
             </li>
           </ul>
           <span>
+            &nbsp; &nbsp; &nbsp;
             <a [routerLink]="['/cart']"
               ><i class="fas fa-shopping-cart shop_cart"><span></span></i>
             </a>

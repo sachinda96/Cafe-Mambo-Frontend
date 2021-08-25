@@ -55,6 +55,7 @@ export class ItemListComponent implements OnInit {
     });
 
     this.countByCategory(this.categoryId);
+    this.fillRatingArray();
   }
 
   addToCart(item: Item) {
@@ -93,6 +94,7 @@ export class ItemListComponent implements OnInit {
   fillRatingArray() {
     this.itemList.forEach((i) => {
       if (i.rateCount) {
+        console.log('===>');
         this.ratingArrayList.push(i.rateCount);
         let itm: ItemRating = new ItemRating();
         itm.item = i;
