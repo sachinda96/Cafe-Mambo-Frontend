@@ -92,7 +92,7 @@ export class NavBarComponent implements OnInit {
 
   logout(): void {
     this.token.signOut();
-    //this.currentUser = null;
+    this.currentUser = null;
     window.location.reload();
   }
 
