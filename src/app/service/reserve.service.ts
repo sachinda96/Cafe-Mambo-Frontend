@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { EventBooking, EventBookingUser } from '../model/reservation';
+import { EventBooking } from '../model/reservation';
 import { BASE_URL } from 'src/environments/environment';
-import { Package } from '../model/packages';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -31,9 +30,9 @@ export class ReserveService {
       httpOptions
     );
   }
-  getAllReservationsByDate() {}
-  getAllReservationsByMonth() {}
-  getAllReservationsByYear() {}
+  // getAllReservationsByDate() {}
+  // getAllReservationsByMonth() {}
+  // getAllReservationsByYear() {}
   addReservation(reserve: EventBooking): Observable<any> {
     return this.http.post(
       BASE_URL + '/eventbooking/save',
