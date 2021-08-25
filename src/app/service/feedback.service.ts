@@ -25,6 +25,6 @@ export class FeedbackService {
     return this.http.post(BASE_URL + '/feedback', fdback);
   }
   updateFeedback(fdback: Feedback) {
-    return this.http.post(BASE_URL + '/feedback/save', fdback);
+    return this.http.post(BASE_URL + '/feedback/saves', fdback);
   }
 }

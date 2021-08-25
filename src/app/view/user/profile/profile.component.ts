@@ -29,10 +29,28 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.uid = this.tokenService.getUserId();
-    if (this.uid != null) this.userService.getUserById(this.uid);
+    if (this.uid != null)
+      this.userService.getUserById(this.uid).subscribe(
+        (data) => {
+          console.log(data);
+          this.user = data;
+          this.form.name = this.user.name;
+          this.form.email = this.user.email;
+          this.form.password = this.user.loginDto.password;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
   onUpdate() {
-    this.userService.updateUser(this.form);
+    console.log(this.form);
+    let user: User = new User();
+    user.name = this.form.name;
+    user.email = user.loginDto.email = this.form.email;
+    user.loginDto.password = this.form.password;
+
+    this.userService.updateUser(user);
   }
 }

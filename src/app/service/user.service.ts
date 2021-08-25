@@ -26,7 +26,7 @@ export class UserService {
   }
 
   getUserById(uid: string) {
-    return this.http.get<User>(BASE_URL + '/getUser/' + uid);
+    return this.http.get<User>(BASE_URL + '/get/' + uid);
   }
 
   updateUser(user: User | any) {
