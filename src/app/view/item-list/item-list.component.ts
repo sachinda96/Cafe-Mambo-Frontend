@@ -11,6 +11,11 @@ import { CategoryService } from 'src/app/service/category.service';
 import { Item } from 'src/app/model/item';
 import { SITE } from 'src/environments/environment';
 
+export class ItemRating {
+  item: Item = new Item();
+  index: number = 0;
+  constructor() {}
+}
 @Component({
   selector: 'app-item-list',
   templateUrl: './item-list.component.html',
@@ -21,7 +26,13 @@ export class ItemListComponent implements OnInit {
 
   itemList: Array<Item> = new Array<Item>();
   categoryId: string = '';
-  pageNumbers: Array<number> = new Array<number>();
+  pageNumbers: number[] = [];
+  max = 10;
+  rate = 7;
+  isReadonly = true;
+  k = 0;
+  ratingArrayList: Array<number> = new Array<number>();
+  itemRatingArray: ItemRating[] = [];
 
   constructor(
     private http: HttpClient,
@@ -56,6 +67,7 @@ export class ItemListComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.itemList = res;
+        this.fillRatingArray();
       });
   }
 
@@ -76,5 +88,17 @@ export class ItemListComponent implements OnInit {
         error.error;
       }
     );
+  }
+
+  fillRatingArray() {
+    this.itemList.forEach((i) => {
+      if (i.rateCount) {
+        this.ratingArrayList.push(i.rateCount);
+        let itm: ItemRating = new ItemRating();
+        itm.item = i;
+        itm.index = this.k++;
+        this.itemRatingArray.push(itm);
+      }
+    });
   }
 }

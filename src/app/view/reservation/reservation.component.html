@@ -25,27 +25,28 @@
         </div>
       </div>
 
-      <form
-        *ngIf="!isSuccessful"
-        name="form"
-        (ngSubmit)="f.form.valid && openModal(template)"
-        #f="ngForm"
-      >
-        <div class="form">
-          <div class="form_text">
-            <span class="up_i">Favorite Bar</span>
-            <h2>Event Booking</h2>
-            <p>
-              <b>THE PARTY NEVER STOPS!!!</b> <br />Cafe mambo is still new in
-              CMB but there is no party too big or too small for us to handle.
-              You come to us with an idea—no matter how out there—and we’ll make
-              it happen. From bar mitzvahs and anniversary parties to team
-              celebrations and bachelor/bachelorette parties, we work with you
-              to make your personal rock and roll fantasy.
-            </p>
-          </div>
+      <div class="form">
+        <div class="form_text">
+          <span class="up_i">Favorite Bar</span>
+          <h2>Event Booking</h2>
+          <p>
+            <b>THE PARTY NEVER STOPS!!!</b> <br />Cafe mambo is still new in CMB
+            but there is no party too big or too small for us to handle. You
+            come to us with an idea—no matter how out there—and we’ll make it
+            happen. From bar mitzvahs and anniversary parties to team
+            celebrations and bachelor/bachelorette parties, we work with you to
+            make your personal rock and roll fantasy.
+          </p>
+        </div>
 
-          <div class="form_info" style="display: flex; flex-direction: column">
+        <div class="form_info" style="display: flex; flex-direction: column">
+          <form
+            *ngIf="!isSuccessful"
+            name="form"
+            (ngSubmit)="f.form.valid && openModal(template)"
+            #f="ngForm"
+            validate
+          >
             <div *ngIf="!isLoggedIn">
               <input
                 placeholder="Name"
@@ -54,13 +55,14 @@
                 [(ngModel)]="form.name"
                 #name="ngModel"
                 required
+                [ngClass]="{ 'is-invalid': f.submitted && name.invalid }"
               />
               <div
                 class="alert-danger field-error"
                 *ngIf="name.errors && f.submitted"
                 style="color: white; background: none; width: 60%"
               >
-                <div *ngIf="name.errors.required">Username is required</div>
+                <div *ngIf="name.errors.required">Name is required</div>
               </div>
             </div>
             <span *ngIf="!isLoggedIn">
@@ -72,6 +74,7 @@
                 #email="ngModel"
                 pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
                 required
+                [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
               />
               <div
                 class="alert-danger field-error"
@@ -98,7 +101,6 @@
               name="location"
               [(ngModel)]="form.location"
               #location="ngModel"
-              required
             />
 
             <div>
@@ -107,7 +109,6 @@
                 name="date"
                 [(ngModel)]="form.date"
                 #date="ngModel"
-                required
               />
             </div>
             <div>
@@ -148,15 +149,15 @@
             >
               Reserve
             </button>
-            <!-- 
+          </form>
+          <!-- 
               date picker  // get from api to findout 
    <button class="button_line (click)="onSubmit()" >Reserve</button>
  
               package type // get form api url 
             -->
-          </div>
         </div>
-      </form>
+      </div>
     </div>
   </section>
 </div>

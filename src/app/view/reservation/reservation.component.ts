@@ -152,13 +152,13 @@ export class ReservationComponent implements OnInit {
       this.isValidationFail = true;
     }
 
-    console.log(new Date());
+    console.log(this.form.date);
     let currentDate = new Date();
     console.log('==<<<<<' + currentDate.getFullYear());
     if (
-      parseInt(this.form.date.substring(8)) <= currentDate.getDate() ||
-      parseInt(this.form.date.substring(5, 7)) <= currentDate.getMonth() ||
-      parseInt(this.form.date.substring(0, 4)) <= currentDate.getFullYear()
+      parseInt(this.form.date.substring(8)) > currentDate.getDate() ||
+      parseInt(this.form.date.substring(5, 7)) >= currentDate.getMonth() ||
+      parseInt(this.form.date.substring(0, 4)) >= currentDate.getFullYear()
     ) {
       this.messageModal = 'Select a valid date\n';
       this.isValidationFail = true;
