@@ -39,4 +39,8 @@ export class OrderService {
   updateOrder(order: Order) {
     return this.http.post(BASE_URL + '/order/cancel', order);
   }
+
+  addShopOrder(order: OrderDTO) {
+    return this.http.post(BASE_URL + '/order', order);
+  }
 }
