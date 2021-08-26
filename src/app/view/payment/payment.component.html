@@ -139,12 +139,18 @@
                   >Place Order</a
                 >
               </form>
-              <alert type="success" *ngIf="isOrderSuccessful">
-                <strong>Well done!</strong> Order is Successfully Completed
-                <a href="#" class="alert-link">this important alert message</a>.
+              <alert
+                type="success"
+                *ngIf="isOrderSuccessful"
+                class="success alert-success"
+              >
+                <strong style="color: aliceblue">
+                  Order is Successfully Completed</strong
+                >
+                <a href="#" class="alert-link"></a>.
               </alert>
               <alert type="danger" *ngIf="isOrderFail">
-                <strong style="color: black">Try Again..!</strong>
+                <strong style="color: aliceblue">Try Again..!</strong>
                 <a href="#" class="alert-link"></a>
               </alert>
             </div>

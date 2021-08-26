@@ -38,6 +38,22 @@ export class OrderDTO {
   paymentDto: Payment = new Payment();
   deliveryDto: Delivery = new Delivery();
   itemDtoList: Array<ItemDTO> = new Array<ItemDTO>();
-  userId:string = "";
+  userId: string = '';
   //i need the count as well
+}
+
+// private String id;
+// private Date orderDate;
+// private PaymentDto paymentDto;
+// private DeliveryDto deliveryDto;
+// private List<ItemDto> itemDtoList;
+// private String userId;
+
+export class PlaceOrderDTO {
+  id: string = '';
+  orderDate: Date = new Date();
+  paymentDto: Payment = new Payment();
+  deliveryDto: Delivery = new Delivery();
+  itemDtoList: Array<ItemDTO> = new Array<ItemDTO>();
+  userId: string = '';
 }

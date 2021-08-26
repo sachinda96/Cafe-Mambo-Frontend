@@ -7,13 +7,13 @@ import {
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/service/cart.service';
 import { OrderService } from 'src/app/service/order.service';
-import { OrderDTO } from 'src/app/model/order';
+import { OrderDTO as PlaceOrderDTO } from 'src/app/model/order';
 import { Delivery } from 'src/app/model/delivery';
 import { Payment } from 'src/app/model/payment';
 import { TokenStorageService } from '../../service/token-storage.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-
+import { UuidService } from 'src/app/service/uuid.service';
 import {
   BASE_URL,
   CANCEL_URL,
@@ -40,7 +40,7 @@ export class PaymentComponent implements OnInit {
   delivery: Delivery = new Delivery();
   payment: Payment = new Payment();
   totalPrice = 0.0;
-  order: OrderDTO = new OrderDTO();
+  order: PlaceOrderDTO = new PlaceOrderDTO();
 
   showDeliveryDetails = true;
   showSuccessModal = false;
@@ -56,7 +56,8 @@ export class PaymentComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private viewRef: ViewContainerRef,
     private modalService: BsModalService,
-    private router: Router
+    private router: Router,
+    private uuidService: UuidService
   ) {
     payhere.onCompleted = function onCompleted(orderId: any) {
       console.log('Payment completed. OrderID:' + orderId);
@@ -94,6 +95,7 @@ export class PaymentComponent implements OnInit {
     message: '',
     type: '',
     date: null,
+    id: this.uuidService.generateUUID(),
   };
 
   isOrderSuccessful = false;
@@ -106,9 +108,12 @@ export class PaymentComponent implements OnInit {
     this.spinner.show();
     this.modalRef.hide();
 
-    this.order.total = this.totalQuantity;
     this.order.orderDate = new Date();
-    this.setCustomerDetails();
+    //id of the order
+    this.order.id = this.form.id;
+    this.order.userId = this.userId;
+
+    //set details of necessary information
     this.setDeliveryDetails();
     this.setPaymentDetails();
     this.setItemDtoDetails();
@@ -133,7 +138,7 @@ export class PaymentComponent implements OnInit {
       return_url: RETURN_URL, // Important
       cancel_url: CANCEL_URL, // Important
       notify_url: NOTIFY_URL,
-      order_id: 'ItemNo12345',
+      order_id: this.form.id,
       items: this.getItemsAsCommaSeperatedList(),
       currency: 'LKR',
       amount: this.order.paymentDto.amount,
@@ -176,12 +181,6 @@ export class PaymentComponent implements OnInit {
     };
   }
 
-  setCustomerDetails() {
-    this.order.customerDto.id = this.userId;
-    this.order.customerDto.email = this.form.email;
-    this.order.customerDto.name = this.form.name;
-  }
-
   setItemDtoDetails() {
     let item: ItemDTO = new ItemDTO();
     this.cartItemList.forEach((ci) => {
@@ -191,13 +190,13 @@ export class PaymentComponent implements OnInit {
     });
   }
   sendOrder() {
-    this.order.userId = this.userId;
     this.orderService.addOrder(this.order).subscribe(
       (res) => {
         //alert('Added');
         console.log('==>' + res);
         this.isOrderSuccessful = true;
-        this.router.navigate(['']);
+        this.spinner.hide();
+        // this.router.navigate(['']);
       },
       (error) => {
         // error.error;
