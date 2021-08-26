@@ -11,6 +11,8 @@ import { SITE } from 'src/environments/environment';
 import { Item } from '../../model/item';
 import { ItemService } from '../../service/item.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ItemReviewService } from 'src/app/service/item-review.service';
+import { ItemReview } from 'src/app/model/item-review';
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -27,13 +29,15 @@ export class ItemComponent implements OnInit {
   //modal
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
+  itemReviewList: ItemReview[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private cartService: CartService,
     private routerActive: ActivatedRoute,
     private itemService: ItemService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private itemReviewService: ItemReviewService
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +51,22 @@ export class ItemComponent implements OnInit {
       }
     });
 
+    if (this.itemId != null)
+      this.itemReviewService.getReviewsByItem(this.itemId).subscribe(
+        (data) => {
+          this.itemReviewList = data;
+          let a = [];
+          a = [
+            this.itemReviewList[0],
+            this.itemReviewList[1],
+            this.itemReviewList[3],
+          ];
+          this.itemReviewList = a;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     console.log(this.itemId);
   }
 

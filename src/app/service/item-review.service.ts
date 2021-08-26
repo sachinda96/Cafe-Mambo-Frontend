@@ -18,4 +18,8 @@ export class ItemReviewService {
   addReview(review: any) {
     return this.http.post(BASE_URL + '/item', review);
   }
+
+  getReviewsByItem(id: string) {
+    return this.http.get<ItemReview[]>(BASE_URL + '/item/' + id);
+  }
 }
