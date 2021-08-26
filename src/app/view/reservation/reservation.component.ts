@@ -30,7 +30,8 @@ export class ReservationComponent implements OnInit {
   valueWidth = false;
   messageModal = '';
   isValidationFail = false;
-  //  types = ['Golden', 'Silver', 'Bronze'];
+  errorMessage = '';
+
   packageTypes: Package[] = [];
 
   form: any = {
@@ -39,11 +40,10 @@ export class ReservationComponent implements OnInit {
     contactNo: null,
     location: null,
     message: '',
-    package: '',
+    package: '', //package id
     date: Date,
   };
 
-  errorMessage = '';
   constructor(
     public token: TokenStorageService,
     private reserveService: ReserveService,
@@ -65,32 +65,13 @@ export class ReservationComponent implements OnInit {
 
   onSubmit(template: TemplateRef<any>): void {
     this.spinner.show();
-    // alert(this.form.name);
-    console.log(this.form);
-    // this.isValidationFail = false;
 
-    console.log(this.form);
-    this.reservation = {
-      id: this.uuidService.generateUUID(),
-      name: this.form.name,
-      email: this.form.email,
-      contactNumber: this.form.contactNo,
-      message: this.form.message,
-      location: this.form.location,
-      userId: this.isLoggedIn
-        ? this.token.getUserId()
-        : this.uuidService.generateUUID(),
-      bookDate: new Date(this.form.date),
-      packageId: this.form.package,
-      packageName: this.findPackageName(this.form.packageId),
-    };
-    console.log('' + this.reservation.packageId);
-    console.log(this.reservation);
-    this.validation();
+    this.setReservationDetails();
+    //validate the  SELECTED DATE
+    this.validateDate();
     if (!this.isValidationFail) {
       this.reserveService.addReservation(this.reservation).subscribe(
         (res) => {
-          console.log(res);
           this.clear();
           this.isSuccessful = true;
           this.messageModal = SUCCESS_MSG;
@@ -106,10 +87,39 @@ export class ReservationComponent implements OnInit {
 
     this.openModal(template);
     this.isValidationFail = false;
-
     this.spinner.hide();
   }
 
+  validateDate() {
+    let today: Date = new Date();
+    let slectedDate: Date = new Date(this.form.date);
+    if (slectedDate.getTime() < today.getTime()) {
+      this.messageModal = 'Select a valid date\n';
+      this.isValidationFail = true;
+    }
+  }
+
+  findPackageName(id: string | undefined) {
+    let pack = this.packageTypes.find((p) => (p.id = this.form.package));
+    return pack?.name;
+  }
+
+  setReservationDetails() {
+    this.reservation = {
+      id: this.uuidService.generateUUID(),
+      name: this.form.name,
+      email: this.form.email,
+      contactNumber: this.form.contactNo,
+      message: this.form.message,
+      location: this.form.location,
+      userId: this.isLoggedIn
+        ? this.token.getUserId()
+        : this.uuidService.generateUUID(),
+      bookDate: new Date(this.form.date),
+      packageId: this.form.package,
+      packageName: this.findPackageName(this.form.packageId),
+    };
+  }
   openModal(template: TemplateRef<any>) {
     // console.log(this.isSuccessful);
     // console.log(this.isError);
@@ -127,31 +137,5 @@ export class ReservationComponent implements OnInit {
       package: null,
       date: Date,
     };
-  }
-  validation() {
-    if (this.form.package == null || this.form.package == '') {
-      this.messageModal = 'Select a valid Package \n';
-      this.isValidationFail = true;
-      console.log('pack: ' + this.form.package);
-    } else console.log('pack:T ' + this.form.package);
-
-    if (this.form.contactNo == null) {
-      this.messageModal += 'Enter a Contact No \n';
-      this.isValidationFail = true;
-    }
-
-    // parseInt(this.form.date.substring(8)) <= currentDate.getDate()
-
-    let today: Date = new Date();
-    let slectedDate: Date = new Date(this.form.date);
-    if (slectedDate.getTime() < today.getTime()) {
-      this.messageModal = 'Select a valid date\n';
-      this.isValidationFail = true;
-    }
-  }
-
-  findPackageName(id: string | undefined) {
-    let pack = this.packageTypes.find((p) => (p.id = this.form.package));
-    return pack?.name;
   }
 }
