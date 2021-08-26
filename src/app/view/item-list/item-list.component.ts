@@ -9,7 +9,7 @@ import { ItemService } from 'src/app/service/item.service';
 import { Category } from 'src/app/model/category';
 import { CategoryService } from 'src/app/service/category.service';
 import { Item } from 'src/app/model/item';
-import { SITE } from 'src/environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export class ItemRating {
   item: Item = new Item();
@@ -39,12 +39,14 @@ export class ItemListComponent implements OnInit {
     private cartService: CartService,
     private location: Location,
     private routerActive: ActivatedRoute,
-    private itemService: ItemService
+    private itemService: ItemService,
+    private spinner: NgxSpinnerService
   ) {}
 
   path: string | undefined;
 
   ngOnInit(): void {
+    this.spinner.show();
     this.routerActive.params.subscribe((params) => {
       if (params.id != null || params.id != undefined) {
         this.categoryId = params.id;
@@ -63,13 +65,17 @@ export class ItemListComponent implements OnInit {
   }
 
   getItemsByPage(index: any, size: any, id: any) {
-    this.itemService
-      .getAllByPageIndexAndSize(index, size, id)
-      .subscribe((res) => {
+    this.itemService.getAllByPageIndexAndSize(index, size, id).subscribe(
+      (res) => {
         console.log(res);
         this.itemList = res;
+        this.spinner.hide();
         //this.fillRatingArray();
-      });
+      },
+      (err) => {
+        this.spinner.hide();
+      }
+    );
   }
 
   nextIndexList(index: any) {
