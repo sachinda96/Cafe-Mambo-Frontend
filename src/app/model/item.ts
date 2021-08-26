@@ -7,6 +7,8 @@ export class Item {
   description: string | undefined;
   ingredients: Array<string> | undefined;
   rateCount: number | undefined;
+  qty: number =0;
+  total: number =0;
 }
 
 export class ItemDTO {

@@ -49,7 +49,6 @@ export class ItemService {
     return this.http.get<Item[]>(
       BASE_URL + '/item/getAllItemByCategory/' + categoryId
     );
-    //return this.items;
   }
 
   getAllItemsByIndexAndCategory(index: number, categoryId: string | null) {

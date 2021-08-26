@@ -217,6 +217,7 @@ export class PaymentComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
 }
 /*
 Delivery

@@ -9,20 +9,32 @@ import { HttpClient } from '@angular/common/http';
 
 import { CartService } from 'src/app/service/cart.service';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { ItemService } from 'src/app/service/item.service';
 import { Category } from 'src/app/model/category';
 import { CategoryService } from 'src/app/service/category.service';
 import { Item } from 'src/app/model/item';
-import { SITE } from 'src/environments/environment';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import {
+  CANCEL_URL,
+  MERCHANT_ID,
+  NOTIFY_URL,
+  RETURN_URL,
+  SHOP_ORDER_RETURN_URL
+} from "../../../environments/environment";
+import {ShopOrder} from "../../model/shop-order";
+import {Payment} from "../../model/payment";
+import {OrderService} from "../../service/order.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 export class ItemRating {
   item: Item = new Item();
   index: number = 0;
   constructor() {}
 }
+
+declare var payhere: any;
 
 @Component({
   selector: 'app-shop-order',
@@ -31,24 +43,20 @@ export class ItemRating {
 })
 export class ShopOrderComponent implements OnInit {
   itemList: Array<Item> = new Array<Item>();
+  tempItemList: Array<Item> = new Array<Item>();
   categoryList: Array<Category> = new Array<Category>();
-  categoryId: string = '';
-  pageNumbers: number[] = [];
   max = 10;
   rate = 7;
   isReadonly = true;
   k = 0;
-  ratingArrayList: Array<number> = new Array<number>();
-  itemRatingArray: ItemRating[] = [];
   modalRef: BsModalRef = new BsModalRef();
-
-  //===========
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
-  isPasswordsMatch = true; //assume for hiding the validation msg
-  valueWidth = false;
-  messageModal = '';
+  categoryId: any;
+  subtotal:number =0;
+  isCardPay:boolean = false;
+  tableid: number = 0;
+  shopOrder:ShopOrder = new ShopOrder();
+  payment:Payment = new Payment();
+  message: any = "Processing";
 
   constructor(
     private http: HttpClient,
@@ -57,22 +65,50 @@ export class ShopOrderComponent implements OnInit {
     private routerActive: ActivatedRoute,
     private itemService: ItemService,
     private categoryService: CategoryService,
-    private modalService: BsModalService
+    private orderService:OrderService,
+    private spinner: NgxSpinnerService,
+    private route:Router
   ) {
-    // this.setContentEvent.emit(SITE);
+
   }
 
-  form: any = {
-    name: null,
-    contactNo: null,
-    type: null,
-    table: null,
-  };
-
-  path: string | undefined;
 
   ngOnInit(): void {
-    this.categoryService.getAllCategories().subscribe(
+
+    this.routerActive.params.subscribe((params) => {
+      if (params.id != null || params.id != undefined) {
+        this.tableid = params.id;
+        this.shopOrder.tableId = this.tableid;
+      }
+    });
+
+    this.getAllCategory();
+    payhere.onCompleted = function onCompleted(orderId: any) {
+      this.payment = new Payment();
+      this.payment.amount = this.subtotal;
+      this.payment.paymentStatus = "Success";
+      this.payment.method = "Card"
+      this.shopOrder.paymentDto = this.payment;
+      this.submitOrder();
+    };
+
+    payhere.onDismissed = function onDismissed() {
+      this.payment = new Payment();
+      this.payment.amount = this.subtotal;
+      this.payment.paymentStatus = "Success";
+      this.payment.method = "Failed"
+      this.shopOrder.paymentDto = this.payment;
+      this.submitOrder();
+    };
+
+    payhere.onError = function onError(error: any) {
+
+    };
+  }
+
+  getAllCategory(){
+    this.categoryList = new Array<Category>();
+    this.categoryService.getAllMainCategories().subscribe(
       (data) => {
         this.categoryList = data;
       },
@@ -80,66 +116,112 @@ export class ShopOrderComponent implements OnInit {
         console.log(err);
       }
     );
+  }
 
-    if (this.categoryList[0].id != null) {
-      this.categoryId = this.categoryList[0].id;
-      this.getItemsByPage(0, 12, this.categoryId);
+  setCategory(event: any) {
+    this.categoryId = event.target.value;
+    this.getAllItemByCategory(this.categoryId);
+  }
+
+  getAllItemByCategory(id:string){
+    this.itemService.getAllItemsByCategory(id).subscribe(res=>{
+      this.itemList = res;
+    })
+  }
+
+  addNew(item:Item) {
+    item.qty = 1;
+    item.total = item.price;
+    this.subtotal = this.subtotal + item.price;
+    this.tempItemList.push(item);
+  }
+
+  plusQty(item: Item) {
+    this.subtotal = this.subtotal + item.price;
+    item.qty = item.qty + 1;
+    item.total = item.total * item.qty;
+  }
+
+  minQty(item: Item) {
+    this.subtotal = this.subtotal - item.price;
+    item.qty = item.qty - 1;
+    item.total = item.price;
+    item.total = item.total * item.qty;
+  }
+
+  removeSelectedItem(item: Item) {
+    this.tempItemList.splice(this.tempItemList.indexOf(item),1);
+  }
+
+  isCard() {
+    this.isCardPay = true;
+  }
+
+  isCash() {
+    this.isCardPay = false;
+  }
+
+  placeOrder() {
+
+    if(this.isCardPay){
+      var payment = {
+        sandbox: true,
+        merchant_id: MERCHANT_ID,
+        return_url: SHOP_ORDER_RETURN_URL+this.tableid,
+        cancel_url: SHOP_ORDER_RETURN_URL+this.tableid,
+        notify_url: NOTIFY_URL,
+        order_id: Math.random().toString(36).substr(2, 9),
+        items: this.getItemsAsCommaSeperatedList(),
+        currency: 'LKR',
+        amount: this.subtotal,
+        first_name: this.shopOrder.customerName,
+        last_name: '',
+        email: 'shop@cafemambo.com',
+        phone: this.shopOrder.contactNumber,
+        address: 'shop',
+        city: 'shop',
+        country: 'Sri Lanka',
+        delivery_address: '',
+        delivery_city: '',
+        delivery_country: 'Sri Lanka',
+        custom_1: '',
+        custom_2: '',
+      };
+
+      payhere.startPayment(payment);
+    }else {
+
+      this.payment = new Payment();
+      this.payment.amount = this.subtotal;
+      this.payment.paymentStatus = "Success";
+      this.payment.method = "Cash"
+      this.shopOrder.paymentDto = this.payment;
+      this.submitOrder();
+
     }
 
-    this.countByCategory(this.categoryId);
   }
 
-  addToCart(item: Item) {
-    this.cartService.addToCart(item);
+  getItemsAsCommaSeperatedList() {
+    let str = '';
+    this.tempItemList.forEach((c) => {
+      str += c.id + ' ' + c.qty + '*' + c.total + ', ';
+    });
+    return str;
   }
 
-  getItemsByPage(index: any, size: any, id: any) {
-    this.itemService
-      .getAllByPageIndexAndSize(index, size, id)
-      .subscribe((res) => {
-        console.log(res);
-        this.itemList = res;
-        this.fillRatingArray();
-      });
-  }
+  submitOrder(){
+    this.spinner.show();
+    this.shopOrder.itemDtoList = this.tempItemList;
+    this.orderService.addShopOrder(this.shopOrder).subscribe(
+      res=>{
+        this.spinner.hide();
+        this.route.navigate(['']);
+      },error => {
+        this.spinner.hide();
 
-  nextIndexList(index: any) {
-    this.getItemsByPage(index - 1, 12, this.categoryId);
-  }
-
-  private countByCategory(categoryId: string) {
-    this.itemService.countByCategory(categoryId).subscribe(
-      (res) => {
-        let count = 0;
-        for (let i = 0; i < res; i++) {
-          count = count + 1;
-          this.pageNumbers.push(count);
-        }
-      },
-      (error) => {
-        console.log(error.error);
       }
     );
   }
 
-  fillRatingArray() {
-    this.itemList.forEach((i) => {
-      if (i.rateCount) {
-        this.ratingArrayList.push(i.rateCount);
-        let itm: ItemRating = new ItemRating();
-        itm.item = i;
-        itm.index = this.k++;
-        this.itemRatingArray.push(itm);
-      }
-    });
-  }
-
-  onClickItemTypeChange(id: string) {
-    this.getItemsByPage(0, 12, id);
-  }
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
-  }
-
-  onSubmit() {}
 }
