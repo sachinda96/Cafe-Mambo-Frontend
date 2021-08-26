@@ -43,7 +43,10 @@
               ><i class="fas fa-shopping-basket"></i>Add to cart</a
             >
             <pre></pre>
-            <a class="button_line" (click)="openModal(template)"
+            <a
+              class="button_line"
+              (click)="openModal(template)"
+              *ngIf="isLoggedIn"
               ><i class="fas fa-pencil"></i>Add Your Review</a
             >
 
@@ -79,6 +82,15 @@
     </div>
   </div>
 </section>
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#372626"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>
 
 <ng-template #template>
   <div class="modal-header">

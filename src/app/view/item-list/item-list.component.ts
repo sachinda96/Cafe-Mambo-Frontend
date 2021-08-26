@@ -85,6 +85,7 @@ export class ItemListComponent implements OnInit {
   private countByCategory(categoryId: string) {
     this.itemService.countByCategory(categoryId).subscribe(
       (res) => {
+        // alert(res);
         let count = 0;
         for (let i = 0; i < res; i++) {
           count = count + 1;
@@ -92,7 +93,7 @@ export class ItemListComponent implements OnInit {
         }
       },
       (error) => {
-        error.error;
+        console.log(error.error);
       }
     );
   }
