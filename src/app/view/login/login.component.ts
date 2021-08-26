@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { BASE_URL } from 'src/environments/environment';
 import { TokenStorageService } from '../../service/token-storage.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
     private tokenStorage: TokenStorageService,
     private router: Router,
     private route: ActivatedRoute,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.spinner.show();
     const { email, password } = this.form;
     //alert(email);
     //alert(password);
@@ -59,7 +61,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
 
         this.roles = this.tokenStorage.getUser().roles;
-
+        this.spinner.hide();
         this.reloadPage();
         this.router.navigate(['/'], { relativeTo: this.route });
       },
@@ -67,6 +69,7 @@ export class LoginComponent implements OnInit {
         console.log('errLog', err);
         this.errorMessage = err.error.text;
         this.isLoginFailed = true;
+        this.spinner.hide();
       }
     );
 

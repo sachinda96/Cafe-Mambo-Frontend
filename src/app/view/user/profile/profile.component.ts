@@ -15,6 +15,10 @@ import { UserService } from 'src/app/service/user.service';
 })
 export class ProfileComponent implements OnInit {
   isLoggedIn = false;
+  isSuccessful = false;
+  isFail = false;
+  errorMsg = '';
+  successMsg = '';
   constructor(
     private userService: UserService,
     private tokenService: TokenStorageService,
@@ -27,6 +31,7 @@ export class ProfileComponent implements OnInit {
     name: null,
     email: null,
     password: null,
+    confirmPassword: null,
   };
 
   ngOnInit(): void {
@@ -51,11 +56,29 @@ export class ProfileComponent implements OnInit {
 
   onSubmit() {
     console.log(this.form);
-    let user: User = new User();
-    user.name = this.form.name;
-    user.email = user.loginDto.email = this.form.email;
-    user.loginDto.password = this.form.password;
+    if (this.comparePassword()) {
+      let user: User = new User();
+      user.name = this.form.name;
+      user.email = user.loginDto.email = this.form.email;
+      user.loginDto.password = this.form.password;
 
-    this.userService.updateUser(user);
+      this.userService.updateUser(user).subscribe(
+        (data) => {
+          console.log(data);
+          this.isSuccessful = true;
+          this.successMsg = 'Sucessfully Updated';
+        },
+        (err) => {
+          console.log(err.error);
+          this.isFail = true;
+          this.errorMsg = 'Try again';
+        }
+      );
+    }
+  }
+
+  comparePassword() {
+    console.log(typeof this.form.password);
+    return this.form.password.localeString(this.form.confirmPassword) == 0;
   }
 }

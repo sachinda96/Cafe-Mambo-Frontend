@@ -22,7 +22,7 @@ export class ItemRating {
   styleUrls: ['./item-list.component.css'],
 })
 export class ItemListComponent implements OnInit {
-  @Output() setContentEvent = new EventEmitter<string>();
+  @Output() cartCountChanged: EventEmitter<number> = new EventEmitter();
 
   itemList: Array<Item> = new Array<Item>();
   categoryId: string = '';
@@ -40,9 +40,7 @@ export class ItemListComponent implements OnInit {
     private location: Location,
     private routerActive: ActivatedRoute,
     private itemService: ItemService
-  ) {
-    this.setContentEvent.emit(SITE);
-  }
+  ) {}
 
   path: string | undefined;
 
@@ -60,6 +58,8 @@ export class ItemListComponent implements OnInit {
 
   addToCart(item: Item) {
     this.cartService.addToCart(item);
+    let cartCount = this.cartService.getItemsTotalCount();
+    this.cartCountChanged.emit(cartCount);
   }
 
   getItemsByPage(index: any, size: any, id: any) {

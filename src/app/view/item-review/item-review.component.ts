@@ -11,7 +11,7 @@ import { SITE } from 'src/environments/environment';
   styleUrls: ['./item-review.component.css'],
 })
 export class ItemReviewComponent implements OnInit {
-  @Output() setContentEvent = new EventEmitter<string>();
+  // @Output() setContentEvent = new EventEmitter<string>();
 
   value: number = 3;
   options: Options = {
@@ -52,7 +52,7 @@ export class ItemReviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.setContentEvent.emit(SITE);
+    // this.setContentEvent.emit(SITE);
     this.routerActive.params.subscribe((params) => {
       if (params.itemId != null || params.itemId != undefined) {
         this.form.itemId = params.itemId;

@@ -2,7 +2,6 @@
   <br />
   <section class="forms">
     <form
-      *ngIf="!isLoggedIn"
       name="form"
       (ngSubmit)="f.form.valid && onSubmit()"
       #f="ngForm"
@@ -84,6 +83,16 @@
     </form>
   </section>
 </div>
+
+<ngx-spinner
+  bdColor="rgba(229,221,221,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-zig-zag-deflect"
+  [fullScreen]="false"
+>
+  <p style="font-size: 20px; color: white">Processing....</p></ngx-spinner
+>
 
 <ng-template #templateFP>
   <div class="modal-header">

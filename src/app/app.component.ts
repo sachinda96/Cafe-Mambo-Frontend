@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'Cafe-Mambo-Frontend';
   content = '';
   cartCount = 0;
+  count = 0;
 
   constructor(private cartService: CartService) {}
 
@@ -21,7 +22,12 @@ export class AppComponent {
     return this.content;
   }
 
-  getCartCount() {
-    return this.cartService.getItemsTotalCount();
+  updateCartCount(count: number) {
+    this.cartCount = this.cartService.getItemsTotalCount();
+    alert(this.cartCount);
+  }
+  countChangedHandler(count: number) {
+    this.cartCount = count;
+    console.log(count);
   }
 }

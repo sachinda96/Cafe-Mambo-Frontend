@@ -94,7 +94,9 @@
           <span>
             &nbsp; &nbsp; &nbsp;
             <a [routerLink]="['/cart']"
-              ><i class="fas fa-shopping-cart shop_cart"></i>
+              ><i class="fas fa-shopping-cart shop_cart"
+                ><span>{{ count }}</span></i
+              >
             </a>
           </span>
         </nav>
@@ -177,8 +179,13 @@
         </ul>
         <span>
           <a [routerLink]="['/cart']">
-            <i class="fas fa-shopping-cart shop_cart">
-              <!--
+            <i
+              class="fas fa-shopping-cart shop_cart"
+              style="height: max-content; width: max-content"
+              ><span>{{ count }}</span></i
+            ></a
+          >
+          <!--
 =======
         <li><a [routerLink]="['/contact-us']">Contact us</a></li>
         <li>
@@ -208,7 +215,7 @@
 
 
            -->
-            </i></a
+
           >
         </span>
       </nav>

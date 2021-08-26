@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   TemplateRef,
+  Input,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
@@ -25,12 +26,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   ],
 })
 export class NavBarComponent implements OnInit {
+  @Input() count: number = 0;
   private roles: string[] = [];
   currentUser: any;
   isLoggedIn = false;
   username?: string;
 
-  cartCount = 0;
   itemList: Array<Item> = new Array();
 
   categoryList: Array<Category> = new Array();
@@ -70,13 +71,10 @@ export class NavBarComponent implements OnInit {
     private modalService: BsModalService,
     public cartService: CartService,
     private categoryService: CategoryService
-  ) {
-    this.cartCount = cartService.count;
-  }
+  ) {}
 
   ngOnInit(): void {
     this.isLoggedIn = this.token.getToken() ? true : false;
-    this.cartCount = this.cartService.getItemsTotalCount();
 
     if (this.isLoggedIn) {
       this.currentUser = this.token.getUser();
@@ -115,9 +113,9 @@ export class NavBarComponent implements OnInit {
   routeToDashboard() {
     this.router.navigate(['/user/dashboard']);
   }
-  updateCartCount(count: any) {
-    this.cartCount = count;
-  }
+  // updateCartCount(count: any) {
+  //   this.cartCount = count;
+  // }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);

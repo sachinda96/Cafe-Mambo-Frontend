@@ -31,7 +31,8 @@ export class ForgotPasswordComponent implements OnInit {
       },
       (err) => {
         console.log(err);
-        this.errorMsg = err.err.text;
+        if (err.err.txt) this.errorMsg = err.error.text;
+        else this.errorMsg = err.statusText;
         this.isError = true;
       }
     );

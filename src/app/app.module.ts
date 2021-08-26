@@ -44,6 +44,7 @@ import { ModalDialogModule } from 'ngx-modal-dialog';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.component';
+
 @NgModule({
   declarations: [
     AppComponent,
