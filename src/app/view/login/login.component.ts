@@ -1,4 +1,10 @@
-import { Component, TemplateRef, OnInit } from '@angular/core';
+import {
+  Component,
+  TemplateRef,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
@@ -11,6 +17,7 @@ import { TokenStorageService } from '../../service/token-storage.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  @Output() onChangeModal = new EventEmitter<any>();
   form: any = {
     email: null,
     password: null,
@@ -76,7 +83,12 @@ export class LoginComponent implements OnInit {
     window.alert('logged in');
   }
   openModal(template: TemplateRef<any>) {
-    window.location.reload();
+    // window.location.reload();
     this.modalRef = this.modalService.show(template);
+  }
+
+  forgotPasswordClick(template: TemplateRef<any>) {
+    this.onChangeModal.emit();
+    this.openModal(template);
   }
 }

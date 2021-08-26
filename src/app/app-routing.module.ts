@@ -20,6 +20,7 @@ import { FeedbackComponent } from './view/user/feedback/feedback.component';
 import { FileUploadComponent } from './component/file-upload/file-upload.component';
 import { UserReservationComponent } from './view/user/user-reservation/user-reservation.component';
 import { ShopOrderComponent } from './view/shop-order/shop-order.component';
+import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -115,6 +116,10 @@ const routes: Routes = [
   {
     path: 'shoporder',
     component: ShopOrderComponent,
+  },
+  {
+    path: 'forgot',
+    component: ForgotPasswordComponent,
   },
 ];
 

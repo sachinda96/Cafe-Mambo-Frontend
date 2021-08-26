@@ -69,7 +69,7 @@
             <div class="form-group">
               <button class="button_line my-btn">Login</button>
             </div>
-            <a (click)="openModal(template)">Forgot Password ?</a>
+            <a (click)="forgotPasswordClick(templateFP)">Forgot Password ?</a>
             <div
               class="alert alert-danger"
               role="alert"
@@ -85,9 +85,12 @@
   </section>
 </div>
 
-<ng-template #template>
+<ng-template #templateFP>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Forgot Password</h4>
+    <h4 class="modal-title pull-left">
+      <span class="up_i">Favorite Bar</span>
+      <h2>Reset Password?</h2>
+    </h4>
     <button
       type="button"
       class="close pull-right"

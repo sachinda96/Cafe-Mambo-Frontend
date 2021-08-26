@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -27,10 +27,12 @@ export class ForgotPasswordComponent implements OnInit {
     this.authService.recoverPassword(this.form.email).subscribe(
       (data) => {
         console.log(data);
+        this.isSuccessful = true;
       },
       (err) => {
         console.log(err);
         this.errorMsg = err.err.text;
+        this.isError = true;
       }
     );
   }

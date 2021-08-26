@@ -122,4 +122,8 @@ export class NavBarComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
+  hideModal() {
+    this.modalRef.hide();
+  }
 }
