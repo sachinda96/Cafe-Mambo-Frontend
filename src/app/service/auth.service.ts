@@ -45,11 +45,24 @@ export class AuthService {
     );
   }
 
-  authorizationHeaders():HttpHeaders{
+  authorizationHeaders(): HttpHeaders {
     let httpHeaders = new HttpHeaders();
     httpHeaders = httpHeaders.set('Content-Type', 'application/json');
-    httpHeaders = httpHeaders.set("Authorization", "Bearer "+sessionStorage.getItem("token")+"");
+    httpHeaders = httpHeaders.set(
+      'Authorization',
+      'Bearer ' + sessionStorage.getItem('token') + ''
+    );
 
     return httpHeaders;
+  }
+
+  recoverPassword(email: string) {
+    return this.http.post(
+      BASE_URL + '/user/forgotpassword',
+      {
+        email,
+      },
+      httpOptions
+    );
   }
 }

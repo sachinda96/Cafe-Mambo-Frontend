@@ -6,12 +6,11 @@
       <br />
       <br />
 
-      <div class="row" *ngIf="packages.length > 0">
-        <div class="col-lg-3" *ngFor="let pack of packages">
+      <div class="row" *ngIf="packageTypes.length > 0">
+        <div class="col-lg-3" *ngFor="let pack of packageTypes">
           <div class="products_sh">
             <div class="">
-              <img src="" alt="" />
-              {{ pack.imagePath }}
+              <img src="{{ pack.imagePath }}" alt="" />
             </div>
             <br /><br />
             <div class="cont_product">
@@ -128,8 +127,8 @@
                 [(ngModel)]="form.package"
                 #package="ngModel"
               >
-                <option value=""></option>
-                <option *ngFor="let type of types" value="{{ type.id }}">
+                <option value="">Select a Package</option>
+                <option *ngFor="let type of packageTypes" value="{{ type.id }}">
                   <!-- value="type.value"-->
                   {{ type.name }}
                 </option>

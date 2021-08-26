@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, TemplateRef, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { BASE_URL } from 'src/environments/environment';
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
     email: null,
     password: null,
   };
-
+  modalRef: BsModalRef = new BsModalRef();
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -72,5 +74,9 @@ export class LoginComponent implements OnInit {
 
   onclick() {
     window.alert('logged in');
+  }
+  openModal(template: TemplateRef<any>) {
+    window.location.reload();
+    this.modalRef = this.modalService.show(template);
   }
 }

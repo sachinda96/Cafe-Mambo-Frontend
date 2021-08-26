@@ -43,3 +43,10 @@ select {
 .reservef input {
   width: 100%;
 }
+
+.img-checkbox {
+  transform: translateY(2rem);
+  border-style: double;
+  height: 2rem;
+  width: 2rem;
+}

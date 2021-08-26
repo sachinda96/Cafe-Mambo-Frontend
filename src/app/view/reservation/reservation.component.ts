@@ -19,7 +19,7 @@ const FAIL_MSG = 'Please Try Again !!!!!';
   styleUrls: ['./reservation.component.css'],
 })
 export class ReservationComponent implements OnInit {
-  packages: Array<Package> = new Array<Package>();
+  //packages: Array<Package> = new Array<Package>();
   reservation: EventBooking = new EventBooking();
   reservationUser: EventBooking = new EventBooking();
   payment: Payment = new Payment();
@@ -31,7 +31,7 @@ export class ReservationComponent implements OnInit {
   messageModal = '';
   isValidationFail = false;
   //  types = ['Golden', 'Silver', 'Bronze'];
-  types: Package[] = [];
+  packageTypes: Package[] = [];
 
   form: any = {
     name: null,
@@ -58,7 +58,7 @@ export class ReservationComponent implements OnInit {
     this.isLoggedIn = this.token.getToken() ? true : false;
 
     this.packageService.getAllPackages().subscribe((res) => {
-      this.types = res;
+      this.packageTypes = res;
     });
   }
 
@@ -151,7 +151,7 @@ export class ReservationComponent implements OnInit {
   }
 
   findPackageName(id: string | undefined) {
-    let p = this.packages.find((p) => (p.id = this.form.package));
-    return p?.name;
+    let pack = this.packageTypes.find((p) => (p.id = this.form.package));
+    return pack?.name;
   }
 }
