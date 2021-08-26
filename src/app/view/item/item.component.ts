@@ -47,7 +47,6 @@ export class ItemComponent implements OnInit {
       if (params.itemId != null || params.itemId != undefined) {
         this.itemId = params.itemId;
         this.getItem(this.itemId);
-        console.log(this.itemId);
       }
     });
 
@@ -55,19 +54,24 @@ export class ItemComponent implements OnInit {
       this.itemReviewService.getReviewsByItem(this.itemId).subscribe(
         (data) => {
           this.itemReviewList = data;
-          let a = [];
-          a = [
-            this.itemReviewList[0],
-            this.itemReviewList[1],
-            this.itemReviewList[3],
-          ];
-          this.itemReviewList = a;
+
+          if(this.itemReviewList.length >= 3){
+            let a = [];
+            a = [
+              this.itemReviewList[0],
+              this.itemReviewList[1],
+              this.itemReviewList[3],
+            ];
+            this.itemReviewList = a;
+          }
+
+          console.log(this.itemReviewList)
         },
         (err) => {
           console.log(err);
         }
       );
-    console.log(this.itemId);
+
   }
 
   addToCart(item: Item) {
