@@ -95,4 +95,8 @@ export class CartService {
   getTaxValues() {
     return this.http.get(BASE_URL + '/cart/tax');
   }
+
+  getItemCount():number{
+    return this.cartItems.length;
+  }
 }

@@ -64,6 +64,9 @@ export class NavBarComponent implements OnInit {
 
   //modal
   modalRef: BsModalRef = new BsModalRef();
+  play: any ;
+  interval:any;
+
 
   constructor(
     public router: Router,
@@ -83,6 +86,15 @@ export class NavBarComponent implements OnInit {
     }
 
     this.getAllCategory();
+this.startTimer();
+
+  }
+
+  startTimer() {
+    this.play = true;
+    this.interval = setInterval(() => {
+     this.count = this.cartService.getItemCount();
+    },1000)
   }
 
   getAllCategory() {

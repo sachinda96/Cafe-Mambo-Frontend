@@ -38,5 +38,6 @@ export class OrderDTO {
   paymentDto: Payment = new Payment();
   deliveryDto: Delivery = new Delivery();
   itemDtoList: Array<ItemDTO> = new Array<ItemDTO>();
+  userId:string = "";
   //i need the count as well
 }

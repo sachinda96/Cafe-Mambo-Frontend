@@ -92,7 +92,7 @@ export class ReservationComponent implements OnInit {
           this.clear();
           this.isSuccessful = true;
           this.messageModal = SUCCESS_MSG;
-          this.router.navigateByUrl('');
+          //this.router.navigateByUrl('');
         },
         (err) => {
           console.log('==>' + err.error);

@@ -45,7 +45,7 @@ export class PaymentComponent implements OnInit {
   showDeliveryDetails = true;
   showSuccessModal = false;
   cardItemArray: string[] = [];
-  userId: string | null = '';
+  userId: any = '';
 
   modalRef: BsModalRef = new BsModalRef();
 
@@ -75,6 +75,7 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cartItemList = this.cartService.getItems();
     this.cartItemList = this.cartService.getItems();
     this.totalQuantity = this.cartService.getItemsTotalCount();
     this.totalPrice = this.cartService.getItemsTotalPrice();
@@ -190,7 +191,7 @@ export class PaymentComponent implements OnInit {
     });
   }
   sendOrder() {
-    console.log(this.order);
+    this.order.userId = this.userId;
     this.orderService.addOrder(this.order).subscribe(
       (res) => {
         //alert('Added');
