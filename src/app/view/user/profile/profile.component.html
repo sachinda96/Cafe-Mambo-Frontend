@@ -251,6 +251,16 @@
     </div>
   </div>
 </div>
+
+<ngx-spinner
+  bdColor="rgba(229,221,221,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-zig-zag-deflect"
+  [fullScreen]="false"
+>
+  <p style="font-size: 20px; color: white">Updating....</p></ngx-spinner
+>
 <alert type="success" *ngIf="isSuccessful">
   <strong>Done!!</strong> {{ successMsg }}
 </alert>

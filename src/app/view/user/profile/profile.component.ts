@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { UserService } from 'src/app/service/user.service';
+import { NgxSpinnerService, Spinner } from 'ngx-spinner';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +23,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private userService: UserService,
     private tokenService: TokenStorageService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
   ) {}
   user: User = new User();
   uid: string | null = '';
@@ -55,6 +57,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinner.show();
     console.log(this.form);
     if (this.comparePassword()) {
       let user: User = new User();
@@ -71,14 +74,17 @@ export class ProfileComponent implements OnInit {
         (err) => {
           console.log(err.error);
           this.isFail = true;
-          this.errorMsg = 'Try again';
         }
       );
+    } else {
+      this.errorMsg = 'Try again';
     }
+
+    this.spinner.hide();
   }
 
   comparePassword() {
     console.log(typeof this.form.password);
-    return this.form.password.localeString(this.form.confirmPassword) == 0;
+    return this.form.password.localeCompare(this.form.confirmPassword) == 0;
   }
 }
