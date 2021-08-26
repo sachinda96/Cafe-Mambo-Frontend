@@ -67,7 +67,7 @@ export class ReservationComponent implements OnInit {
     this.spinner.show();
     // alert(this.form.name);
     console.log(this.form);
-    this.isValidationFail = false;
+    // this.isValidationFail = false;
 
     console.log(this.form);
     this.reservation = {

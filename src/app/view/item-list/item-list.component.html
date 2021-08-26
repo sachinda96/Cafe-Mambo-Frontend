@@ -1,6 +1,6 @@
-<div class="container content">
+<div class="content">
   <section class="products_shop">
-    <div class="container">
+    <div class="containr">
       <div class="row flex-wrap">
         <div *ngFor="let item of itemList" class="col-lg-3">
           <div class="products_sh">
@@ -10,7 +10,7 @@
               ><img
                 src="{{ item.imagePath }}"
                 alt=""
-                style="max-height: 10rem; min-height: 10rem"
+                style="max-width: 30rem; min-height: 10rem"
               />
             </div>
             <a class="cont_product" [routerLink]="['/item', item.id]">
