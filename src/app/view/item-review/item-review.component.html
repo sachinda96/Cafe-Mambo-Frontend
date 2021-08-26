@@ -1,10 +1,15 @@
-<div class="latest_post item_widget">
-  <section class="forms">
-    <div class="container">
+<div class="">
+  <section class="">
+    <div class="">
       <form>
         <div class="form">
           <!--*ngIf="isLoggedIn"-->
-          <form name="form" #review="ngForm" novalidate>
+          <form
+            name="form"
+            novalidate
+            (ngSubmit)="reviewf.form.valid && addReview()"
+            #reviewf="ngForm"
+          >
             <div class="form_info">
               <div
                 class="form_info"
@@ -14,28 +19,34 @@
                 <br />
                 <textarea
                   type="text"
-                  placeholder="Write your review"
+                  placeholder="Give your comments about the item"
                   name="review"
                   required=""
                   aria-rowcount="5"
                   aria-colcount="4"
                   style="font-style: italic; border-radius: 0.4rem"
+                  #review="ngModel"
                   [(ngModel)]="form.review"
                   required
                 ></textarea>
+                <div
+                  class="alert-danger field-error"
+                  *ngIf="review.errors && reviewf.submitted"
+                  style="color: rgb(3, 3, 3)"
+                >
+                  <div *ngIf="review.errors.required">Review is required</div>
+                </div>
+
                 <ngx-slider
                   [(value)]="value"
                   [options]="options"
-                  style="color: aliceblue; width: 23rem"
+                  style="color: blue; width: 23rem"
                 ></ngx-slider>
 
-                <button
-                  class="button_line"
-                  (click)="addReview()"
-                  style="width: 40%"
-                >
-                  Submit
-                </button>
+                <button class="button_fill" style="width: 40%">Submit</button>
+                <alert type="warning" *ngIf="isError">
+                  <strong>Warning!</strong> {{ errorMessage }}
+                </alert>
               </div>
             </div>
           </form>

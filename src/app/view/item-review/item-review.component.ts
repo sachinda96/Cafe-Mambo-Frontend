@@ -33,6 +33,8 @@ export class ItemReviewComponent implements OnInit {
     },
   };
   isLoggedIn = false;
+  errorMessage = '';
+  isError = false;
 
   form: any = {
     id: null,
@@ -64,6 +66,16 @@ export class ItemReviewComponent implements OnInit {
     console.log(this.form);
     this.form.rate = this.value;
     this.form.userId = this.tokenService.getUserId();
-    this.itemReviewService.addReview(this.form);
+    this.itemReviewService.addReview(this.form).subscribe(
+      (data) => {
+        console.log(data);
+        window.location.reload();
+      },
+      (err) => {
+        this.errorMessage = err.error;
+        console.log(err.error);
+        this.isError = true;
+      }
+    );
   }
 }

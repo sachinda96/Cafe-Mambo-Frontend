@@ -1,9 +1,16 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  TemplateRef,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from 'src/app/service/cart.service';
 import { SITE } from 'src/environments/environment';
 import { Item } from '../../model/item';
 import { ItemService } from '../../service/item.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
@@ -11,17 +18,22 @@ import { ItemService } from '../../service/item.service';
 })
 export class ItemComponent implements OnInit {
   @Output() setContentEvent = new EventEmitter<string>();
-  //
+  //slider
   item: Item = new Item();
   itemId: string = '';
   max: number = 5;
   value: number = 3;
 
+  //modal
+  modalRef: BsModalRef = new BsModalRef();
+  message: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private cartService: CartService,
     private routerActive: ActivatedRoute,
-    private itemService: ItemService
+    private itemService: ItemService,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
@@ -54,5 +66,9 @@ export class ItemComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }
