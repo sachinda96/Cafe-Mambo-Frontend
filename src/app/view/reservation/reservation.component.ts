@@ -39,7 +39,7 @@ export class ReservationComponent implements OnInit {
     contactNo: null,
     location: null,
     message: '',
-    package: null,
+    package: '',
     date: Date,
   };
 
@@ -59,6 +59,7 @@ export class ReservationComponent implements OnInit {
 
     this.packageService.getAllPackages().subscribe((res) => {
       this.packageTypes = res;
+      this.form.package = this.packageTypes[0].id;
     });
   }
 
@@ -83,6 +84,7 @@ export class ReservationComponent implements OnInit {
       packageId: this.form.package,
       packageName: this.findPackageName(this.form.packageId),
     };
+    console.log('' + this.reservation.packageId);
     console.log(this.reservation);
     this.validation();
     if (!this.isValidationFail) {
@@ -103,6 +105,7 @@ export class ReservationComponent implements OnInit {
     }
 
     this.openModal(template);
+    this.isValidationFail = false;
 
     this.spinner.hide();
   }
@@ -129,16 +132,13 @@ export class ReservationComponent implements OnInit {
     if (this.form.package == null || this.form.package == '') {
       this.messageModal = 'Select a valid Package \n';
       this.isValidationFail = true;
-    }
+      console.log('pack: ' + this.form.package);
+    } else console.log('pack:T ' + this.form.package);
 
     if (this.form.contactNo == null) {
       this.messageModal += 'Enter a Contact No \n';
       this.isValidationFail = true;
     }
-
-    console.log(typeof this.form.date);
-    let currentDate = new Date();
-    console.log('==<<<<<' + currentDate.getFullYear());
 
     // parseInt(this.form.date.substring(8)) <= currentDate.getDate()
 

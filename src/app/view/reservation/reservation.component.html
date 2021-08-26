@@ -127,7 +127,7 @@
                 [(ngModel)]="form.package"
                 #package="ngModel"
               >
-                <option value="">Select a Package</option>
+                <option value="" disabled>Select a Package</option>
                 <option *ngFor="let type of packageTypes" value="{{ type.id }}">
                   <!-- value="type.value"-->
                   {{ type.name }}
