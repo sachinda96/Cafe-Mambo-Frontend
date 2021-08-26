@@ -104,11 +104,14 @@
       <a
         *ngIf="cartItems.length == 0 && !this.isLoggedIn"
         class="button_line"
-        onclick="alert('Please Add Items to the Cart')"
+        onclick="alert()"
         aria-disabled="true"
       >
         Checkout
       </a>
+      <alert type="danger" **ngIf="isAlert">
+        <strong>Oh snap!</strong> Please Add the Items to the Cart !!!!
+      </alert>
     </section>
   </div>
 </div>

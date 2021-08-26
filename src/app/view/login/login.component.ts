@@ -51,8 +51,8 @@ export class LoginComponent implements OnInit {
 
         this.roles = this.tokenStorage.getUser().roles;
 
-        this.router.navigateByUrl('/');
         this.reloadPage();
+        this.router.navigate(['/'], { relativeTo: this.route });
       },
       (err) => {
         console.log('errLog', err);
@@ -60,6 +60,10 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = true;
       }
     );
+
+    if (this.isLoggedIn) {
+      // window.location.href = window.location.hostname;
+    }
   }
 
   reloadPage(): void {

@@ -27,7 +27,6 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     if (this.tokenService.getUserId() != null)
       this.userId = this.tokenService.getUserId();
-    this.userId = '23610b0a-66d5-4cc8-938c-75309a845a38';
 
     this.orderService.getAllOrdersByUser(this.userId).subscribe(
       (data) => {

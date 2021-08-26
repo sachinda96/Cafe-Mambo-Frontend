@@ -19,9 +19,12 @@ export class CartComponent implements OnInit {
   cartItems = this.cartService.cartItems;
   totQuantity = this.cartService.getItemsTotalCount();
   totPrice = this.cartService.getItemsTotalPrice();
+  isAlert = false;
   // items:
   ngOnInit(): void {
     this.checkLoggedIn();
+    this.isAlert = false;
+    // items:
   }
 
   incrementItem(item: Item) {
@@ -54,5 +57,9 @@ export class CartComponent implements OnInit {
   updateInfo() {
     this.totQuantity = this.cartService.getItemsTotalCount();
     this.totPrice = this.cartService.getItemsTotalPrice();
+  }
+
+  alert() {
+    this.isAlert = true;
   }
 }

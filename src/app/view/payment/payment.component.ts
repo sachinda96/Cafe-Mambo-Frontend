@@ -80,6 +80,7 @@ export class PaymentComponent implements OnInit {
     this.totalPrice = this.cartService.getItemsTotalPrice();
     this.userId = this.tokenStorageService.getUserId();
     if (this.userId == null) this.router.navigate(['']);
+    if (this.totalQuantity == 0) this.router.navigate(['']);
   }
 
   form: any = {

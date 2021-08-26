@@ -26,10 +26,10 @@ export class UserService {
   }
 
   getUserById(uid: string) {
-    return this.http.get<User>(BASE_URL + '/get/' + uid);
+    return this.http.get<User>(BASE_URL + '/user/get/' + uid);
   }
 
   updateUser(user: User | any) {
-    return this.http.post(BASE_URL + '/update', user);
+    return this.http.post(BASE_URL + '/user/update', user);
   }
 }

@@ -55,7 +55,7 @@ export class ItemListComponent implements OnInit {
     });
 
     this.countByCategory(this.categoryId);
-    this.fillRatingArray();
+    // this.fillRatingArray();
   }
 
   addToCart(item: Item) {
@@ -68,7 +68,7 @@ export class ItemListComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.itemList = res;
-        this.fillRatingArray();
+        //this.fillRatingArray();
       });
   }
 

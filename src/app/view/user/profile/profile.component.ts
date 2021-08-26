@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { UserService } from 'src/app/service/user.service';
@@ -16,7 +17,8 @@ export class ProfileComponent implements OnInit {
   isLoggedIn = false;
   constructor(
     private userService: UserService,
-    private tokenService: TokenStorageService
+    private tokenService: TokenStorageService,
+    private router: Router
   ) {}
   user: User = new User();
   uid: string | null = '';
@@ -29,7 +31,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.uid = this.tokenService.getUserId();
-    if (this.uid != null)
+    if (this.uid != null) {
       this.userService.getUserById(this.uid).subscribe(
         (data) => {
           console.log(data);
@@ -42,9 +44,12 @@ export class ProfileComponent implements OnInit {
           console.log(err);
         }
       );
+    } else {
+      if (this.uid == null) this.router.navigateByUrl('');
+    }
   }
 
-  onUpdate() {
+  onSubmit() {
     console.log(this.form);
     let user: User = new User();
     user.name = this.form.name;

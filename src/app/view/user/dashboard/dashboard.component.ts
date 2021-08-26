@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
 
     this.uid = this.tokenService.getUserId();
     if (this.uid != null) this.isLoggedIn = true;
+    else this.router.navigateByUrl('');
   }
 
   getPendingOrders() {

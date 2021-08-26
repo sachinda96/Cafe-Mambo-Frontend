@@ -75,16 +75,14 @@
             <li *ngIf="!isLoggedIn">
               <a [routerLink]="['/register']">Register</a>
             </li>
+            <li *ngIf="isLoggedIn">
+              <a (click)="routeToDashboard()">Dashboard</a>
+            </li>
           </ul>
           &nbsp;&nbsp;
           <ul *ngIf="!isLoggedIn">
-            <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
-          </ul>
-          <ul *ngIf="isLoggedIn">
             <li>
-              <a (click)="routeToDashboard()" style="padding-right: 0.2rem"
-                >Dashboard</a
-              >
+              <a class="button_line" (click)="openModal(template)">Login</a>
             </li>
           </ul>
 
@@ -160,14 +158,18 @@
           <li>
             <a [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
           </li>
+
+          <li *ngIf="isLoggedIn">
+            <a (click)="routeToDashboard()">Dashboard</a>
+          </li>
         </ul>
         &nbsp;&nbsp;
         <ul *ngIf="!isLoggedIn">
-          <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
+          <li>
+            <a class="button_line" (click)="openModal(template)">Login</a>
+          </li>
         </ul>
-        <ul *ngIf="isLoggedIn">
-          <li><a (click)="routeToDashboard()">Dashboard</a></li>
-        </ul>
+
         <ul *ngIf="isLoggedIn">
           <li>
             <a class="button_line" (click)="logout()">Logout</a>
@@ -213,3 +215,22 @@
     </div>
   </div>
 </div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">
+      <span class="up_i">Favorite Bar</span>
+      <h2>Login</h2>
+    </h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-login></app-login>
+  </div>
+</ng-template>

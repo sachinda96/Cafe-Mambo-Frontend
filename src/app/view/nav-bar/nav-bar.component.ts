@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  TemplateRef,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
 import { Item } from 'src/app/model/item';
@@ -6,6 +12,7 @@ import { CartService } from 'src/app/service/cart.service';
 import { CategoryService } from 'src/app/service/category.service';
 import { TokenStorageService } from '../../service/token-storage.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-nav-bar',
@@ -54,10 +61,13 @@ export class NavBarComponent implements OnInit {
     nav: true,
   };
 
+  //modal
+  modalRef: BsModalRef = new BsModalRef();
+
   constructor(
     public router: Router,
     public token: TokenStorageService,
-
+    private modalService: BsModalService,
     public cartService: CartService,
     private categoryService: CategoryService
   ) {
@@ -107,5 +117,9 @@ export class NavBarComponent implements OnInit {
   }
   updateCartCount(count: any) {
     this.cartCount = count;
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 }

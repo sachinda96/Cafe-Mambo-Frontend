@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Package } from 'src/app/model/packages';
 import { EventBooking } from 'src/app/model/reservation';
 import { PackageService } from 'src/app/service/package.service';
@@ -22,11 +23,14 @@ export class UserReservationComponent implements OnInit {
   constructor(
     private tokenService: TokenStorageService,
     private bookingService: ReserveService,
-    private packageService: PackageService
+    private packageService: PackageService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.userId = this.tokenService.getUserId();
+    if (this.userId == null) this.router.navigateByUrl('');
     this.packageService.getAllPackages().subscribe(
       (data) => {
         this.packageList = data;
