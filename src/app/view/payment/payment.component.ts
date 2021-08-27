@@ -118,13 +118,12 @@ export class PaymentComponent implements OnInit {
     this.setPaymentDetails();
     this.setItemDtoDetails();
 
-    if (this.form.type != 'cod') {
+    if (this.form.type == 'card') {
       this.paynow();
-    } else if (this.form.type != 'cash') {
+    } else if (this.form.type == 'cash') {
       this.sendOrder();
-    } else {
-      this.spinner.hide();
     }
+    this.spinner.hide();
   }
 
   paynow() {
@@ -142,7 +141,7 @@ export class PaymentComponent implements OnInit {
       amount: this.order.paymentDto.amount,
       first_name: this.form.name,
       last_name: '',
-      email: 'samanp@gmail.com',
+      email: '',
       phone: this.form.contactNo,
       address: this.form.address,
       city: this.form.city,
@@ -150,12 +149,14 @@ export class PaymentComponent implements OnInit {
       delivery_address: this.form.address,
       delivery_city: this.form.city,
       delivery_country: 'Sri Lanka',
-      custom_1: '',
+      uid: this.userId,
       custom_2: '',
     };
 
     this.spinner.hide();
     payhere.startPayment(payment);
+
+    //if (this.isPaymentSuccess) this.sendOrder();
   }
   setDeliveryDetails() {
     this.order.deliveryDto = {
@@ -219,7 +220,7 @@ export class PaymentComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.sendOrder();
+    // this.sendOrder();
     this.modalRef = this.modalService.show(template);
   }
 
