@@ -43,7 +43,6 @@
           </p>
         </div>
         <form
-          *ngIf="!isSuccessful"
           name="form"
           (ngSubmit)="f.form.valid && onSubmit(template)"
           #f="ngForm"
