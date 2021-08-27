@@ -127,8 +127,8 @@
                 <a
                   class="button_fill"
                   style="margin-left: 2%"
-                  (click)="openModal(template)"
                   *ngIf="form.type == 'card'"
+                  (click)="openModal(template)"
                   >Continue to checkout</a
                 >
                 <a
@@ -139,12 +139,8 @@
                   >Place Order</a
                 >
               </form>
-              <alert
-                type="success"
-                *ngIf="isOrderSuccessful"
-                class="success alert-success"
-              >
-                <strong style="color: aliceblue">
+              <alert type="success" *ngIf="isOrderSuccessful">
+                <strong style="color: black">
                   Order is Successfully Completed</strong
                 >
                 <a href="#" class="alert-link"></a>.

@@ -36,6 +36,7 @@ export class ItemComponent implements OnInit {
   modalRef: BsModalRef = new BsModalRef();
   message: string = '';
   itemReviewList: ItemReview[] = [];
+  i: ItemReview = new ItemReview();
 
   //authentication
   isLoggedIn = false;

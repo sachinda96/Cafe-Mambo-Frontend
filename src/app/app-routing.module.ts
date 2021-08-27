@@ -44,11 +44,6 @@ const routes: Routes = [
     path: 'contact-us',
     component: ContactUsComponent,
   },
-
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
   {
     path: 'cart',
     component: CartComponent,

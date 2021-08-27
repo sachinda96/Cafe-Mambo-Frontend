@@ -61,20 +61,16 @@
 
 <section>
   <div class="container">
-    <div class="our_team">
-      <div class="our_t col-lg-12">
-        <span class="up_i">from our hearts</span>
-        <h2>Our Team</h2>
+    <div class="">
+      <div class="col-lg-12">
+        <span class="up_i">From their hearts</span>
+        <h2>Our Customers</h2>
         <div class="row">
-          <div *ngFor="let rev of itemReviewList" class="col-lg-4">
-            <div
-              class="info_block aos-init aos-animate"
-              data-aos="zoom-in-right"
-              data-aos-duration="800"
-            >
-              <h3>{{ rev.userName }}</h3>
-              <p>"{{ rev.review }}"</p>
-              <div class="icon_social"></div>
+          <div class="col-lg-4" *ngFor="let rev of itemReviewList">
+            <div class="info_block" style="padding: 0.5rem">
+              <h3>"{{ rev.review }}"</h3>
+
+              <h2>{{ rev.userName }}</h2>
             </div>
           </div>
         </div>
@@ -82,7 +78,6 @@
     </div>
   </div>
 </section>
-
 <ngx-spinner
   bdColor="rgba(0, 0, 0, 0.8)"
   size="medium"

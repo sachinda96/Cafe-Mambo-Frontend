@@ -81,6 +81,7 @@ export class PaymentComponent implements OnInit {
     this.totalQuantity = this.cartService.getItemsTotalCount();
     this.totalPrice = this.cartService.getItemsTotalPrice();
     this.userId = this.tokenStorageService.getUserId();
+
     if (this.userId == null) this.router.navigate(['']);
     if (this.totalQuantity == 0) this.router.navigate(['']);
   }
@@ -196,6 +197,10 @@ export class PaymentComponent implements OnInit {
         console.log('==>' + res);
         this.isOrderSuccessful = true;
         this.spinner.hide();
+        this.clearAll();
+        setTimeout(() => {
+          this.router.navigate(['']);
+        }, 10000);
         // this.router.navigate(['']);
       },
       (error) => {
@@ -217,6 +222,20 @@ export class PaymentComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+  clearAll() {
+    this.form = {
+      name: null,
+      email: null,
+      contactNo: null,
+      address: null,
+      city: null,
+      district: null,
+      message: '',
+      type: '',
+      date: null,
+      id: null,
+    };
   }
 }
 /*

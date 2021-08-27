@@ -86,13 +86,22 @@
       </div>
       <br /><br />
       <!--&& this.isLoggedIn-->
+
       <a
-        *ngIf="cartItems.length > 0"
+        *ngIf="cartItems.length > 0 && isLoggedIn"
         class="button_line"
         [routerLink]="['/order/payment']"
       >
         Checkout
       </a>
+      <a
+        *ngIf="cartItems.length > 0 && !isLoggedIn"
+        class="button_line"
+        (onclick)="isAlert = true"
+      >
+        Checkout
+      </a>
+
       <!-- <a
         *ngIf="cartItems.length > 0 && !this.isLoggedIn"
         class="button_line"
@@ -102,9 +111,15 @@
         Checkout
       </a> -->
       <a
-        *ngIf="cartItems.length == 0 && !this.isLoggedIn"
+        *ngIf="cartItems.length == 0 && !isLoggedIn"
         class="button_line"
-        onclick="alert()"
+        aria-disabled="true"
+      >
+        Checkout
+      </a>
+      <a
+        *ngIf="cartItems.length == 0 && isLoggedIn"
+        class="button_line"
         aria-disabled="true"
       >
         Checkout
