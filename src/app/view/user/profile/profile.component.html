@@ -170,62 +170,21 @@
                                     [(ngModel)]="form.address"
                                     name="address"
                                     #address="ngModel"
-                                    appPasswordPattern
                                     minlength="6"
                                     required
                                   />
-                                  <span
-                                    class="text-danger"
-                                    *ngIf="
-                                      (address.touched ||
-                                        registerForm.submitted) &&
-                                      address.errors?.required
-                                    "
-                                  >
-                                    Address is required
-                                  </span>
-                                  <span
-                                    class="text-danger"
-                                    *ngIf="
-                                      address.touched &&
-                                      address.errors?.invalidPassword
-                                    "
-                                  >
-                                    Password should have minimum 6 characters,
-                                    at least 1 uppercase letter, 1 lowercase
-                                    letter and 1 number
-                                  </span>
                                 </div>
                                 <div class="form-group">
-                                  <label>Confirm Password</label>
+                                  <label>Contact Number</label>
                                   <input
-                                    type="password"
+                                    type="tel"
                                     class="form-control"
-                                    [(ngModel)]="form.confirmPassword"
-                                    name="confirmPassword"
-                                    #confirmPassword="ngModel"
-                                    minlength="6"
+                                    [(ngModel)]="form.telNo"
+                                    name="telNo"
+                                    #telNo="ngModel"
+                                    max
                                     required
                                   />
-                                  <span
-                                    class="text-danger"
-                                    *ngIf="
-                                      (confirmPassword.touched ||
-                                        registerForm.submitted) &&
-                                      confirmPassword.errors?.required
-                                    "
-                                  >
-                                    Confirm Password is required
-                                  </span>
-                                  <span
-                                    class="text-danger"
-                                    *ngIf="
-                                      confirmPassword.touched &&
-                                      confirmPassword.errors?.passwordMismatch
-                                    "
-                                  >
-                                    Passwords doesnot match
-                                  </span>
                                 </div>
                                 <div class="form-group">
                                   <button type="submit" class="btn btn-success">

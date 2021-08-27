@@ -67,7 +67,9 @@ export class ProfileComponent implements OnInit {
     let user: UserProfile = new UserProfile();
     user.name = this.form.name;
     user.email = user.email = this.form.email;
-    user.password = this.form.password;
+    user.address = this.form.address;
+    user.telNo = this.form.telNo;
+    user.id = this.uid;
 
     this.userService.updateUser(user).subscribe(
       (data) => {

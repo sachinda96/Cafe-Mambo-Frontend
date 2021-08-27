@@ -26,7 +26,7 @@ export class UserEntity {
 }
 
 export class UserProfile {
-  id: string | undefined = '';
+  id: string | null = '';
   name: string = '';
   email: string = '';
   password: string = '';
