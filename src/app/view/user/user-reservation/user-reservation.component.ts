@@ -22,6 +22,7 @@ export class UserReservationComponent implements OnInit {
   packageList: Package[] = [];
   errorStatusMsg: string = '';
   errorStatus: number = 0;
+  errorStat: any;
   constructor(
     private tokenService: TokenStorageService,
     private bookingService: ReserveService,
@@ -35,7 +36,6 @@ export class UserReservationComponent implements OnInit {
     if (this.userId == null) this.router.navigateByUrl('');
     this.packageService.getAllPackages().subscribe(
       (data) => {
-        console.log(data);
         this.packageList = data;
       },
       (err) => {
@@ -48,6 +48,8 @@ export class UserReservationComponent implements OnInit {
     );
     this.bookingService.getAllReservationsByUser(this.userId).subscribe(
       (data) => {
+        console.log("test")
+        console.log(data);
         this.bookingList = data;
       },
       (err) => {

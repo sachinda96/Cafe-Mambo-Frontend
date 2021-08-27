@@ -41,23 +41,19 @@
                     <table class="table table-head-fixed text-nowrap">
                       <thead>
                         <tr>
-                          <th>ID</th>
                           <th>location</th>
                           <th>Message</th>
-                          <th>Date</th>
+                          <th>Book Date</th>
                           <th>Package</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let booking of bookingList">
-                          <!--*ngFor="let order of orderList"  -->
-
-                          <td>{{ booking.id }}</td>
                           <td>{{ booking.location }}</td>
 
                           <td>{{ booking.message }}</td>
-                          <td>{{ booking.bookDate }}</td>
-                          <td>{{ findPackage(booking.packageId) }}</td>
+                          <td>{{ booking.bookDate | date: 'dd/MM/yyyy'}}</td>
+                          <td>{{ booking.packageName }}</td>
                         </tr>
                       </tbody>
                     </table>

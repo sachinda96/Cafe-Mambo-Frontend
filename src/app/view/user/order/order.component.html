@@ -43,7 +43,7 @@
                             class="form-control float-right"
                             placeholder="Search"
                           />
-        
+
                           <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
                               <i class="fas fa-search"></i>
@@ -57,22 +57,19 @@
                     <table class="table table-head-fixed text-nowrap">
                       <thead>
                         <tr>
-                          <th>ID</th>
-
                           <th>Order Date</th>
                           <th>Total Price</th>
-                          <th>Payment Status</th>
-                          <th>Delivery Status</th>
+                          <th>Address</th>
+                          <th>Order Status</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let order of orderList">
-                          <td>{{ order.id }}</td>
 
-                          <td>{{ order.orderDate }}</td>
+                          <td>{{ order.orderDate | date: 'dd/MM/yyyy'}}</td>
                           <td>{{ order.total | currency: "Rs. " }}</td>
-                          <td>{{ order.paymentEntity.status }}</td>
-                          <td>{{ order.deliveryDetailsEntity.status }}</td>
+                          <td>{{ order.deliveryDetailsEntity.address }}</td>
+                          <td>{{ order.orderStatus }}</td>
                         </tr>
                       </tbody>
                     </table>
