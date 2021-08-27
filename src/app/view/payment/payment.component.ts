@@ -46,7 +46,7 @@ export class PaymentComponent implements OnInit {
   showSuccessModal = false;
   cardItemArray: string[] = [];
   userId: any = '';
-  isPaymentSuccess:boolean = false;
+  isPaymentSuccess: boolean = false;
 
   modalRef: BsModalRef = new BsModalRef();
 
@@ -62,7 +62,7 @@ export class PaymentComponent implements OnInit {
   ) {
     payhere.onCompleted = function onCompleted(orderId: any) {
       console.log('Payment completed. OrderID:' + orderId);
-     this.isPaymentSuccess = true;
+      this.isPaymentSuccess = true;
     };
 
     payhere.onDismissed = function onDismissed() {
@@ -121,7 +121,7 @@ export class PaymentComponent implements OnInit {
     if (this.form.type != 'cod') {
       this.paynow();
     } else if (this.form.type != 'cash') {
-        this.sendOrder();
+      this.sendOrder();
     } else {
       this.spinner.hide();
     }
@@ -188,11 +188,11 @@ export class PaymentComponent implements OnInit {
     });
   }
   sendOrder() {
-
-    console.log(this.order)
+    console.log(this.order);
     this.orderService.addOrder(this.order).subscribe(
       (res) => {
         this.isOrderSuccessful = true;
+        this.isOrderFail = false;
         this.spinner.hide();
         this.clearAll();
         setTimeout(() => {
@@ -202,7 +202,7 @@ export class PaymentComponent implements OnInit {
       },
       (error) => {
         // error.error;
-        console.log(error)
+        console.log(error);
         this.isOrderSuccessful = false;
         this.isOrderFail = true;
         this.spinner.hide();
@@ -219,8 +219,8 @@ export class PaymentComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-      this.sendOrder();
-      this.modalRef = this.modalService.show(template);
+    this.sendOrder();
+    this.modalRef = this.modalService.show(template);
   }
 
   clearAll() {
@@ -237,7 +237,6 @@ export class PaymentComponent implements OnInit {
       id: null,
     };
   }
-
 }
 /*
 Delivery

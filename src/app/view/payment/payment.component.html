@@ -34,6 +34,7 @@
                       [(ngModel)]="form.name"
                       #name="ngModel"
                       required
+                      style="color: black"
                     />
                     <div
                       class="alert-danger field-error"
@@ -67,6 +68,7 @@
                     placeholder="Colombo"
                     [(ngModel)]="form.city"
                     required
+                    style="color: black"
                   />
 
                   <div class="row">
@@ -79,6 +81,7 @@
                         placeholder="Colombo"
                         [(ngModel)]="form.district"
                         required
+                        style="color: black"
                       />
                     </div>
                     <div class="col-50">
@@ -90,6 +93,7 @@
                         placeholder="10001"
                         [(ngModel)]="form.mobileNo"
                         required
+                        style="color: black"
                       />
                     </div>
                     <div class="col-50">
@@ -140,16 +144,6 @@
                 >
               </form>
               <br /><br />
-              <alert type="success" *ngIf="isOrderSuccessful">
-                <strong style="color: black">
-                  Order is Successfully Completed</strong
-                >
-                <a href="#" class="alert-link"></a>.
-              </alert>
-              <alert type="danger" *ngIf="isOrderFail">
-                <strong style="color: aliceblue">Try Again..!</strong>
-                <a href="#" class="alert-link"></a>
-              </alert>
             </div>
           </div>
         </div>
@@ -190,6 +184,15 @@
     </div>
   </section>
 </div>
+
+<alert type="success" *ngIf="isOrderSuccessful">
+  <strong style="color: black"> Order is Successfully Completed</strong>
+  <a href="#" class="alert-link"></a>.
+</alert>
+<alert type="danger" *ngIf="isOrderFail">
+  <strong style="color: aliceblue">Try Again..!</strong>
+  <a href="#" class="alert-link"></a>
+</alert>
 <ngx-spinner
   bdColor="rgba(229,221,221,0.8)"
   size="medium"
@@ -219,6 +222,12 @@
         class="button_fill btn btn-primary"
         style="width: 5rem; padding-right: 3rem"
         >Yes</a
+      >
+      <a
+        (click)="modalRef.hide()"
+        class="button_fill btn"
+        style="width: 5rem; padding-right: 3rem; background-color: red"
+        >No</a
       >
     </div>
   </div>
