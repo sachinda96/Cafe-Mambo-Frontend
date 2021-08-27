@@ -23,3 +23,20 @@ export class Delivery {
 
   constructor() {}
 }
+
+export class DeliveryDetailsEntity {
+  address: string = '';
+  city: string = '';
+  createBy: string = '';
+  createDate: Date = new Date();
+  DeliveryDate: Date = new Date();
+  deliveryNote: string = '';
+  district: string = '';
+  id: string | undefined = '';
+  mobileNo: string = '';
+  name: string = '';
+  postalCode: string = '';
+  status: string = '';
+  updateBy: string = '';
+  updateDate: Date = new Date();
+}

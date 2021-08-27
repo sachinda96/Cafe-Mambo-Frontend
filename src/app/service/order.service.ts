@@ -2,9 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BASE_URL } from 'src/environments/environment';
 
-import { Order, OrderDTO, PlaceOrderDTO } from '../model/order';
-import {ShopOrder} from "../model/shop-order";
-
+import { Order, OrderCustomer, OrderDTO, PlaceOrderDTO } from '../model/order';
+import { ShopOrder } from '../model/shop-order';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +15,7 @@ export class OrderService {
   //   return this.http.get<Array<OrderDTO>>(BASE_URL + '/order/getAllorders');
   // }
   getAllOrdersByUser(uid: string | null) {
-    return this.http.get<OrderDTO[]>(
+    return this.http.get<OrderCustomer[]>(
       BASE_URL + '/order/allOrderByCustomer/' + uid
     );
   }
@@ -48,8 +47,7 @@ export class OrderService {
   // addShopOrder(order: PlaceOrderDTO) {
   //   return this.http.post(BASE_URL + '/order', order);
 
-  addShopOrder(shopOrder:ShopOrder) {
+  addShopOrder(shopOrder: ShopOrder) {
     return this.http.post(BASE_URL + '/shoporder/placeorder', shopOrder);
-
   }
 }

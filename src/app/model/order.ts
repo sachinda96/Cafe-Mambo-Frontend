@@ -1,8 +1,9 @@
-import { Delivery } from './delivery';
-import { Payment } from './payment';
+import { Delivery, DeliveryDetailsEntity } from './delivery';
+import { Payment, paymentEntity } from './payment';
 import { CheckoutItem } from './checkout-item';
 import { Customer } from './customer';
 import { Item, ItemDTO } from './item';
+import { UserEntity } from './user';
 
 // export interface Order {
 //   id: string;
@@ -56,4 +57,21 @@ export class PlaceOrderDTO {
   deliveryDto: Delivery = new Delivery();
   itemDtoList: Array<ItemDTO> = new Array<ItemDTO>();
   userId: string = '';
+}
+
+export class OrderCustomer {
+  createBy: string = '';
+  createDate: string = '';
+  deliveryDetailsEntity: DeliveryDetailsEntity = new DeliveryDetailsEntity();
+  id: string = '';
+  orderDate: Date = new Date();
+  orderStatus: string = '';
+  paymentEntity: paymentEntity = new paymentEntity();
+  status: string = '';
+  total: number = 0;
+  updateBy: string = '';
+  updateDate: Date = new Date();
+  userEntity: UserEntity = new UserEntity();
+
+  constructor() {}
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/app/model/item';
-import { OrderDTO } from 'src/app/model/order';
+import { OrderCustomer } from 'src/app/model/order';
 import { OrderService } from 'src/app/service/order.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 
@@ -15,7 +15,7 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
   ],
 })
 export class OrderComponent implements OnInit {
-  orderList: Array<OrderDTO> = new Array<OrderDTO>();
+  orderList: Array<OrderCustomer> = new Array<OrderCustomer>();
   itemList: Array<Item> = new Array<Item>();
   userId: string | null = '';
 
@@ -30,6 +30,7 @@ export class OrderComponent implements OnInit {
 
     this.orderService.getAllOrdersByUser(this.userId).subscribe(
       (data) => {
+        console.log(data);
         this.orderList = data;
       },
       (err) => {

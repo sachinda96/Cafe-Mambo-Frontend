@@ -19,3 +19,17 @@ export class Login {
   email: string = '';
   password: string = '';
 }
+
+export class loginEntity {
+  createBy: string = '';
+  createDate: Date = new Date();
+  email: string = '';
+  id: string = '';
+  locked: boolean = false;
+  password: string = '';
+  status: string = '';
+  updateBy: string = '';
+  updateDate: Date = new Date();
+
+  constructor() {}
+}
