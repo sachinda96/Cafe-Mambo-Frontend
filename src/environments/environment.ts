@@ -6,8 +6,7 @@ export const environment = {
   production: false,
 };
 
-export const BASE_URL = 'http://localhost:8081'; //'http://yjv1g.mocklab.io'; //;
-export const CLOUD_API_URL = '';
+export const BASE_URL = 'http://localhost:8081';
 export const AUTH_API = '';
 export const ITEMS_LIST_URL = '';
 export const ITEMS_PER_PAGE_COUNT = 9;
