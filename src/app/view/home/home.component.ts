@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
       (data) => {
         data.forEach((d) => {
           if (this.i < 4) {
-            let des = d.description?.slice(0, 20) + '........';
+            let des = d.description?.slice(0, 80) + '........';
             d.description = des;
             this.itemList.push(d);
             if (this.i == 0) this.catId = d.categoryId;
