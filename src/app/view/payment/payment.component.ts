@@ -223,6 +223,7 @@ export class PaymentComponent implements OnInit {
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+
   clearAll() {
     this.form = {
       name: null,
@@ -237,6 +238,7 @@ export class PaymentComponent implements OnInit {
       id: null,
     };
   }
+
 }
 /*
 Delivery

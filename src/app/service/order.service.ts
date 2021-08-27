@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BASE_URL } from 'src/environments/environment';
+
 import { Order, OrderDTO, PlaceOrderDTO } from '../model/order';
+import {ShopOrder} from "../model/shop-order";
+
 
 @Injectable({
   providedIn: 'root',
@@ -42,7 +45,11 @@ export class OrderService {
     return this.http.post(BASE_URL + '/order/cancel', order);
   }
 
-  addShopOrder(order: PlaceOrderDTO) {
-    return this.http.post(BASE_URL + '/order', order);
+  // addShopOrder(order: PlaceOrderDTO) {
+  //   return this.http.post(BASE_URL + '/order', order);
+
+  addShopOrder(shopOrder:ShopOrder) {
+    return this.http.post(BASE_URL + '/shoporder/placeorder', shopOrder);
+
   }
 }

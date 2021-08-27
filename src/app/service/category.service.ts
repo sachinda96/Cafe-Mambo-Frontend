@@ -20,6 +20,13 @@ export class CategoryService {
       //httpOptions
     );
   }
+
+  getAllMainCategories():Observable<Array<Category>> {
+    return this.http.get<Array<Category>>(
+      BASE_URL + '/category/getall'
+      //httpOptions
+    );
+  }
   getCategoryById(id: any) {
     return this.http.get<Category>(
       BASE_URL + '/category/getCategoryById/' + id

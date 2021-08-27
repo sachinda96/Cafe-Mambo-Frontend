@@ -109,7 +109,7 @@ const routes: Routes = [
     component: FileUploadComponent,
   },
   {
-    path: 'shoporder',
+    path: 'shoporder/:id',
     component: ShopOrderComponent,
   },
   {

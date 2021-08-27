@@ -1,0 +1,197 @@
+<div id="shop_t">
+  <header>
+    <div class="container flex_center">
+      <div class="title">
+        <h1>Shop Order</h1>
+        <p>
+
+        </p>
+      </div>
+    </div>
+  </header>
+
+<!--  <div class="content-wrapper">-->
+<!--    <section class="content">-->
+<!--      <div class="container-fluid">-->
+<!--      </div>-->
+<!--      <section>-->
+<!--    </div>       -->
+</div>
+
+<div class="content-wrapper">
+  <section class="content">
+          <div class="container-fluid">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Customer Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      name="name"
+                      placeholder="Customer Name"
+                      [(ngModel)]="shopOrder.customerName"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>contact Number</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="tel"
+                      name="tel"
+                      placeholder="Contact Number"
+                      [(ngModel)]="shopOrder.contactNumber"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Category</label>
+                    <select
+                      class="form-control select2"
+                      style="width: 100%"
+                      (change)="setCategory($event)">
+                      <option selected="selected">---Select Category---</option>
+                      <option *ngFor="let category of categoryList" value="{{ category.id }}">
+                        {{ category.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row">
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="card-body">
+                    <div class="card-body table-responsive p-0" style="height: 300px;">
+                      <table id="example1" class="table table-head-fixed text-nowrap">
+                        <thead>
+                        <tr>
+                          <th></th>
+                          <th>Name</th>
+                          <th>Price</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of itemList">
+                          <th><img style="width: 50px;height: 50px" src="{{item.imagePath}}"></th>
+                          <td>{{item.name}}</td>
+                          <td>{{item.price}}</td>
+                          <td><h3 class="card-title" style="float: right"><i class="fas fa-plus-circle fa-1x" style="color: cadetblue" (click)="addNew(item)"></i></h3></td>
+
+                        </tr>
+
+                        </tbody>
+                        <tfoot>
+
+                        </tfoot>
+                      </table>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <div class="card-body">
+                      <div class="card-body table-responsive p-0" style="height: 300px;">
+                      <table id="example2" class="table table-head-fixed text-nowrap">
+                        <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Price</th>
+                          <th>Qty</th>
+                          <th>Total</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of tempItemList">
+                          <td>{{item.name}}</td>
+                          <td>{{item.price}}</td>
+                          <td> <i class="fas fa-minus" (click)="minQty(item)"></i> {{item.qty}} <i class="fas fa-plus" (click)="plusQty(item)"></i></td>
+                          <td>{{item.total}}</td>
+                          <td><i class="fas fa-minus-circle" style="color: red" (click)="removeSelectedItem(item)"></i></td>
+                        </tr>
+
+                        </tbody>
+                        <tfoot>
+
+                        </tfoot>
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-6">
+
+              </div>
+              <!-- /.col -->
+              <div class="col-6">
+                <p class="lead">Amount </p>
+
+                <div class="table-responsive">
+                  <table class="table">
+                    <tr>
+                      <th style="width:50%">Subtotal:</th>
+                      <td>{{subtotal}}</td>
+                    </tr>
+                    <tr>
+                      <th>Discount: </th>
+                      <td>0</td>
+                    </tr>
+                    <tr>
+                      <th>Total:</th>
+                      <td>{{subtotal}}</td>
+                    </tr>
+                    <tr>
+                      <th>Payment Method:</th>
+                      <td> <fieldset id="group1">
+                        <input type="radio" value="value1" name="group1" style="border: 0px;width: 6%;">Cash&nbsp;&nbsp;
+                        <input type="radio" value="value2" name="group1" (click)="isCard()" style="border: 0px;width: 6%;">Card
+                      </fieldset></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          </section>
+  <a
+    class="button_fill"
+    style="margin-right: 5% ; float: right"
+    (click)="placeOrder()"
+  >Place Order</a
+  >
+</div>
+<br><br><br>
+<hr tyle="">
+
+<ngx-spinner
+  bdColor="rgba(229,221,221,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-zig-zag-deflect"
+  [fullScreen]="true"
+>
+  <p style="font-size: 20px; color: white">{{message}}</p></ngx-spinner
+>
