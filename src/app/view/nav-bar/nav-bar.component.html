@@ -47,10 +47,13 @@
     <div class="l_m_global headroom">
       <div class="container l_m">
         <a class="logo" [routerLink]="['/']"
-          ><img
-            src="../../../assets/img/Logo/Logo Original white copy.png"
-            alt="logo" /></a
-        ><span class="fas fa-bars" id="menu_icon"></span>
+          ><h3 style="color: white">LOGO</h3>
+<!--          <img-->
+<!--            src="../../../assets/img/Logo/Logo Original white copy.png"-->
+<!--            alt="logo" />-->
+
+        </a
+        ><span class="fas fa-bars" id="menu_icon">LOGO</span>
         <nav class="menu">
           <ul>
             <li class=""><a [routerLink]="['/']">Home</a></li>
@@ -135,9 +138,11 @@
   <div class="l_m_global headroom" *ngIf="router.url != '/'">
     <div class="container l_m">
       <a class="logo" [routerLink]="['/']">
-        ><img
-          src="../../../assets/img/Logo/Logo Original white copy.png"
-          alt="logo" /></a
+        ><h1 style="color: white">LOGO</h1>
+<!--        <img-->
+<!--          src="../../../assets/img/Logo/Logo Original white copy.png"-->
+<!--          alt="logo" />-->
+      </a
       ><span class="fas fa-bars" id="menu_icon"></span>
       <nav class="menu">
         <ul>
@@ -160,7 +165,6 @@
           <li>
             <a [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
           </li>
-
           <li *ngIf="isLoggedIn">
             <a (click)="routeToDashboard()">Dashboard</a>
           </li>
@@ -184,38 +188,6 @@
               style="height: max-content; width: max-content"
               ><span>{{ count }}</span></i
             ></a
-          >
-          <!--
-=======
-        <li><a [routerLink]="['/reservation']">Contact us</a></li>
-        <li>
-          <a [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
-        </li>
-      </ul>
-      &nbsp;&nbsp;
-      <ul *ngIf="!isLoggedIn">
-        <li><a class="button_line" [routerLink]="['/login']">Login</a></li>
-      </ul>
-      <ul *ngIf="isLoggedIn">
-        <li>
-          <a class="button_line" (click)="logout()">Logout</a>
-        </li>
-      </ul>
-      <span>
-        <a [routerLink]="['/cart']">
-          <i class="fas fa-shopping-cart shop_cart"><span>{{cartCount}}</span>
-            <!--
->>>>>>> origin/Migrate-manage
-<span *ngIf="this.cartService.getItemsTotalCount() != 0">{{
-              this.cartService.getItemsTotalCount()
-            }}</span>
-            <span *ngIf="this.cartService.getItemsTotalCount() == 0">{{
-              this.cartService.getItemsTotalCount()
-            }}</span>
-
-
-           -->
-
           >
         </span>
       </nav>

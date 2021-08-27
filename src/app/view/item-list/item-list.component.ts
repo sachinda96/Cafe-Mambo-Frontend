@@ -65,9 +65,9 @@ export class ItemListComponent implements OnInit {
   }
 
   getItemsByPage(index: any, size: any, id: any) {
+    this.spinner.show();
     this.itemService.getAllByPageIndexAndSize(index, size, id).subscribe(
       (res) => {
-        console.log(res);
         this.itemList = res;
         this.spinner.hide();
         //this.fillRatingArray();

@@ -46,6 +46,7 @@ export class PaymentComponent implements OnInit {
   showSuccessModal = false;
   cardItemArray: string[] = [];
   userId: any = '';
+  isPaymentSuccess:boolean = false;
 
   modalRef: BsModalRef = new BsModalRef();
 
@@ -61,7 +62,7 @@ export class PaymentComponent implements OnInit {
   ) {
     payhere.onCompleted = function onCompleted(orderId: any) {
       console.log('Payment completed. OrderID:' + orderId);
-      this.sendOrder();
+     this.isPaymentSuccess = true;
     };
 
     payhere.onDismissed = function onDismissed() {
@@ -110,21 +111,17 @@ export class PaymentComponent implements OnInit {
     this.modalRef.hide();
 
     this.order.orderDate = new Date();
-    //id of the order
     this.order.id = this.form.id;
     this.order.userId = this.userId;
 
-    //set details of necessary information
     this.setDeliveryDetails();
     this.setPaymentDetails();
     this.setItemDtoDetails();
 
-    console.log(this.order);
-
     if (this.form.type != 'cod') {
       this.paynow();
     } else if (this.form.type != 'cash') {
-      this.sendOrder();
+        this.sendOrder();
     } else {
       this.spinner.hide();
     }
@@ -156,7 +153,7 @@ export class PaymentComponent implements OnInit {
       custom_1: '',
       custom_2: '',
     };
-    console.log('==>' + payment);
+
     this.spinner.hide();
     payhere.startPayment(payment);
   }
@@ -191,10 +188,10 @@ export class PaymentComponent implements OnInit {
     });
   }
   sendOrder() {
+
+    console.log(this.order)
     this.orderService.addOrder(this.order).subscribe(
       (res) => {
-        //alert('Added');
-        console.log('==>' + res);
         this.isOrderSuccessful = true;
         this.spinner.hide();
         this.clearAll();
@@ -205,6 +202,7 @@ export class PaymentComponent implements OnInit {
       },
       (error) => {
         // error.error;
+        console.log(error)
         this.isOrderSuccessful = false;
         this.isOrderFail = true;
         this.spinner.hide();
@@ -221,7 +219,8 @@ export class PaymentComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+      this.sendOrder();
+      this.modalRef = this.modalService.show(template);
   }
 
   clearAll() {
