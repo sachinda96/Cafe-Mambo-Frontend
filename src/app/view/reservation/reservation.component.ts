@@ -72,6 +72,7 @@ export class ReservationComponent implements OnInit {
     if (!this.isValidationFail) {
       this.reserveService.addReservation(this.reservation).subscribe(
         (res) => {
+          console.log(res);
           this.clear();
           this.isSuccessful = true;
           this.messageModal = SUCCESS_MSG;
