@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/model/user';
+import { User, UserProfile } from 'src/app/model/user';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
 import { UserService } from 'src/app/service/user.service';
 import { NgxSpinnerService, Spinner } from 'ngx-spinner';
@@ -20,13 +20,14 @@ export class ProfileComponent implements OnInit {
   isFail = false;
   errorMsg = '';
   successMsg = '';
+  errorStatusMsg = '';
   constructor(
     private userService: UserService,
     private tokenService: TokenStorageService,
     private router: Router,
     private spinner: NgxSpinnerService
   ) {}
-  user: User = new User();
+  user: UserProfile = new UserProfile();
   uid: string | null = '';
 
   form: any = {
@@ -34,6 +35,8 @@ export class ProfileComponent implements OnInit {
     email: null,
     password: null,
     confirmPassword: null,
+    address: null,
+    telNo: null,
   };
 
   ngOnInit(): void {
@@ -45,7 +48,8 @@ export class ProfileComponent implements OnInit {
           this.user = data;
           this.form.name = this.user.name;
           this.form.email = this.user.email;
-          this.form.password = this.user.loginDto.password;
+          this.form.address = this.user.address;
+          this.form.telNo = this.user.telNo;
         },
         (err) => {
           console.log(err);
@@ -59,26 +63,26 @@ export class ProfileComponent implements OnInit {
   onSubmit() {
     this.spinner.show();
     console.log(this.form);
-    if (this.comparePassword()) {
-      let user: User = new User();
-      user.name = this.form.name;
-      user.email = user.loginDto.email = this.form.email;
-      user.loginDto.password = this.form.password;
 
-      this.userService.updateUser(user).subscribe(
-        (data) => {
-          console.log(data);
-          this.isSuccessful = true;
-          this.successMsg = 'Sucessfully Updated';
-        },
-        (err) => {
-          console.log(err.error);
-          this.isFail = true;
-        }
-      );
-    } else {
-      this.errorMsg = 'Try again';
-    }
+    let user: UserProfile = new UserProfile();
+    user.name = this.form.name;
+    user.email = user.email = this.form.email;
+    user.password = this.form.password;
+
+    this.userService.updateUser(user).subscribe(
+      (data) => {
+        console.log(data);
+        this.isSuccessful = true;
+        this.successMsg = 'Sucessfully Updated';
+      },
+      (err) => {
+        console.log(err.error);
+        this.isFail = true;
+      }
+    );
+    // } else {
+    //   this.errorMsg = 'Try again';
+    // }
 
     this.spinner.hide();
   }

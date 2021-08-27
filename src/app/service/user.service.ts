@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BASE_URL } from 'src/environments/environment';
-import { User } from '../model/user';
+import { User, UserProfile } from '../model/user';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,7 @@ export class UserService {
   }
 
   getUserById(uid: string) {
-    return this.http.get<User>(BASE_URL + '/user/get/' + uid);
+    return this.http.get<UserProfile>(BASE_URL + '/user/get/' + uid);
   }
 
   updateUser(user: User | any) {

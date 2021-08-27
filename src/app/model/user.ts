@@ -24,3 +24,14 @@ export class UserEntity {
   updateDate: string = '';
   constructor() {}
 }
+
+export class UserProfile {
+  id: string | undefined = '';
+  name: string = '';
+  email: string = '';
+  password: string = '';
+  role: string = '';
+  telNo: string = '';
+  address: string = '';
+  constructor() {}
+}

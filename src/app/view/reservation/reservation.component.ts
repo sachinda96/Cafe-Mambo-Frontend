@@ -119,6 +119,7 @@ export class ReservationComponent implements OnInit {
       packageId: this.form.package,
       packageName: this.findPackageName(this.form.packageId),
     };
+    console.log(this.isLoggedIn, this.reservation);
   }
   openModal(template: TemplateRef<any>) {
     // console.log(this.isSuccessful);

@@ -163,13 +163,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                  <label>Password</label>
+                                  <label>Address</label>
                                   <input
-                                    type="password"
+                                    type="address"
                                     class="form-control"
-                                    [(ngModel)]="form.password"
-                                    name="password"
-                                    #password="ngModel"
+                                    [(ngModel)]="form.address"
+                                    name="address"
+                                    #address="ngModel"
                                     appPasswordPattern
                                     minlength="6"
                                     required
@@ -177,18 +177,18 @@
                                   <span
                                     class="text-danger"
                                     *ngIf="
-                                      (password.touched ||
+                                      (address.touched ||
                                         registerForm.submitted) &&
-                                      password.errors?.required
+                                      address.errors?.required
                                     "
                                   >
-                                    Password is required
+                                    Address is required
                                   </span>
                                   <span
                                     class="text-danger"
                                     *ngIf="
-                                      password.touched &&
-                                      password.errors?.invalidPassword
+                                      address.touched &&
+                                      address.errors?.invalidPassword
                                     "
                                   >
                                     Password should have minimum 6 characters,

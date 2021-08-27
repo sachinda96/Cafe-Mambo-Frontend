@@ -25,8 +25,8 @@ export class ReserveService {
   }
 
   getAllReservationsByUser(id: string | null) {
-    return this.http.get<Array<EventBooking>>(
-      BASE_URL + '/eventbooking/user/getAll/' + id,
+    return this.http.get<Array<any>>(
+      BASE_URL + '/eventbooking/getAllEventBookingsByCustomer/' + id,
       httpOptions
     );
   }

@@ -17,9 +17,11 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
   ],
 })
 export class UserReservationComponent implements OnInit {
-  bookingList: Array<EventBooking> = new Array<EventBooking>();
+  bookingList: Array<any> = new Array<any>();
   userId: string | null = '';
   packageList: Package[] = [];
+  errorStatusMsg: string = '';
+  errorStatus: number = 0;
   constructor(
     private tokenService: TokenStorageService,
     private bookingService: ReserveService,
@@ -33,9 +35,14 @@ export class UserReservationComponent implements OnInit {
     if (this.userId == null) this.router.navigateByUrl('');
     this.packageService.getAllPackages().subscribe(
       (data) => {
+        console.log(data);
         this.packageList = data;
       },
       (err) => {
+        if (err.status == 400) {
+          this.errorStatus = 400;
+          this.errorStatusMsg = 'No Reservations Made';
+        }
         console.log(err);
       }
     );

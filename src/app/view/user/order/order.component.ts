@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Item } from 'src/app/model/item';
 import { OrderCustomer } from 'src/app/model/order';
 import { OrderService } from 'src/app/service/order.service';
@@ -21,17 +22,20 @@ export class OrderComponent implements OnInit {
 
   constructor(
     private tokenService: TokenStorageService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
     if (this.tokenService.getUserId() != null)
       this.userId = this.tokenService.getUserId();
 
+    this.spinner.show();
     this.orderService.getAllOrdersByUser(this.userId).subscribe(
       (data) => {
         console.log(data);
         this.orderList = data;
+        this.spinner.hide();
       },
       (err) => {
         console.log(err);
