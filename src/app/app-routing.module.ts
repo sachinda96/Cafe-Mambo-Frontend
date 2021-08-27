@@ -41,7 +41,7 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'contact-us',
+    path: 'reservation',
     component: ContactUsComponent,
   },
   {

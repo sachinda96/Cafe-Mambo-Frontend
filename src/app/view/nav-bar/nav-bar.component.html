@@ -71,7 +71,7 @@
 
             <li><a [routerLink]="['/about-us']">About us</a></li>
 
-            <li><a [routerLink]="['/contact-us']">Reservation</a></li>
+            <li><a [routerLink]="['/reservation']">Reservation</a></li>
             <li *ngIf="!isLoggedIn">
               <a [routerLink]="['/register']">Register</a>
             </li>
@@ -156,7 +156,7 @@
 
           <li><a [routerLink]="['/about-us']">About us</a></li>
 
-          <li><a [routerLink]="['/contact-us']">Reservation</a></li>
+          <li><a [routerLink]="['/reservation']">Reservation</a></li>
           <li>
             <a [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
           </li>
@@ -187,7 +187,7 @@
           >
           <!--
 =======
-        <li><a [routerLink]="['/contact-us']">Contact us</a></li>
+        <li><a [routerLink]="['/reservation']">Contact us</a></li>
         <li>
           <a [routerLink]="['/register']" *ngIf="!isLoggedIn">Register</a>
         </li>
