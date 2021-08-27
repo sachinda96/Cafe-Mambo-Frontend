@@ -65,7 +65,6 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let order of orderList">
-
                           <td>{{ order.orderDate | date: 'dd/MM/yyyy'}}</td>
                           <td>{{ order.total | currency: "Rs. " }}</td>
                           <td>{{ order.deliveryDetailsEntity.address }}</td>

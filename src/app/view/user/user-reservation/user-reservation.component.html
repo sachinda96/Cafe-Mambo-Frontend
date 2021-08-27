@@ -41,16 +41,17 @@
                     <table class="table table-head-fixed text-nowrap">
                       <thead>
                         <tr>
+
                           <th>location</th>
                           <th>Message</th>
                           <th>Book Date</th>
                           <th>Package</th>
+
                         </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let booking of bookingList">
                           <td>{{ booking.location }}</td>
-
                           <td>{{ booking.message }}</td>
                           <td>{{ booking.bookDate | date: 'dd/MM/yyyy'}}</td>
                           <td>{{ booking.packageName }}</td>
