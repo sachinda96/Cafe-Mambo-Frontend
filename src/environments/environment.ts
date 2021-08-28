@@ -17,8 +17,8 @@ export const SITE = '';
 
 //Pay Here Constants
 export const MERCHANT_ID = '1218370';
-export const RETURN_URL = 'http://localhost:38251/';
-export const SHOP_ORDER_RETURN_URL = 'http://localhost:4200/shoporder/';
+export const RETURN_URL = 'http://localhost:39701/';
+export const SHOP_ORDER_RETURN_URL = 'http://localhost:39701/shoporder/';
 export const NOTIFY_URL = '';
 export const CANCEL_URL = '';
 export const SECRET_KEY = '4TrWQT1xQe38W2QiBGA8KT4p5V7MTvGZa8LWN9YV0MpF';
