@@ -94,11 +94,7 @@
       >
         Checkout
       </a>
-      <a
-        *ngIf="cartItems.length > 0 && !isLoggedIn"
-        class="button_line"
-        (onclick)="isAlert = true"
-      >
+      <a *ngIf="cartItems.length > 0 && !isLoggedIn" class="button_line">
         Checkout
       </a>
 
@@ -114,6 +110,7 @@
         *ngIf="cartItems.length == 0 && !isLoggedIn"
         class="button_line"
         aria-disabled="true"
+        (onclick)="showHideAlert(true)"
       >
         Checkout
       </a>
@@ -121,10 +118,14 @@
         *ngIf="cartItems.length == 0 && isLoggedIn"
         class="button_line"
         aria-disabled="true"
+        (onclick)="showHideAlert(true)"
       >
         Checkout
       </a>
-      <alert type="danger" **ngIf="isAlert">
+      <alert type="danger" style="" *ngIf="isAlert">
+        <strong>Oh snap!</strong> Please Add the Items to the Cart !!!!
+      </alert>
+      <alert type="success" *ngIf="isAlert">
         <strong>Oh snap!</strong> Please Add the Items to the Cart !!!!
       </alert>
     </section>

@@ -59,7 +59,7 @@ export class CartComponent implements OnInit {
     this.totPrice = this.cartService.getItemsTotalPrice();
   }
 
-  alert() {
-    this.isAlert = true;
+  showHideAlert(val: boolean) {
+    this.isAlert = val;
   }
 }

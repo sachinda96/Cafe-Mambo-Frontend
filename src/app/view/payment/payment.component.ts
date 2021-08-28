@@ -49,6 +49,9 @@ export class PaymentComponent implements OnInit {
   isPaymentSuccess: boolean = false;
 
   modalRef: BsModalRef = new BsModalRef();
+  play: any;
+  interval: any;
+  count: any;
 
   constructor(
     private cartService: CartService,
@@ -70,10 +73,34 @@ export class PaymentComponent implements OnInit {
 
     if (this.userId == null) this.router.navigate(['']);
     if (this.totalQuantity == 0) this.router.navigate(['']);
+
     payhere.onCompleted = function onCompleted(orderId: any) {
       console.log('Payment completed. OrderIDss:' + orderId);
+      console.log(this.isPaymentSuccess);
       this.isPaymentSuccess = true;
-      this.sendOrder();
+
+      var url = BASE_URL + '/order';
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url);
+
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          console.log(xhr.status);
+          console.log(xhr.status);
+          console.log(xhr.responseText);
+          sessionStorage.removeItem('ORDER');
+        }
+      };
+
+      var data = sessionStorage.getItem('ORDER');
+
+      xhr.send(data);
+      // console.log(this.sendOrder());
+      //this.sendOrder();
     };
 
     payhere.onDismissed = function onDismissed() {
@@ -119,6 +146,7 @@ export class PaymentComponent implements OnInit {
     this.setItemDtoDetails();
 
     if (this.form.type == 'card') {
+      window.sessionStorage.setItem('ORDER', JSON.stringify(this.order));
       this.paynow();
     } else if (this.form.type == 'cod') {
       this.sendOrder();
@@ -153,8 +181,10 @@ export class PaymentComponent implements OnInit {
       custom_2: '',
     };
 
+    console.log(this.isPaymentSuccess);
     this.spinner.hide();
     payhere.startPayment(payment);
+    console.log(payhere.onCompleted);
 
     //if (this.isPaymentSuccess) this.sendOrder();
   }
@@ -190,25 +220,29 @@ export class PaymentComponent implements OnInit {
   }
   sendOrder() {
     console.log(this.order);
-    // this.orderService.addOrder(this.order).subscribe(
-    //   (res) => {
-    //     this.isOrderSuccessful = true;
-    //     this.isOrderFail = false;
-    //     this.spinner.hide();
-    //     this.clearAll();
-    //     setTimeout(() => {
-    //       this.router.navigate(['']);
-    //     }, 10000);
-    //     // this.router.navigate(['']);
-    //   },
-    //   (error) => {
-    //     // error.error;
-    //     console.log(error);
-    //     this.isOrderSuccessful = false;
-    //     this.isOrderFail = true;
-    //     this.spinner.hide();
-    //   }
-    // );
+    this.orderService.addOrder(this.order).subscribe(
+      (res) => {
+        this.isOrderSuccessful = true;
+        this.isOrderFail = false;
+        this.spinner.hide();
+        this.clearAll();
+        this.cartService.clearCart();
+        setTimeout(() => {
+          this.router.navigate(['']);
+        }, 10000);
+        // this.router.navigate(['']);
+        return true;
+      },
+      (error) => {
+        // error.error;
+        console.log(error);
+        this.isOrderSuccessful = false;
+        this.isOrderFail = true;
+        this.spinner.hide();
+      }
+    );
+
+    return false;
   }
 
   getItemsAsCommaSeperatedList() {
@@ -239,6 +273,10 @@ export class PaymentComponent implements OnInit {
     };
   }
 }
+
+// function startTimer() {
+//   throw new Error('Function not implemented.');
+// }
 /*
 Delivery
 id string = '';

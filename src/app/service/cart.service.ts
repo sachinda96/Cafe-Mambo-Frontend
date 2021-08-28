@@ -4,6 +4,7 @@ import { BASE_URL } from 'src/environments/environment';
 import { Item } from '../model/item';
 import { CartItem } from '../model/cart-item';
 
+export const CART = 'cart';
 @Injectable({
   providedIn: 'root',
 })
@@ -96,7 +97,7 @@ export class CartService {
     return this.http.get(BASE_URL + '/cart/tax');
   }
 
-  getItemCount():number{
+  getItemCount(): number {
     return this.cartItems.length;
   }
 }

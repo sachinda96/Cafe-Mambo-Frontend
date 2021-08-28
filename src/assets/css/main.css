@@ -142,6 +142,7 @@ p {
 .button_line:hover:before,
 .button_fill:hover:before {
   opacity: 0.5;
+  color: #fff;
 }
 
 .button_line:hover:after {
