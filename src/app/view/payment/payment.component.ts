@@ -59,10 +59,22 @@ export class PaymentComponent implements OnInit {
     private modalService: BsModalService,
     private router: Router,
     private uuidService: UuidService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+    this.cartItemList = this.cartService.getItems();
+    this.cartItemList = this.cartService.getItems();
+    this.totalQuantity = this.cartService.getItemsTotalCount();
+    this.totalPrice = this.cartService.getItemsTotalPrice();
+    this.userId = this.tokenStorageService.getUserId();
+
+    if (this.userId == null) this.router.navigate(['']);
+    if (this.totalQuantity == 0) this.router.navigate(['']);
     payhere.onCompleted = function onCompleted(orderId: any) {
+      localStorage.setItem("PaymentStatus","Pass")
       console.log('Payment completed. OrderID:' + orderId);
      this.isPaymentSuccess = true;
+
     };
 
     payhere.onDismissed = function onDismissed() {
@@ -74,17 +86,6 @@ export class PaymentComponent implements OnInit {
       console.log('Error:' + error);
       this.spinner.hide();
     };
-  }
-
-  ngOnInit(): void {
-    this.cartItemList = this.cartService.getItems();
-    this.cartItemList = this.cartService.getItems();
-    this.totalQuantity = this.cartService.getItemsTotalCount();
-    this.totalPrice = this.cartService.getItemsTotalPrice();
-    this.userId = this.tokenStorageService.getUserId();
-
-    if (this.userId == null) this.router.navigate(['']);
-    if (this.totalQuantity == 0) this.router.navigate(['']);
   }
 
   form: any = {
@@ -118,13 +119,14 @@ export class PaymentComponent implements OnInit {
     this.setPaymentDetails();
     this.setItemDtoDetails();
 
-    if (this.form.type != 'cod') {
+    if(localStorage.getItem("PaymentStatus") == "Pass"){
+      this.sendOrder();
+    }else if (this.form.type == 'card') {
       this.paynow();
-    } else if (this.form.type != 'cash') {
-        this.sendOrder();
-    } else {
-      this.spinner.hide();
+    } else if (this.form.type == 'cod') {
+      this.sendOrder();
     }
+    this.spinner.hide();
   }
 
   paynow() {
@@ -142,7 +144,7 @@ export class PaymentComponent implements OnInit {
       amount: this.order.paymentDto.amount,
       first_name: this.form.name,
       last_name: '',
-      email: 'samanp@gmail.com',
+      email: '',
       phone: this.form.contactNo,
       address: this.form.address,
       city: this.form.city,
@@ -150,12 +152,14 @@ export class PaymentComponent implements OnInit {
       delivery_address: this.form.address,
       delivery_city: this.form.city,
       delivery_country: 'Sri Lanka',
-      custom_1: '',
+      uid: this.userId,
       custom_2: '',
     };
 
     this.spinner.hide();
     payhere.startPayment(payment);
+
+    //if (this.isPaymentSuccess) this.sendOrder();
   }
   setDeliveryDetails() {
     this.order.deliveryDto = {
@@ -192,6 +196,7 @@ export class PaymentComponent implements OnInit {
     console.log(this.order)
     this.orderService.addOrder(this.order).subscribe(
       (res) => {
+        localStorage.removeItem("PaymentStatus")
         this.isOrderSuccessful = true;
         this.spinner.hide();
         this.clearAll();
@@ -201,6 +206,7 @@ export class PaymentComponent implements OnInit {
         // this.router.navigate(['']);
       },
       (error) => {
+        localStorage.removeItem("PaymentStatus")
         // error.error;
         console.log(error)
         this.isOrderSuccessful = false;
@@ -208,6 +214,27 @@ export class PaymentComponent implements OnInit {
         this.spinner.hide();
       }
     );
+
+    // this.orderService.addOrder(this.order).subscribe(
+    //   (res) => {
+    //     this.isOrderSuccessful = true;
+    //     this.isOrderFail = false;
+    //     this.spinner.hide();
+    //     this.clearAll();
+    //     setTimeout(() => {
+    //       this.router.navigate(['']);
+    //     }, 10000);
+    //     // this.router.navigate(['']);
+    //   },
+    //   (error) => {
+    //     // error.error;
+    //     console.log(error);
+    //     this.isOrderSuccessful = false;
+    //     this.isOrderFail = true;
+    //     this.spinner.hide();
+    //   }
+    // );
+
   }
 
   getItemsAsCommaSeperatedList() {
@@ -219,8 +246,14 @@ export class PaymentComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-      this.sendOrder();
+    if(localStorage.getItem("PaymentStatus") == "Pass"){
+      this.onSubmit();
+    }else{
       this.modalRef = this.modalService.show(template);
+    }
+
+
+
   }
 
   clearAll() {

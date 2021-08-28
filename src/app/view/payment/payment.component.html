@@ -57,6 +57,7 @@
                     placeholder="542 W. 15th Street"
                     [(ngModel)]="form.address"
                     required
+                    style="color: black"
                   />
                   <label for="city"
                     ><i class="fa fa-institution"></i> City</label
@@ -185,11 +186,19 @@
   </section>
 </div>
 
-<alert type="success" *ngIf="isOrderSuccessful">
+<alert
+  type="success"
+  *ngIf="isOrderSuccessful"
+  style="width: 35rem; text-align: center; margin: auto"
+>
   <strong style="color: black"> Order is Successfully Completed</strong>
   <a href="#" class="alert-link"></a>.
 </alert>
-<alert type="danger" *ngIf="isOrderFail">
+<alert
+  type="danger"
+  *ngIf="isOrderFail"
+  style="width: 35rem; text-align: center; margin: auto"
+>
   <strong style="color: aliceblue">Try Again..!</strong>
   <a href="#" class="alert-link"></a>
 </alert>
