@@ -59,10 +59,21 @@ export class PaymentComponent implements OnInit {
     private modalService: BsModalService,
     private router: Router,
     private uuidService: UuidService
-  ) {
+  ) {}
+
+  ngOnInit(): void {
+    this.cartItemList = this.cartService.getItems();
+    this.cartItemList = this.cartService.getItems();
+    this.totalQuantity = this.cartService.getItemsTotalCount();
+    this.totalPrice = this.cartService.getItemsTotalPrice();
+    this.userId = this.tokenStorageService.getUserId();
+
+    if (this.userId == null) this.router.navigate(['']);
+    if (this.totalQuantity == 0) this.router.navigate(['']);
     payhere.onCompleted = function onCompleted(orderId: any) {
-      console.log('Payment completed. OrderID:' + orderId);
+      console.log('Payment completed. OrderIDss:' + orderId);
       this.isPaymentSuccess = true;
+      this.sendOrder();
     };
 
     payhere.onDismissed = function onDismissed() {
@@ -74,17 +85,6 @@ export class PaymentComponent implements OnInit {
       console.log('Error:' + error);
       this.spinner.hide();
     };
-  }
-
-  ngOnInit(): void {
-    this.cartItemList = this.cartService.getItems();
-    this.cartItemList = this.cartService.getItems();
-    this.totalQuantity = this.cartService.getItemsTotalCount();
-    this.totalPrice = this.cartService.getItemsTotalPrice();
-    this.userId = this.tokenStorageService.getUserId();
-
-    if (this.userId == null) this.router.navigate(['']);
-    if (this.totalQuantity == 0) this.router.navigate(['']);
   }
 
   form: any = {
@@ -120,7 +120,7 @@ export class PaymentComponent implements OnInit {
 
     if (this.form.type == 'card') {
       this.paynow();
-    } else if (this.form.type == 'cash') {
+    } else if (this.form.type == 'cod') {
       this.sendOrder();
     }
     this.spinner.hide();
@@ -190,25 +190,25 @@ export class PaymentComponent implements OnInit {
   }
   sendOrder() {
     console.log(this.order);
-    this.orderService.addOrder(this.order).subscribe(
-      (res) => {
-        this.isOrderSuccessful = true;
-        this.isOrderFail = false;
-        this.spinner.hide();
-        this.clearAll();
-        setTimeout(() => {
-          this.router.navigate(['']);
-        }, 10000);
-        // this.router.navigate(['']);
-      },
-      (error) => {
-        // error.error;
-        console.log(error);
-        this.isOrderSuccessful = false;
-        this.isOrderFail = true;
-        this.spinner.hide();
-      }
-    );
+    // this.orderService.addOrder(this.order).subscribe(
+    //   (res) => {
+    //     this.isOrderSuccessful = true;
+    //     this.isOrderFail = false;
+    //     this.spinner.hide();
+    //     this.clearAll();
+    //     setTimeout(() => {
+    //       this.router.navigate(['']);
+    //     }, 10000);
+    //     // this.router.navigate(['']);
+    //   },
+    //   (error) => {
+    //     // error.error;
+    //     console.log(error);
+    //     this.isOrderSuccessful = false;
+    //     this.isOrderFail = true;
+    //     this.spinner.hide();
+    //   }
+    // );
   }
 
   getItemsAsCommaSeperatedList() {
@@ -220,7 +220,7 @@ export class PaymentComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
-    // this.sendOrder();
+    //this.sendOrder();
     this.modalRef = this.modalService.show(template);
   }
 
