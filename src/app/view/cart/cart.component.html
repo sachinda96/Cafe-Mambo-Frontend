@@ -29,10 +29,12 @@
             </tr>
             <tr *ngFor="let cItem of cartItems">
               <td>
-                <img
-                  src="{{ cItem.item.imagePath }}"
-                  style="height: 4rem; width: 4rem"
-                />
+                <a [routerLink]="['/item/', cItem.item.id]">
+                  <img
+                    src="{{ cItem.item.imagePath }}"
+                    style="height: 4rem; width: 4rem"
+                  />
+                </a>
               </td>
               <td>{{ cItem.item.name }}</td>
               <td>{{ cItem.item.price }}</td>
