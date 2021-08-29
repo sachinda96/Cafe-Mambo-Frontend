@@ -133,14 +133,27 @@
                     </h3>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body">
-                    <dl class="row" *ngIf="isProcessingOrder">
-                      <span *ngFor="let item of order.itemDtoList">
-                        <dt class="col-sm-4">item.name</dt>
-                        <dd class="col-sm-8"></dd>
-                      </span>
-                    </dl>
-                  </div>
+                  <table>
+                    <tbody *ngIf="isProcessingOrder">
+                      <tr *ngFor="let order of orderList">
+                        <td style="padding-bottom: 0.3 rem">
+                          Order Date:
+                          {{ order.createDate | date: "dd/MM/yyyy" }}
+                          <hr />
+                        </td>
+                        <td>
+                          Total :
+                          {{ order.paymentEntity.amount | currency: "Rs " }}
+                          <hr />
+                        </td>
+                        <td>
+                          Method of Payment : {{ order.paymentEntity.method }}
+                          <hr />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
                   <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -203,3 +216,11 @@
     </div>
   </div>
 </div>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#372626"
+  type="square-jelly-box"
+  [fullScreen]="true"
+  ><p style="color: white">Loading...</p></ngx-spinner
+>

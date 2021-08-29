@@ -95,6 +95,7 @@
               name="contactNo"
               [(ngModel)]="form.contactNo"
               #contactNo="ngModel"
+              pattern="^((\\+94-?)|0)?[0-9]{10}$"
               required
             />
             <div
@@ -105,6 +106,9 @@
               <div *ngIf="contactNo.errors.required">
                 Contact Number is required
               </div>
+              <div *ngIf="contactNo.errors.pattern">
+                Contact Number must be a valid number
+              </div>
             </div>
 
             <input
@@ -113,7 +117,19 @@
               name="location"
               [(ngModel)]="form.location"
               #location="ngModel"
+              pattern="^([A-Za-z0-9\\\/_\-]|([A-Za-z0-9\\\/_\-][A-Za-z0-9\\\/_\- ]{0,18}[A-Za-z0-9\\\/_\-]))$"
+              required
             />
+            <div
+              class="alert-danger field-error"
+              *ngIf="location.errors && f.submitted"
+              style="color: white; background: none; width: 60%"
+            >
+              <div *ngIf="location.errors.required">Location is required</div>
+              <div *ngIf="location.errors.pattern">
+                Location cannot start with an empty space
+              </div>
+            </div>
 
             <div>
               <input
@@ -143,9 +159,16 @@
               name="message"
               [(ngModel)]="form.message"
               #message="ngModel"
-              required=""
+              required
               aria-rowcount="5"
             />
+            <div
+              class="alert-danger field-error"
+              *ngIf="message.errors && f.submitted"
+              style="color: white; background: none; width: 60%"
+            >
+              <div *ngIf="message.errors.required">Message is required</div>
+            </div>
             <div>
               <button class="button_fill">Reserve</button>
             </div>

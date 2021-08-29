@@ -12,6 +12,7 @@ export class CartService {
   items: Item[] = [];
   cartItems: Array<CartItem> = new Array<CartItem>();
   count: number = 0;
+
   constructor(private http: HttpClient) {}
 
   addToCart(item: Item) {
@@ -26,9 +27,12 @@ export class CartService {
       };
 
       this.cartItems.push(cartItem);
+      window.sessionStorage.setItem(CART, this.cartItems.toString());
     } else {
       // Handle if the product already exists in cart
       this.cartItems[index].count += 1;
+      window.sessionStorage.removeItem(CART);
+      window.sessionStorage.setItem(CART, this.cartItems.toString());
     }
 
     this.count = this.cartItems.length;

@@ -29,9 +29,7 @@ export class OrderService {
     );
   }
   getPendingOrdersByUser(uid: string) {
-    return this.http.get<OrderDTO>(
-      BASE_URL + '/order/getPendingOrdersByUser/' + uid
-    );
+    return this.http.get<OrderDTO>(BASE_URL + '/order' + uid);
   }
 
   getOrderById(id: string) {
