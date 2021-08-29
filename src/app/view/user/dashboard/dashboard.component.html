@@ -136,7 +136,9 @@
                   <table>
                     <tbody *ngIf="isProcessingOrder">
                       <tr *ngFor="let order of orderList">
-                        <td style="padding-bottom: 0.3 rem">
+                        <td
+                          style="padding-bottom: 0.3 rem; margin-right: 0.5rem"
+                        >
                           Order Date:
                           {{ order.createDate | date: "dd/MM/yyyy" }}
                           <hr />
@@ -146,8 +148,12 @@
                           {{ order.paymentEntity.amount | currency: "Rs " }}
                           <hr />
                         </td>
-                        <td>
-                          Method of Payment : {{ order.paymentEntity.method }}
+                        <td *ngIf="order.paymentEntity.method == 'cod'">
+                          Method of Payment : Cash
+                          <hr />
+                        </td>
+                        <td *ngIf="order.paymentEntity.method != 'cod'">
+                          Method of Payment : Card
                           <hr />
                         </td>
                       </tr>
