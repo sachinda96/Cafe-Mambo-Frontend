@@ -277,7 +277,7 @@
 
                 <br />
                 <alert
-                id="alertS"
+                  id="alertS"
                   type="success"
                   *ngIf="isOrderSuccessful"
                   style="width: 35rem; text-align: center; margin: auto"
@@ -288,17 +288,16 @@
                   <a href="#" class="alert-link"></a>.
                 </alert>
                 <alert
-                
-                  type="danger"
+                  type="warning"
                   *ngIf="isOrderFail"
                   style="
                     width: 35rem;
                     text-align: center;
                     margin: auto;
-                    background-color: crimson;
+                    background-color: yellow;
                   "
                 >
-                  <strong style="color: aliceblue">Try Again..!</strong>
+                  <strong style="color: black">Try Again..!</strong>
                   <a href="#" class="alert-link"></a>
                 </alert>
               </form>
