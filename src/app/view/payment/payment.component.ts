@@ -113,10 +113,12 @@ export class PaymentComponent implements OnInit {
           console.log(xhr.status);
           console.log(xhr.responseText);
           sessionStorage.removeItem('ORDER');
+
           alert('Order is Successful');
         }
 
         window.location.replace(BASE_URL);
+        window.location.reload();
       };
 
       var data = sessionStorage.getItem('ORDER');
@@ -155,6 +157,8 @@ export class PaymentComponent implements OnInit {
   Message = '';
 
   onSubmit(): void {
+    this.isOrderSuccessful = false;
+    this.isOrderFail = false;
     this.spinner.show();
     this.modalRef.hide();
     this.setFormDetails();
