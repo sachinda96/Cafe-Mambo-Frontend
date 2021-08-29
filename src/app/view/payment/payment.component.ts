@@ -113,7 +113,7 @@ export class PaymentComponent implements OnInit {
           console.log(xhr.status);
           console.log(xhr.responseText);
           sessionStorage.removeItem('ORDER');
-          cartService.clearCart();
+          alert('Order is Successful');
         }
       };
 
@@ -269,8 +269,6 @@ export class PaymentComponent implements OnInit {
         this.spinner.hide();
       }
     );
-
-    return false;
   }
 
   getItemsAsCommaSeperatedList() {
