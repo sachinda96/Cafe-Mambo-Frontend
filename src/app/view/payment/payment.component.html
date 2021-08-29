@@ -16,8 +16,7 @@
             <div class="row">
               <form
                 *ngIf="!isOrderSuccessful || showDeliveryDetails"
-                name="form"
-                #f="ngForm"
+                [formGroup]="requiredForm"
                 novalidate
               >
                 <div class="col-50 form_info">
@@ -25,124 +24,291 @@
                   <label for="fname"
                     ><i class="fa fa-user"></i> Full Name</label
                   >
-                  <div>
+                  <div style="display: flex; flex-direction: row">
                     <input
                       type="text"
                       id="fname"
                       placeholder="John M. Doe"
                       name="name"
-                      [(ngModel)]="form.name"
-                      #name="ngModel"
+                      formControlName="name"
                       required
                       style="color: black"
+                      maxlength="40"
                     />
                     <div
-                      class="alert-danger field-error"
-                      *ngIf="name.errors && f.submitted"
-                      style="color: aliceblue"
+                      *ngIf="
+                        requiredForm.controls['name'].invalid &&
+                        (requiredForm.controls['name'].touched ||
+                          requiredForm.controls['name'].dirty)
+                      "
+                      style="padding-left: 1rem"
                     >
-                      <div *ngIf="name.errors.required">
-                        Username is required
+                      <div
+                        *ngIf="requiredForm.controls['name'].errors.required"
+                      >
+                        Name is required.
+                      </div>
+                      <div
+                        *ngIf="requiredForm.controls['name'].errors?.pattern"
+                      >
+                        Name is not valid.
+                      </div>
+
+                      <div
+                        *ngIf="requiredForm.controls['name'].errors?.maxlength"
+                      >
+                        Name must be at most 40 characters long.
                       </div>
                     </div>
                   </div>
 
                   <label for="adr"
-                    ><i class="fa fa-address-card-o"></i> Address</label
+                    ><i class="fa fa-address-card"></i> Address</label
                   >
-                  <input
-                    type="text"
-                    id="adr"
-                    name="address"
-                    placeholder="542 W. 15th Street"
-                    [(ngModel)]="form.address"
-                    required
-                    style="color: black"
-                  />
-                  <label for="city"
-                    ><i class="fa fa-institution"></i> City</label
-                  >
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    placeholder="Colombo"
-                    [(ngModel)]="form.city"
-                    required
-                    style="color: black"
-                  />
-
-                  <div class="row">
-                    <div class="col-50">
-                      <label for="district">District</label>
-                      <input
-                        type="text"
-                        id="district"
-                        name="district"
-                        placeholder="Colombo"
-                        [(ngModel)]="form.district"
-                        required
-                        style="color: black"
-                      />
-                    </div>
-                    <div class="col-50">
-                      <label for="zip">Contact No</label>
-                      <input
-                        type="text"
-                        id="mobileNo"
-                        name="mobileNo"
-                        placeholder="10001"
-                        [(ngModel)]="form.mobileNo"
-                        required
-                        style="color: black"
-                      />
-                    </div>
-                    <div class="col-50">
-                      <label for="mop">Method of Payment</label>
-                      <select
-                        class="typeDDL"
-                        id="mop"
-                        name="type"
-                        [(ngModel)]="form.type"
-                        #type="ngModel"
-                        required
-                        style="
-                          color: black;
-                          font-size: small;
-                          height: fit-content;
+                  <div style="display: flex; flex-direction: row">
+                    <input
+                      type="text"
+                      id="adr"
+                      formControlName="address"
+                      placeholder="542 W. 15th Street"
+                      style="color: black"
+                      minlength="8"
+                      maxlength="40"
+                    />
+                    <div
+                      *ngIf="
+                        requiredForm.controls['address'].invalid &&
+                        (requiredForm.controls['address'].touched ||
+                          requiredForm.controls['address'].dirty)
+                      "
+                      style="padding-left: 1rem"
+                    >
+                      <div
+                        *ngIf="requiredForm.controls['address'].errors.required"
+                      >
+                        Address is required.
+                      </div>
+                      <div
+                        *ngIf="
+                          requiredForm.controls['address'].errors?.minlength
                         "
                       >
-                        <option value="" selected style="color: black">
-                          <b>
-                            ------------------Please Select------------------</b
+                        Address must be at least 8 characters long.
+                      </div>
+                    </div>
+                  </div>
+                  <label for="city"><i class="fa fa-city"></i> City</label>
+                  <div style="display: flex; flex-direction: row">
+                    <input
+                      type="text"
+                      id="city"
+                      formControlName="city"
+                      placeholder="Colombo"
+                      style="color: black"
+                      minlength="3"
+                      maxlength="20"
+                    />
+                    <div>
+                      <div
+                        *ngIf="
+                          requiredForm.controls['city'].invalid &&
+                          (requiredForm.controls['city'].touched ||
+                            requiredForm.controls['city'].dirty)
+                        "
+                        style="padding-left: 1rem"
+                      >
+                        <div
+                          *ngIf="requiredForm.controls['city'].errors.required"
+                        >
+                          City is required.
+                        </div>
+                        <div
+                          *ngIf="
+                            requiredForm.controls['city'].errors?.minlength
+                          "
+                        >
+                          City must be at least 3 characters long.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-50">
+                      <label for="district"
+                        ><i class="fa fa-location-arrow"></i> District</label
+                      >
+                      <div style="display: flex; flex-direction: row">
+                        <input
+                          type="text"
+                          id="district"
+                          formControlName="district"
+                          placeholder="Colombo"
+                          style="color: rgb(3, 3, 3)"
+                          minlength="4"
+                          maxlength="20"
+                        />
+                        <div
+                          *ngIf="
+                            requiredForm.controls['district'].invalid &&
+                            (requiredForm.controls['district'].touched ||
+                              requiredForm.controls['district'].dirty)
+                          "
+                          style="padding-left: 1rem"
+                        >
+                          <div
+                            *ngIf="
+                              requiredForm.controls['district'].errors.required
+                            "
                           >
-                        </option>
+                            District is required.
+                          </div>
+                          <div
+                            *ngIf="
+                              requiredForm.controls['district'].errors
+                                ?.minlength
+                            "
+                          >
+                            District must be at least 4 characters long.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-50">
+                      <label for="zip"
+                        ><i class="fa fa-phone"></i>Contact No</label
+                      >
+                      <div style="display: flex; flex-direction: row">
+                        <input
+                          type="text"
+                          id="mobileNo"
+                          formControlName="contactNo"
+                          placeholder="10001"
+                          style="color: black"
+                          minlength="10"
+                          maxlength="10"
+                        />
+                        <div
+                          *ngIf="
+                            requiredForm.controls['contactNo'].invalid &&
+                            (requiredForm.controls['contactNo'].touched ||
+                              requiredForm.controls['contactNo'].dirty)
+                          "
+                          style="padding-left: 1rem"
+                        >
+                          <div
+                            *ngIf="
+                              requiredForm.controls['contactNo'].errors.required
+                            "
+                          >
+                            ContactNo is required.
+                          </div>
+                          <div
+                            *ngIf="
+                              requiredForm.controls['contactNo'].errors
+                                ?.minlength
+                            "
+                          >
+                            ContactNo must be at least 10characters long.
+                          </div>
+                          <div
+                            *ngIf="
+                              requiredForm.controls['contactNo'].errors?.pattern
+                            "
+                          >
+                            ContactNo is invalid
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-50">
+                      <label for="mop"
+                        ><i class="fa fa-money-check"></i>Method of
+                        Payment</label
+                      >
+                      <div>
+                        <select
+                          class="typeDDL"
+                          id="mop"
+                          formControlName="type"
+                          style="
+                            color: black;
+                            font-size: small;
+                            height: fit-content;
+                          "
+                        >
+                          <option value="" selected style="color: black">
+                            <b>
+                              ------------------Please
+                              Select------------------</b
+                            >
+                          </option>
 
-                        <option value="card" selected style="color: black">
-                          <b>Card</b>
-                        </option>
-                        <option value="cod" style="color: black">
-                          <b>Cash on Delivery</b>
-                        </option>
-                      </select>
+                          <option value="card" selected style="color: black">
+                            <b>Card</b>
+                          </option>
+                          <option value="cod" style="color: black">
+                            <b>Cash on Delivery</b>
+                          </option>
+                        </select>
+                        <div
+                          *ngIf="
+                            requiredForm.controls['type'].invalid &&
+                            (requiredForm.controls['type'].touched ||
+                              requiredForm.controls['type'].dirty)
+                          "
+                          style="padding-left: 1rem"
+                        >
+                          <div
+                            *ngIf="
+                              requiredForm.controls['type'].errors.required
+                            "
+                          >
+                            Method is required.
+                          </div>
+                        </div>
+                      </div>
+                      >
                     </div>
                   </div>
                 </div>
+                <p>{{ requiredForm.controls["type"].status }}</p>
+                <p>{{ requiredForm.controls["name"].status }}</p>
+                <p>{{ requiredForm.controls["city"].status }}</p>
+                <p>{{ requiredForm.controls["district"].status }}</p>
+                <p>{{ requiredForm.controls["contactNo"].status }}</p>
+                <p>{{ requiredForm.controls["address"].status }}</p>
 
                 <a
                   class="button_fill"
                   style="margin-left: 2%"
-                  *ngIf="form.type == 'card'"
                   (click)="openModal(template)"
                   >Continue to checkout</a
                 >
-                <a
-                  class="button_fill"
-                  style="margin-left: 2%"
-                  (click)="openModal(template)"
-                  *ngIf="form.type == 'cod'"
-                  >Place Order</a
+
+                <br />
+                <alert
+                  type="success"
+                  *ngIf="isOrderSuccessful"
+                  style="width: 35rem; text-align: center; margin: auto"
                 >
+                  <strong style="color: black">
+                    Order is Successfully Completed</strong
+                  >
+                  <a href="#" class="alert-link"></a>.
+                </alert>
+                <alert
+                  type="danger"
+                  *ngIf="isOrderFail"
+                  style="
+                    width: 35rem;
+                    text-align: center;
+                    margin: auto;
+                    background-color: crimson;
+                  "
+                >
+                  <strong style="color: aliceblue">Try Again..!</strong>
+                  <a href="#" class="alert-link"></a>
+                </alert>
               </form>
               <br /><br />
             </div>
@@ -186,22 +352,6 @@
   </section>
 </div>
 
-<alert
-  type="success"
-  *ngIf="isOrderSuccessful"
-  style="width: 35rem; text-align: center; margin: auto"
->
-  <strong style="color: black"> Order is Successfully Completed</strong>
-  <a href="#" class="alert-link"></a>.
-</alert>
-<alert
-  type="danger"
-  *ngIf="isOrderFail"
-  style="width: 35rem; text-align: center; margin: auto"
->
-  <strong style="color: aliceblue">Try Again..!</strong>
-  <a href="#" class="alert-link"></a>
-</alert>
 <ngx-spinner
   bdColor="rgba(229,221,221,0.8)"
   size="medium"

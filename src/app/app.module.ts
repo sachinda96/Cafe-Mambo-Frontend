@@ -7,7 +7,7 @@ import { HomeComponent } from './view/home/home.component';
 import { MenuComponent } from './view/menu/menu.component';
 import { AboutUsComponent } from './view/about-us/about-us.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './view/footer/footer.component';
 import { EventComponent } from './view/event/event.component';
@@ -96,6 +96,7 @@ import { ForgotPasswordComponent } from './view/forgot-password/forgot-password.
     ModalDialogModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+    ReactiveFormsModule,
   ],
   providers: [RatingConfig],
   bootstrap: [AppComponent],

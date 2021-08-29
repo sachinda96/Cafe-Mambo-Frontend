@@ -15,6 +15,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UuidService } from 'src/app/service/uuid.service';
 import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
+import {
   BASE_URL,
   CANCEL_URL,
   MERCHANT_ID,
@@ -53,6 +59,14 @@ export class PaymentComponent implements OnInit {
   interval: any;
   count: any;
 
+  namePattern = '^[a-z]$';
+  pwdPattern = '^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?!.*s).{6,12}$';
+  mobnumPattern = '^((\\+94-?)|0)?[0-9]{10}$';
+  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+
+  //Create FormGroup
+  requiredForm: FormGroup | any;
+
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
@@ -61,8 +75,11 @@ export class PaymentComponent implements OnInit {
     private viewRef: ViewContainerRef,
     private modalService: BsModalService,
     private router: Router,
-    private uuidService: UuidService
-  ) {}
+    private uuidService: UuidService,
+    private fb: FormBuilder
+  ) {
+    this.myForm();
+  }
 
   ngOnInit(): void {
     this.cartItemList = this.cartService.getItems();
@@ -74,7 +91,10 @@ export class PaymentComponent implements OnInit {
     if (this.userId == null) this.router.navigate(['']);
     if (this.totalQuantity == 0) this.router.navigate(['']);
 
-    payhere.onCompleted = function onCompleted(orderId: any) {
+    payhere.onCompleted = function onCompleted(
+      orderId: any,
+      cartService: CartService
+    ) {
       console.log('Payment completed. OrderIDss:' + orderId);
       console.log(this.isPaymentSuccess);
       this.isPaymentSuccess = true;
@@ -93,6 +113,7 @@ export class PaymentComponent implements OnInit {
           console.log(xhr.status);
           console.log(xhr.responseText);
           sessionStorage.removeItem('ORDER');
+          cartService.clearCart();
         }
       };
 
@@ -105,12 +126,10 @@ export class PaymentComponent implements OnInit {
 
     payhere.onDismissed = function onDismissed() {
       console.log('Payment dismissed');
-      this.spinner.hide();
     };
 
     payhere.onError = function onError(error: any) {
       console.log('Error:' + error);
-      this.spinner.hide();
     };
   }
 
@@ -124,7 +143,7 @@ export class PaymentComponent implements OnInit {
     message: '',
     type: '',
     date: null,
-    id: this.uuidService.generateUUID(),
+    id: null,
   };
 
   isOrderSuccessful = false;
@@ -136,20 +155,28 @@ export class PaymentComponent implements OnInit {
   onSubmit(): void {
     this.spinner.show();
     this.modalRef.hide();
+    this.setFormDetails();
+    console.log(this.form);
 
-    this.order.orderDate = new Date();
-    this.order.id = this.form.id;
-    this.order.userId = this.userId;
+    if (this.checkValidity()) {
+      this.order.orderDate = new Date();
+      this.order.id = this.form.id;
+      this.order.userId = this.userId;
 
-    this.setDeliveryDetails();
-    this.setPaymentDetails();
-    this.setItemDtoDetails();
+      this.setDeliveryDetails();
+      this.setPaymentDetails();
+      this.setItemDtoDetails();
 
-    if (this.form.type == 'card') {
-      window.sessionStorage.setItem('ORDER', JSON.stringify(this.order));
-      this.paynow();
-    } else if (this.form.type == 'cod') {
-      this.sendOrder();
+      if (this.form.type == 'card') {
+        window.sessionStorage.setItem('ORDER', JSON.stringify(this.order));
+        this.paynow();
+      } else if (this.form.type == 'cod') {
+        this.sendOrder();
+      }
+      this.spinner.hide();
+    } else {
+      this.isOrderSuccessful = false;
+      this.isOrderFail = true;
     }
     this.spinner.hide();
   }
@@ -215,6 +242,7 @@ export class PaymentComponent implements OnInit {
     this.cartItemList.forEach((ci) => {
       item.id = ci.item.id;
       item.qty = ci.count;
+      item.price = ci.item.price;
       this.order.itemDtoList.push(item);
     });
   }
@@ -271,6 +299,84 @@ export class PaymentComponent implements OnInit {
       date: null,
       id: null,
     };
+  }
+  setFormDetails() {
+    this.form = {
+      name: this.requiredForm.get('name').value,
+      email: '',
+      contactNo: this.requiredForm.get('contactNo').value,
+      address: this.requiredForm.get('address').value,
+      city: this.requiredForm.get('city').value,
+      district: this.requiredForm.get('district').value,
+      message: '',
+      type: this.requiredForm.get('type').value,
+      date: new Date(),
+      id: this.uuidService.generateUUID(),
+    };
+    console.log(this.requiredForm.get('name'));
+  }
+
+  checkValidity() {
+    console.log(this.requiredForm.get('name').status.localeCompare('INVALID'));
+    if (
+      this.requiredForm.get('name').status.localeCompare('INVALID') == 0 ||
+      this.requiredForm.get('contactNo').status.localeCompare('INVALID') == 0 ||
+      this.requiredForm.get('address').status.localeCompare('INVALID') == 0 ||
+      this.requiredForm.get('city').status.localeCompare('INVALID') == 0 ||
+      this.requiredForm.get('district').status.localeCompare('INVALID') == 0 ||
+      this.requiredForm.get('type').status.localeCompare('INVALID') == 0
+    ) {
+      return false;
+    }
+    return true;
+  }
+  //Create required field validator for name
+  myForm() {
+    this.requiredForm = this.fb.group({
+      name: [
+        '',
+        Validators.required,
+        Validators.pattern('^[a-zA-Z]$'),
+        Validators.minLength(8),
+        Validators.maxLength(40),
+      ],
+      address: [
+        '',
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9]{8,60}$'),
+        Validators.minLength(8),
+        Validators.maxLength(40),
+      ],
+      city: [
+        '',
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9]{3,20}$'),
+        Validators.minLength(3),
+        Validators.maxLength(20),
+      ],
+      district: [
+        '',
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9]*'),
+        Validators.minLength(8),
+        Validators.maxLength(20),
+      ],
+      contactNo: [
+        '',
+        Validators.required,
+        Validators.pattern(this.mobnumPattern),
+        Validators.minLength(10),
+        Validators.maxLength(10),
+      ],
+      type: ['', Validators.required],
+    });
+  }
+
+  startTimer() {
+    this.play = true;
+    this.interval = setInterval(() => {
+      this.form.type = this.requiredForm.get('type');
+    }, 1000);
   }
 }
 
