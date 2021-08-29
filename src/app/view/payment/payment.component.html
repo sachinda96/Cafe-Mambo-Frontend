@@ -41,7 +41,6 @@
                         (requiredForm.controls['name'].touched ||
                           requiredForm.controls['name'].dirty)
                       "
-                      style="padding-left: 1rem"
                     >
                       <div
                         *ngIf="requiredForm.controls['name'].errors.required"
@@ -81,7 +80,6 @@
                         (requiredForm.controls['address'].touched ||
                           requiredForm.controls['address'].dirty)
                       "
-                      style="padding-left: 1rem"
                     >
                       <div
                         *ngIf="requiredForm.controls['address'].errors.required"
@@ -153,7 +151,6 @@
                             (requiredForm.controls['district'].touched ||
                               requiredForm.controls['district'].dirty)
                           "
-                          style="padding-left: 1rem"
                         >
                           <div
                             *ngIf="
@@ -175,7 +172,7 @@
                     </div>
                     <div class="col-50">
                       <label for="zip"
-                        ><i class="fa fa-phone"></i>Contact No</label
+                        ><i class="fa fa-phone"></i>&nbsp;Contact No</label
                       >
                       <div style="display: flex; flex-direction: row">
                         <input
@@ -200,7 +197,7 @@
                               requiredForm.controls['contactNo'].errors.required
                             "
                           >
-                            ContactNo is required.
+                            Contact Number is required.
                           </div>
                           <div
                             *ngIf="
@@ -222,7 +219,7 @@
                     </div>
                     <div class="col-50">
                       <label for="mop"
-                        ><i class="fa fa-money-check"></i>Method of
+                        ><i class="fa fa-money-check"></i>&nbsp;Method of
                         Payment</label
                       >
                       <div>
