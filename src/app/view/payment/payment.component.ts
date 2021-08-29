@@ -115,6 +115,8 @@ export class PaymentComponent implements OnInit {
           sessionStorage.removeItem('ORDER');
           alert('Order is Successful');
         }
+
+        window.location.replace(BASE_URL);
       };
 
       var data = sessionStorage.getItem('ORDER');
