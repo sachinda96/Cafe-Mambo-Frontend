@@ -130,10 +130,14 @@ export class PaymentComponent implements OnInit {
 
     payhere.onDismissed = function onDismissed() {
       console.log('Payment dismissed');
+      alert('Payment dismissed');
+      sessionStorage.removeItem('ORDER');
     };
 
     payhere.onError = function onError(error: any) {
       console.log('Error:' + error);
+      alert('Try Again');
+      sessionStorage.removeItem('ORDER');
     };
   }
 
@@ -239,7 +243,7 @@ export class PaymentComponent implements OnInit {
       id: '',
       amount: this.totalPrice,
       method: this.form.type,
-      paymentStatus: '',
+      paymentStatus: 'Success',
     };
   }
 

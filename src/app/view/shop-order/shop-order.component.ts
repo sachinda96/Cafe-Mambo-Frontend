@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { CartService } from 'src/app/service/cart.service';
 import { Location } from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ItemService } from 'src/app/service/item.service';
 import { Category } from 'src/app/model/category';
@@ -17,16 +17,17 @@ import { CategoryService } from 'src/app/service/category.service';
 import { Item } from 'src/app/model/item';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import {
+  BASE_URL,
   CANCEL_URL,
   MERCHANT_ID,
   NOTIFY_URL,
   RETURN_URL,
-  SHOP_ORDER_RETURN_URL
-} from "../../../environments/environment";
-import {ShopOrder} from "../../model/shop-order";
-import {Payment} from "../../model/payment";
-import {OrderService} from "../../service/order.service";
-import {NgxSpinnerService} from "ngx-spinner";
+  SHOP_ORDER_RETURN_URL,
+} from '../../../environments/environment';
+import { ShopOrder } from '../../model/shop-order';
+import { Payment } from '../../model/payment';
+import { OrderService } from '../../service/order.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export class ItemRating {
   item: Item = new Item();
@@ -51,12 +52,12 @@ export class ShopOrderComponent implements OnInit {
   k = 0;
   modalRef: BsModalRef = new BsModalRef();
   categoryId: any;
-  subtotal:number =0;
-  isCardPay:boolean = false;
+  subtotal: number = 0;
+  isCardPay: boolean = false;
   tableid: number = 0;
-  shopOrder:ShopOrder = new ShopOrder();
-  payment:Payment = new Payment();
-  message: any = "Processing";
+  shopOrder: ShopOrder = new ShopOrder();
+  payment: Payment = new Payment();
+  message: any = 'Processing';
 
   constructor(
     private http: HttpClient,
@@ -65,16 +66,12 @@ export class ShopOrderComponent implements OnInit {
     private routerActive: ActivatedRoute,
     private itemService: ItemService,
     private categoryService: CategoryService,
-    private orderService:OrderService,
+    private orderService: OrderService,
     private spinner: NgxSpinnerService,
-    private route:Router
-  ) {
-
-  }
-
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
-
     this.routerActive.params.subscribe((params) => {
       if (params.id != null || params.id != undefined) {
         this.tableid = params.id;
@@ -86,27 +83,55 @@ export class ShopOrderComponent implements OnInit {
     payhere.onCompleted = function onCompleted(orderId: any) {
       this.payment = new Payment();
       this.payment.amount = this.subtotal;
-      this.payment.paymentStatus = "Success";
-      this.payment.method = "Card"
+      this.payment.paymentStatus = 'Success';
+      this.payment.method = 'Card';
       this.shopOrder.paymentDto = this.payment;
       this.submitOrder();
+
+      var url = BASE_URL + '/shoporder/placeorder';
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url);
+
+      xhr.setRequestHeader('Accept', 'application/json');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          console.log(xhr.status);
+          console.log(xhr.status);
+          console.log(xhr.responseText);
+          sessionStorage.removeItem('ORDER');
+
+          alert('Order is Successful');
+        }
+
+        window.location.reload();
+      };
+
+      var data = sessionStorage.getItem('ORDER');
+
+      xhr.send(data);
     };
 
     payhere.onDismissed = function onDismissed() {
-      this.payment = new Payment();
-      this.payment.amount = this.subtotal;
-      this.payment.paymentStatus = "Success";
-      this.payment.method = "Failed"
-      this.shopOrder.paymentDto = this.payment;
-      this.submitOrder();
+      // this.payment = new Payment();
+      // this.payment.amount = this.subtotal;
+      // this.payment.paymentStatus = 'Success';
+      // this.payment.method = 'Failed';
+      // this.shopOrder.paymentDto = this.payment;
+      // this.submitOrder();
+      alert('Payment is Dismissed');
+      sessionStorage.removeItem('ORDER');
     };
 
     payhere.onError = function onError(error: any) {
-
+      sessionStorage.removeItem('ORDER');
+      alert('Try Again');
     };
   }
 
-  getAllCategory(){
+  getAllCategory() {
     this.categoryList = new Array<Category>();
     this.categoryService.getAllMainCategories().subscribe(
       (data) => {
@@ -123,13 +148,13 @@ export class ShopOrderComponent implements OnInit {
     this.getAllItemByCategory(this.categoryId);
   }
 
-  getAllItemByCategory(id:string){
-    this.itemService.getAllItemsByCategory(id).subscribe(res=>{
+  getAllItemByCategory(id: string) {
+    this.itemService.getAllItemsByCategory(id).subscribe((res) => {
       this.itemList = res;
-    })
+    });
   }
 
-  addNew(item:Item) {
+  addNew(item: Item) {
     item.qty = 1;
     item.total = item.price;
     this.subtotal = this.subtotal + item.price;
@@ -150,7 +175,7 @@ export class ShopOrderComponent implements OnInit {
   }
 
   removeSelectedItem(item: Item) {
-    this.tempItemList.splice(this.tempItemList.indexOf(item),1);
+    this.tempItemList.splice(this.tempItemList.indexOf(item), 1);
   }
 
   isCard() {
@@ -162,13 +187,20 @@ export class ShopOrderComponent implements OnInit {
   }
 
   placeOrder() {
+    if (this.isCardPay) {
+      this.shopOrder.itemDtoList = this.tempItemList;
+      this.payment = new Payment();
+      this.payment.amount = this.subtotal;
+      this.payment.paymentStatus = 'Success';
+      this.payment.method = 'Card';
+      this.shopOrder.paymentDto = this.payment;
 
-    if(this.isCardPay){
+      window.sessionStorage.setItem('ORDER', JSON.stringify(this.shopOrder));
       var payment = {
         sandbox: true,
         merchant_id: MERCHANT_ID,
-        return_url: SHOP_ORDER_RETURN_URL+this.tableid,
-        cancel_url: SHOP_ORDER_RETURN_URL+this.tableid,
+        return_url: SHOP_ORDER_RETURN_URL + this.tableid,
+        cancel_url: SHOP_ORDER_RETURN_URL + this.tableid,
         notify_url: NOTIFY_URL,
         order_id: Math.random().toString(36).substr(2, 9),
         items: this.getItemsAsCommaSeperatedList(),
@@ -189,17 +221,14 @@ export class ShopOrderComponent implements OnInit {
       };
 
       payhere.startPayment(payment);
-    }else {
-
+    } else {
       this.payment = new Payment();
       this.payment.amount = this.subtotal;
-      this.payment.paymentStatus = "Success";
-      this.payment.method = "Cash"
+      this.payment.paymentStatus = 'Success';
+      this.payment.method = 'Cash';
       this.shopOrder.paymentDto = this.payment;
       this.submitOrder();
-
     }
-
   }
 
   getItemsAsCommaSeperatedList() {
@@ -210,18 +239,17 @@ export class ShopOrderComponent implements OnInit {
     return str;
   }
 
-  submitOrder(){
+  submitOrder() {
     this.spinner.show();
     this.shopOrder.itemDtoList = this.tempItemList;
     this.orderService.addShopOrder(this.shopOrder).subscribe(
-      res=>{
+      (res) => {
         this.spinner.hide();
         this.route.navigate(['']);
-      },error => {
+      },
+      (error) => {
         this.spinner.hide();
-
       }
     );
   }
-
 }

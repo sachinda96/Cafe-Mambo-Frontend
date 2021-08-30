@@ -27,7 +27,7 @@
                   <div style="display: flex; flex-direction: row">
                     <input
                       type="text"
-                      id="fname"
+                      id="name"
                       placeholder="John M. Doe"
                       name="name"
                       formControlName="name"
@@ -67,7 +67,8 @@
                   <div style="display: flex; flex-direction: row">
                     <input
                       type="text"
-                      id="adr"
+                      id="address"
+                      name="address"
                       formControlName="address"
                       placeholder="542 W. 15th Street"
                       style="color: black"
@@ -100,6 +101,7 @@
                     <input
                       type="text"
                       id="city"
+                      name="city"
                       formControlName="city"
                       placeholder="Colombo"
                       style="color: black"
@@ -139,6 +141,7 @@
                         <input
                           type="text"
                           id="district"
+                          name="district"
                           formControlName="district"
                           placeholder="Colombo"
                           style="color: rgb(3, 3, 3)"
@@ -177,7 +180,8 @@
                       <div style="display: flex; flex-direction: row">
                         <input
                           type="text"
-                          id="mobileNo"
+                          id="contactNo"
+                          name="contactNo"
                           formControlName="contactNo"
                           placeholder="10001"
                           style="color: black"
@@ -205,14 +209,14 @@
                                 ?.minlength
                             "
                           >
-                            ContactNo must be at least 10characters long.
+                            Contact Number must be at least 10characters long.
                           </div>
                           <div
                             *ngIf="
                               requiredForm.controls['contactNo'].errors?.pattern
                             "
                           >
-                            ContactNo is invalid
+                            Contact Number is invalid
                           </div>
                         </div>
                       </div>
@@ -225,7 +229,8 @@
                       <div>
                         <select
                           class="typeDDL"
-                          id="mop"
+                          id="type"
+                          name="type"
                           formControlName="type"
                           style="
                             color: black;

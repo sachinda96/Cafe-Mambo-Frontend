@@ -104,4 +104,12 @@ export class CartService {
   getItemCount(): number {
     return this.cartItems.length;
   }
+
+  setCartSession() {
+    sessionStorage.setItem(CART, [].toString());
+  }
+  updateCartSession() {
+    sessionStorage.removeItem(CART);
+    sessionStorage.setItem(CART, this.cartItems.toString());
+  }
 }
